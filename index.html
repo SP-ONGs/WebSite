@@ -4,87 +4,270 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SP ONGS</title>
+  <link rel="stylesheet" href="src/style.css" class="rel">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
 
 <header>
-  <img src="SPONGs_icon.jpg" class="icone-logo" alt="SP ONGS Logo">
+  <img src="src/imagens/SPONGs_icon-fb.png" class="icone-logo" alt="SP ONGS Logo">
   <h1>SP ONGS</h1>
 </header>
+
+<!-- // MAIN AQUI TROPA  -->
 
 <div class="layout-principal">
 
   <div class="coluna-esquerda">
 
-    <div class="barra-pesquisa">
+  <div class="barra-pesquisa">
 
-<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNjQwIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDcuMi4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjYgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTQ4MCAyNzJDNDgwIDMxNy45IDQ2NS4xIDM2MC4zIDQ0MCAzOTQuN0w1NjYuNiA1MjEuNEM1NzkuMSA1MzMuOSA1NzkuMSA1NTQuMiA1NjYuNiA1NjYuN0M1NTQuMSA1NzkuMiA1MzMuOCA1NzkuMiA1MjEuMyA1NjYuN0wzOTQuNyA0NDBDMzYwLjMgNDY1LjEgMzE3LjkgNDgwIDI3MiA0ODBDMTU3LjEgNDgwIDY0IDM4Ni45IDY0IDI3MkM2NCAxNTcuMSAxNTcuMSA2NCAyNzIgNjRDMzg2LjkgNjQgNDgwIDE1Ny4xIDQ4MCAyNzJ6TTI3MiA0MTZDMzUxLjUgNDE2IDQxNiAzNTEuNSA0MTYgMjcyQzQxNiAxOTIuNSAzNTEuNSAxMjggMjcyIDEyOEMxOTIuNSAxMjggMTI4IDE5Mi41IDEyOCAyNzJDMTI4IDM1MS41IDE5Mi41IDQxNiAyNzIgNDE2eiIvPjwvc3ZnPg==" width="18" height="18" style="filter: invert(40%) sepia(60%) saturate(500%) hue-rotate(175deg); display:block;" alt="busca">
-      <input type="text" placeholder="Pesquise o nome da ONG" id="entrada-pesquisa"/>
-      <div class="separador-pesquisa"></div>
-      <button class="botao-filtrar" onclick="openFilter()">
-<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNjQwIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDcuMi4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjYgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTk2IDEyOEM4My4xIDEyOCA3MS40IDEzNS44IDY2LjQgMTQ3LjhDNjEuNCAxNTkuOCA2NC4yIDE3My41IDczLjQgMTgyLjZMMjU2IDM2NS4zTDI1NiA0ODBDMjU2IDQ4OC41IDI1OS40IDQ5Ni42IDI2NS40IDUwMi42TDMyOS40IDU2Ni42QzMzOC42IDU3NS44IDM1Mi4zIDU3OC41IDM2NC4zIDU3My41QzM3Ni4zIDU2OC41IDM4NCA1NTYuOSAzODQgNTQ0TDM4NCAzNjUuM0w1NjYuNiAxODIuN0M1NzUuOCAxNzMuNSA1NzguNSAxNTkuOCA1NzMuNSAxNDcuOEM1NjguNSAxMzUuOCA1NTYuOSAxMjggNTQ0IDEyOEw5NiAxMjh6Ii8+PC9zdmc+" width="16" height="16" style="filter: invert(20%) sepia(10%) saturate(200%) hue-rotate(0deg); display:block;" alt="filtrar">
-        Filtrar
-      </button>
-      <div class="separador-pesquisa"></div>
-      <button class="botao-localizacao" onclick="ativarLocalizacao()">
-<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNjQwIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDcuMi4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjYgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTEyOCAyNTIuNkMxMjggMTQ4LjQgMjE0IDY0IDMyMCA2NEM0MjYgNjQgNTEyIDE0OC40IDUxMiAyNTIuNkM1MTIgMzcxLjkgMzkxLjggNTE0LjkgMzQxLjYgNTY5LjRDMzI5LjggNTgyLjIgMzEwLjEgNTgyLjIgMjk4LjMgNTY5LjRDMjQ4LjEgNTE0LjkgMTI3LjkgMzcxLjkgMTI3LjkgMjUyLjZ6TTMyMCAzMjBDMzU1LjMgMzIwIDM4NCAyOTEuMyAzODQgMjU2QzM4NCAyMjAuNyAzNTUuMyAxOTIgMzIwIDE5MkMyODQuNyAxOTIgMjU2IDIyMC43IDI1NiAyNTZDMjU2IDI5MS4zIDI4NC43IDMyMCAzMjAgMzIweiIvPjwvc3ZnPg==" width="16" height="16" style="filter: invert(40%) sepia(60%) saturate(500%) hue-rotate(175deg); display:block;" alt="localização">
-        Ative a sua localização
-      </button>
-    </div>
+    <i class="bi bi-search" id="icone-busca"></i>
 
-    <div class="cartao-ong">
-      <div class="imagem-ong" style="background:#e8eef5;"></div>
-      <div class="info-ong">
-        <div class="nome-ong">Cachorros carentes</div>
-        <div class="endereco-ong">
-<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNjQwIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDcuMi4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjYgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTEyOCAyNTIuNkMxMjggMTQ4LjQgMjE0IDY0IDMyMCA2NEM0MjYgNjQgNTEyIDE0OC40IDUxMiAyNTIuNkM1MTIgMzcxLjkgMzkxLjggNTE0LjkgMzQxLjYgNTY5LjRDMzI5LjggNTgyLjIgMzEwLjEgNTgyLjIgMjk4LjMgNTY5LjRDMjQ4LjEgNTE0LjkgMTI3LjkgMzcxLjkgMTI3LjkgMjUyLjZ6TTMyMCAzMjBDMzU1LjMgMzIwIDM4NCAyOTEuMyAzODQgMjU2QzM4NCAyMjAuNyAzNTUuMyAxOTIgMzIwIDE5MkMyODQuNyAxOTIgMjU2IDIyMC43IDI1NiAyNTZDMjU2IDI5MS4zIDI4NC43IDMyMCAzMjAgMzIweiIvPjwvc3ZnPg==" width="13" height="13" style="filter: invert(40%) sepia(60%) saturate(500%) hue-rotate(175deg);" alt="">
-          São Paulo, SP, Rua Doutor Joviano Pacheco de Aguirre, 255
-        </div>
-        <div class="etiquetas-ong">
-          <span class="etiqueta">🐾 Animais</span>
-          <span class="etiqueta">💰 Doação</span>
-          <span class="etiqueta">🤝 Voluntário</span>
-        </div>
-      </div>
-      <button class="botao-acessar">
-<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NDAgNjQwIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDcuMi4wIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjYgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTQ4MCAyNzJDNDgwIDMxNy45IDQ2NS4xIDM2MC4zIDQ0MCAzOTQuN0w1NjYuNiA1MjEuNEM1NzkuMSA1MzMuOSA1NzkuMSA1NTQuMiA1NjYuNiA1NjYuN0M1NTQuMSA1NzkuMiA1MzMuOCA1NzkuMiA1MjEuMyA1NjYuN0wzOTQuNyA0NDBDMzYwLjMgNDY1LjEgMzE3LjkgNDgwIDI3MiA0ODBDMTU3LjEgNDgwIDY0IDM4Ni45IDY0IDI3MkM2NCAxNTcuMSAxNTcuMSA2NCAyNzIgNjRDMzg2LjkgNjQgNDgwIDE1Ny4xIDQ4MCAyNzJ6TTI3MiA0MTZDMzUxLjUgNDE2IDQxNiAzNTEuNSA0MTYgMjcyQzQxNiAxOTIuNSAzNTEuNSAxMjggMjcyIDEyOEMxOTIuNSAxMjggMTI4IDE5Mi41IDEyOCAyNzJDMTI4IDM1MS41IDE5Mi41IDQxNiAyNzIgNDE2eiIvPjwvc3ZnPg==" width="16" height="16" style="filter: brightness(0) invert(1); display:block;" alt="">
-        Acessar
-      </button>
-    </div>
+    <input type="text" placeholder="Pesquise o nome da ONG" id="entrada-pesquisa"/>
 
-    <div class="cartao-ong esqueleto"></div>
-    <div class="cartao-ong esqueleto"></div>
-    <div class="cartao-ong esqueleto"></div>
-    <div class="cartao-ong esqueleto"></div>
+    <!-- <div class="separador-pesquisa"></div> -->
 
-    <div class="paginacao">
-      <a class="botao-nav" onclick="changePage(currentPage - 1)">&#8249;</a>
-      <a id="pagina-1" class="ativo" onclick="changePage(1)">1</a>
-      <a id="pagina-2" onclick="changePage(2)">2</a>
-      <a id="pagina-3" onclick="changePage(3)">3</a>
-      <a id="pagina-4" onclick="changePage(4)">4</a>
-      <a id="pagina-5" onclick="changePage(5)">5</a>
-      <span>...</span>
-      <a onclick="changePage(50)">50</a>
-      <a class="botao-nav" onclick="changePage(currentPage + 1)">&#8250;</a>
-    </div>
+    <button class="botao-filtrar" onclick="openFilter()">
 
+      <i class="bi bi-funnel-fill" style="font-size:1.4rem; color:#3d3d3d;"></i>
+
+      Filtrar
+    </button>
+
+    <!-- <div class="separador-pesquisa"></div> -->
+
+    <button class="botao-localizacao" onclick="ativarLocalizacao()">
+
+      <i class="bi bi-geo-alt-fill" style="font-size:1.4rem; color:#3d3d3d; display:block;"></i>
+
+      <a href="#">Ative a sua localização</a>
+    </button>
   </div>
 
+  <!-- LISTAGEM AQUI PABLOOOO -->
+
+  <div class="listagem">
+
+  <div class="cartao-ong">
+    <div class="imagem-ong" style="background:#e8eef5;"></div>
+
+    <div class="info-ong">
+
+      <div class="desc-left">
+        <div class="nome-ong">Cachorros carentes</div>
+
+        <div class="endereco-ong">
+
+        <i class="bi bi-geo-alt-fill" style="font-size:13px; color:#4a90e2;"></i>
+
+        São Paulo, SP, Rua Doutor Joviano Pacheco de Aguirre, 255
+        </div>
+
+      </div>
+
+      <div class="desc-right">
+        <div class="etiquetas-ong">
+        <span class="etiqueta">🐾 Animais</span>
+        <span class="etiqueta">💰 Doação</span>
+        <span class="etiqueta">🤝 Voluntário</span>
+        </div>
+      </div>
+  
+
+    </div>
+
+    <button class="botao-acessar">
+
+      <i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
+
+      Acessar
+    </button>
+  </div>
+
+  <div class="cartao-ong">
+    <div class="imagem-ong" style="background:#e8eef5;"></div>
+
+    <div class="info-ong">
+
+      <div class="desc-left">
+        <div class="nome-ong">Cachorros carentes</div>
+
+        <div class="endereco-ong">
+
+        <i class="bi bi-geo-alt-fill" style="font-size:13px; color:#4a90e2;"></i>
+
+        São Paulo, SP, Rua Doutor Joviano Pacheco de Aguirre, 255
+        </div>
+
+      </div>
+
+      <div class="desc-right">
+        <div class="etiquetas-ong">
+        <span class="etiqueta">🐾 Animais</span>
+        <span class="etiqueta">💰 Doação</span>
+        <span class="etiqueta">🤝 Voluntário</span>
+        </div>
+      </div>
+  
+
+    </div>
+
+    <button class="botao-acessar">
+
+      <i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
+
+      Acessar
+    </button>
+  </div>
+
+  <div class="cartao-ong">
+    <div class="imagem-ong" style="background:#e8eef5;"></div>
+
+    <div class="info-ong">
+
+      <div class="desc-left">
+        <div class="nome-ong">Cachorros carentes</div>
+
+        <div class="endereco-ong">
+
+        <i class="bi bi-geo-alt-fill" style="font-size:13px; color:#4a90e2;"></i>
+
+        São Paulo, SP, Rua Doutor Joviano Pacheco de Aguirre, 255
+        </div>
+
+      </div>
+
+      <div class="desc-right">
+        <div class="etiquetas-ong">
+        <span class="etiqueta">🐾 Animais</span>
+        <span class="etiqueta">💰 Doação</span>
+        <span class="etiqueta">🤝 Voluntário</span>
+        </div>
+      </div>
+  
+
+    </div>
+
+    <button class="botao-acessar">
+
+      <i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
+
+      Acessar
+    </button>
+  </div>
+
+  <div class="cartao-ong">
+    <div class="imagem-ong" style="background:#e8eef5;"></div>
+
+    <div class="info-ong">
+
+      <div class="desc-left">
+        <div class="nome-ong">thallyson carentes</div>
+
+        <div class="endereco-ong">
+
+        <i class="bi bi-geo-alt-fill" style="font-size:13px; color:#4a90e2;"></i>
+
+        São Paulo, SP, Rua Doutor Joviano Pacheco de Aguirre, 255
+        </div>
+
+      </div>
+
+      <div class="desc-right">
+        <div class="etiquetas-ong">
+        <span class="etiqueta">🐾 Animais</span>
+        <span class="etiqueta">💰 Doação</span>
+        <span class="etiqueta">🤝 Voluntário</span>
+        </div>
+      </div>
+  
+
+    </div>
+
+    <button class="botao-acessar">
+
+      <i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
+
+      Acessar
+    </button>
+  </div>
+
+  <div class="cartao-ong">
+    <div class="imagem-ong" style="background:#e8eef5;"></div>
+
+    <div class="info-ong">
+
+      <div class="desc-left">
+        <div class="nome-ong">gustavo carente</div>
+
+        <div class="endereco-ong">
+
+        <i class="bi bi-geo-alt-fill" style="font-size:13px; color:#4a90e2;"></i>
+
+        São Paulo, SP, Rua Doutor Joviano Pacheco de Aguirre, 255
+        </div>
+
+      </div>
+
+      <div class="desc-right">
+        <div class="etiquetas-ong">
+        <span class="etiqueta">🐾 Animais</span>
+        <span class="etiqueta">💰 Doação</span>
+        <span class="etiqueta">🤝 Voluntário</span>
+        </div>
+      </div>
+  
+
+    </div>
+
+    <button class="botao-acessar">
+
+      <i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
+
+      Acessar
+    </button>
+  </div>
+
+
+</div>
+
+
+  <div class="paginacao">
+
+
+    <a class="botao-nav" onclick="changePage(currentPage - 1)">&#8249;</a>
+
+    <a id="pagina-1" class="ativo" onclick="changePage(1)">1</a>
+    <a id="pagina-2" onclick="changePage(2)">2</a>
+    <a id="pagina-3" onclick="changePage(3)">3</a>
+    <a id="pagina-4" onclick="changePage(4)">4</a>
+    <a id="pagina-5" onclick="changePage(5)">5</a>
+    <span>...</span>
+    <a onclick="changePage(50)">50</a>
+    <a class="botao-nav" onclick="changePage(currentPage + 1)">&#8250;</a>
+  </div>
+
+</div>
+
   <div class="coluna-direita">
+
     <div class="caixa-info">
       <div class="caixa-info-esquerda">
         <strong>QUEM SOMOS NÓS?</strong>
+        <a href="#" onclick="alert('Página sobre nós')">Clique aqui</a>
       </div>
-      <a href="#" onclick="alert('Página sobre nós')">Clique aqui</a>
+   
     </div>
-    <div class="linha-mapa">
+
+    <div class="ativar-mapa">
       <span>Visualizar mapa</span>
       <label class="interruptor">
         <input type="checkbox" id="interruptor-mapa" onchange="toggleMap()"/>
         <span class="deslizador"></span>
       </label>
     </div>
+
     <div class="area-mapa" id="area-mapa">
       <div class="icone-mapa-desativado">
         <svg width="56" height="56" fill="none" stroke="#999" stroke-width="2.5" viewBox="0 0 24 24">
@@ -98,5 +281,7 @@
   </div>
 
 </div>
+
+<script src="src/script.js"></script>
 </body>
 </html>
