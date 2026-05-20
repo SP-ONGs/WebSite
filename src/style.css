@@ -1,130 +1,155 @@
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 body {
-  font-family: 'Inter',sans-serif;
+  font-family: 'Inter', sans-serif;
   background: #fff;
   color: #222;
   min-height: 100vh;
+
+   padding-top: 250px; /* espaço da barra fixa */
 }
 
+/* HEADER FIXA */
 header {
-  background-color: transparent;
-  padding: 50px 50px 22px 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 135px;
+
+  background-color: #fff;
+  padding: 25px 50px 10px 65px;
+
+  z-index: 1000;
+  border-bottom: 2px solid rgb(255, 255, 255);
+}
+
+.logo-area {
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 20px;
 }
 
 .icone-logo {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
 }
 
 header h1 {
-  font-size: 5rem;
+  font-size: 6rem;
   font-weight: 700;
-  color:#007dbc;
+  color: #007dbc;
+  line-height: 1;
 }
+
+body {
+  padding-top: 145px;
+}
+
 
 /* main */
 
 .layout-principal {
   display: flex;
-  height: 100%;
-  padding: 0px 32px;
-  max-width: 95%;
-  margin: 0 auto;
   align-items: flex-start;
-  /* background-color: cadetblue; */
+  gap: 28px;
+
+  padding: 0 45px;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 .coluna-esquerda {
-  flex: 0.8;
+  flex: 1;
   min-width: 0;
-  border-top: gray 3px solid;
+}
+
+.coluna-direita {
+  width: 480px;
+  flex-shrink: 0;
+}
+
+/* barra que fica abaixo do sp ongs, da outra forma tava atrapalhando o alinhamento*/
+
+.barra-cinza {
+  width: 67%;
+  height: 2px;
+
+  background-color: #d9d9d9;
+
+  margin: 0 0 24px 0;
+  margin-left: 45px;
+  border-radius: 0;
 }
 
 .barra-pesquisa {
   display: flex;
   align-items: center;
-  width: 80%;
-  /* max-width: 900px; */
-  gap: 2px;
-  /* background: rgb(255, 48, 48); */
+
+  width: 100%;
+  height: 44px;
+
+  gap: 14px;
+
   border: 1.5px solid #c8d6e5;
   border-radius: 8px;
-  padding: 0 10px;
 
+  padding: 0 12px;
   margin-bottom: 18px;
-  height: 46px;
 }
 
 .barra-pesquisa input {
-  flex:0.4;
+  flex: 1;
   border: none;
   outline: none;
+
   font-size: 0.8rem;
   color: #555;
-  background-color: none;
-  margin-top: 6px;
+  background: transparent;
+
   padding: 0 8px;
 }
-
-.barra-pesquisa #icone-busca {
-  color: #3d2222;
-  font-size: 1.4rem;
-  -webkit-text-stroke:0.8px #010203;
-
-}
-
-/* .separador-pesquisa {
-  width: 1.5px;
-  height: 26px;
-  background: #c8d6e5;
-  margin: 0 8px;
-} */
 
 .botao-filtrar {
   display: flex;
   align-items: center;
-  flex: 0.3;
-  gap: 5px;
+  gap: 6px;
+
+  margin-left: auto;
+
   background: none;
   border: none;
   cursor: pointer;
+
   color: #333;
   font-size: 0.97rem;
   font-weight: 500;
-  padding: 0 6px;
-  margin-top: 7px; 
-  transition: color 0.2s;
 }
-
-.botao-filtrar:hover { color: #1a8fd1; }
-
-
 
 .botao-localizacao {
   display: flex;
   align-items: center;
-  flex: 0.3; 
-  gap: 5px;
+  gap: 6px;
+
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 0.90rem;
+
+  font-size: 0.9rem;
   font-weight: 500;
-  padding: 0 6px;
-  margin-top: 5px; 
-  transition: all 0.6s;
 }
 
 .botao-localizacao a {
-    color: #1a8fd1;
+  color: #1a8fd1;
 }
+
 .botao-localizacao a:hover { color: #1261a0; }
 
 /* LISTAGEM  */
@@ -374,13 +399,23 @@ header h1 {
 .interruptor input:checked + .deslizador::before { transform: translateX(20px); }
 
 .area-mapa {
-  background: #cddff1;
+  background-color: #cddff1;
+
+  /* Textura ruído adicionada no fundo do mapa desativado*/
+
+  background-image: 
+  linear-gradient(rgba(205, 223, 241, 0.55), rgba(205, 223, 241, 0.55)),
+  url("imagens/84425e6cdccb6087df60120b640a61dbba4436a4.png");
+  background-repeat: repeat;
+  background-size: 200px 200px;;
   border-radius: 0 0 8px 8px;
   height: 50vh;
+
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
   gap: 14px;
   color: #555;
   margin-top: 20px;
@@ -388,6 +423,7 @@ header h1 {
 
 .area-mapa.ativo {
   background: #d0e8d0;
+  background-image: none;
 }
 
 .texto-mapa-desativado {
@@ -405,3 +441,106 @@ header h1 {
 }
 
 svg.icon { vertical-align: middle; }
+
+
+
+
+/* Segunda página */
+.container {
+    padding: 160px 50px 60px;
+}
+
+/* Sobre */
+.sobre {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.texto {
+    max-width: 950px;
+}
+
+.texto hr {
+    margin-bottom: 20px;
+    border: 1px solid #d9d9d9;
+}
+
+.texto h2,
+.integrantes h2 {
+    font-size: 65px;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.texto p {
+    font-size: 30px;
+    line-height: 1.5;
+    color: #333;
+}
+
+/* Foto fatec */
+.imagem-fatec {
+    display: flex;
+    flex-direction: column;
+}
+
+.imagem-fatec img {
+    width: 720px;
+    height: 460px;
+    object-fit: cover;
+}
+
+.imagem-fatec span {
+    margin-top: 5px;
+    font-size: 20px;
+    color: #555;
+}
+
+/* Integrantes */
+.integrantes {
+    margin-top: 50px;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 35px;
+}
+
+.card {
+    text-align: center;
+}
+
+/* Fotos dos integrantes */
+.card img {
+    width: 200px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 18px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    font-size: 20px;
+    font-weight: normal;
+}
+
+.card p {
+    font-size: 17px;
+    color: #555;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
