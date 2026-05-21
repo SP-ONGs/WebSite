@@ -16,10 +16,11 @@
   </div>
 </header>
 
-</header>
-
 <!-- // MAIN AQUI TROPA  -->
-<div class="barra-cinza"> </div>
+
+<main>
+
+  <div class="barra-cinza"> </div>
 
 <div class="layout-principal">
 
@@ -31,20 +32,18 @@
 
     <input type="text" placeholder="Pesquise o nome da ONG" id="entrada-pesquisa"/>
 
-    <!-- <div class="separador-pesquisa"></div> -->
 
     <button class="botao-filtrar" onclick="openFilter()">
 
-      <i class="bi bi-funnel-fill" style="font-size:1.4rem; color:#3d3d3d;"></i>
+      <i class="bi bi-funnel-fill" style="font-size: 1.47rem;" ></i>
 
       Filtrar
     </button>
 
-    <!-- <div class="separador-pesquisa"></div> -->
 
     <button class="botao-localizacao" onclick="ativarLocalizacao()">
 
-      <i class="bi bi-geo-alt-fill" style="font-size:1.4rem; color:#3d3d3d; display:block;"></i>
+      <i class="bi bi-geo-alt-fill" ></i>
 
       <a href="#">Ative a sua localização</a>
     </button>
@@ -234,11 +233,7 @@
     </button>
   </div>
 
-
-</div>
-
-
-  <div class="paginacao">
+   <div class="paginacao">
 
 
     <a class="botao-nav" onclick="changePage(currentPage - 1)">&#8249;</a>
@@ -255,12 +250,18 @@
 
 </div>
 
+
+
+</div>
+
+
+ 
   <div class="coluna-direita">
 
     <div class="caixa-info">
       <div class="caixa-info-esquerda">
         <strong>QUEM SOMOS NÓS?</strong>
-        <a href="#" onclick="alert('Página sobre nós')">Clique aqui</a>
+        <a href="#sobre" >Clique aqui</a>
       </div>
    
     </div>
@@ -288,105 +289,87 @@
 
 </div>
 
+<br><br><br>
 
-    <!-- Segunda página -->
-    <section class="container" id="sobre">
+</main>
 
-        <section class="sobre">
 
-            <div class="texto">
+<!-- Segunda página aqui tropa  -->
 
-                <hr>
+<article>
 
-                <h2>QUEM SOMOS NÓS</h2>
+  <section class="container" id="sobre">
 
-                <p>
-                    O SP ONGs é um projeto nascido dentro da FATEC Zona Leste,
-                    com o objetivo de conectar pessoas às ONGs da principal
-                    metrópole do país através do nosso site.
-                    <strong>100% gratuito</strong> e sem fins lucrativos.
-                </p>
+    <section class="sobre">
+        <div class="texto">
+            <h2>Quem Somos Nós</h2>
+            <p>
+                O <strong>SP ONGs</strong> é um projeto nascido dentro da FATEC Zona Leste,
+                com o objetivo de conectar pessoas às ONGs da principal
+                metrópole do país através do nosso site. Um ecossistema 
+                <strong>100% gratuito</strong> e sem fins lucrativos.
+            </p>
+        </div>
 
-            </div>
-
-            <!-- Foto fatec -->
-            <div class="imagem-fatec">
-
-                <img src="src/imagens/Fatec_foto.jpg" alt="FATEC Zona Leste">
-
-                <span>Foto FATEC Zona Leste</span>
-
-            </div>
-
-        </section>
-
-        <!-- Integrantes -->
-        <section class="integrantes">
-
-            <h2>INTEGRANTES</h2>
-
-            <div class="cards">
-
-                <!-- Card 1 -->
-                <div class="card">
-
-                    <img src="src/imagens/RodrigoNardy.png" alt="Rodrigo Nardy">
-
-                    <h3>Rodrigo Nardy</h3>
-
-                    <p>Front-end / Backlog</p>
-
-                </div>
-
-                <!-- Card 2 -->
-                <div class="card">
-
-                    <img src="src/imagens/PabloOliveira.jpg" alt="Pablo Oliveira">
-
-                    <h3>Pablo Oliveira</h3>
-
-                    <p>Front-end / Dados</p>
-
-                </div>
-
-                <!-- Card 3 -->
-                <div class="card">
-
-                    <img src="src/imagens/3ebcbfd30160f2cf7724b11afa470e86a8bdb5f8.jpg" alt="Ryan Gualberto Silva">
-
-                    <h3>Ryan Gualberto Silva</h3>
-
-                    <p>Back-end / Design</p>
-
-                </div>
-
-                <!-- Card 4 -->
-                <div class="card">
-
-                    <img src="src/imagens/ThallysonNeves.jpg" alt="Thallyson Neves">
-
-                    <h3>Thallyson Neves</h3>
-
-                    <p>Front-end</p>
-
-                </div>
-
-                <!-- Card 5 -->
-                <div class="card">
-
-                    <img src="src/imagens/GustavoSantos.jpg" alt="Gustavo Santos">
-
-                    <h3>Gustavo Santos</h3>
-
-                    <p>Front-end / Design</p>
-
-                </div>
-
-            </div>
-
-        </section>
-
+        <div class="imagem-fatec">
+            <img src="src/imagens/Fatec_foto.jpg" alt="FATEC Zona Leste">
+            <span>Foto: FATEC Zona Leste</span>
+        </div>
     </section>
+
+    
+    <section class="integrantes">
+        <h2>Integrantes</h2>
+        
+        <div class="cards">
+          
+            <div class="card">
+                <img src="src/imagens/RodrigoNardy.png" alt="Rodrigo Nardy">
+                <h3>Rodrigo Nardy</h3>
+                <p>Front-end / Backlog</p>
+            </div>
+
+            
+            <div class="card">
+                <img src="src/imagens/PabloOliveira.jpg" alt="Pablo Oliveira">
+                <h3>Pablo Oliveira</h3>
+                <p>Front-end / Dados</p>
+            </div>
+
+          
+            <div class="card">
+                <img src="src/imagens/RyanGualberto.jpg" alt="Ryan Gualberto Silva">
+                <h3>Ryan Gualberto</h3>
+                <p>Back-end / Design</p>
+            </div>
+
+          
+            <div class="card">
+                <img src="src/imagens/ThallysonNeves.jpg" alt="Thallyson Neves">
+                <h3>Thallyson Neves</h3>
+                <p>Front-end</p>
+            </div>
+
+            
+            <div class="card">
+                <img src="src/imagens/GustavoSantos.jpg" alt="Gustavo Santos">
+                <h3>Gustavo Santos</h3>
+                <p>Front-end / Design</p>
+            </div>
+        </div>
+    </section>
+
+</section>
+
+
+</article>
+
+
+<footer>
+
+  <p>  <i class="bi bi-c-circle"></i> 
+    2026 SP ONGs, direitos reservados FATEC da Zona Leste.</p>
+</footer>
 
 
 
