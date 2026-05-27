@@ -26,7 +26,7 @@ body {
   padding-top: 245px; /* espaço da barra fixa */
 }
 
-/* HEADER FIXA */
+/* HEADER FIXA AQUI PABLO */
 header {
   position: fixed;
   top: 0;
@@ -52,8 +52,9 @@ header {
 
 header h1 {
   font-size: 6rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--cor-primaria);
+  letter-spacing: -2px;
   line-height: 1;
 }
 
@@ -74,8 +75,6 @@ main{
   display: flex;
   align-items: flex-start;
   gap: 28px;
-  /* background-color: red; */
-
   padding: 0 45px;
   max-width: 100%;
   margin: 0 auto;
@@ -90,11 +89,8 @@ main{
 .coluna-direita {
   width: 480px;
   flex-shrink: 0;
-
   display: flex;
   flex-direction: column;
-
-  /* margin-left: 24px; */
 }
 
 /* barra que fica abaixo do sp ongs, da outra forma tava atrapalhando o alinhamento*/
@@ -111,45 +107,84 @@ main{
 .barra-pesquisa {
   display: flex;
   align-items: center;
-
-  width: 100%;
+  width: 70%;
   height: 44px;
-
-  gap: 14px;
-
+  gap: 40px;
   border: 1.5px solid var(--borda);
   border-radius: 8px;
-
   padding: 0 12px;
   margin-bottom: 18px;
+  /* background-color: cadetblue; */
 }
 
+
 .barra-pesquisa input {
-  flex: 1;
+  flex: 0.6;
   border: none;
   outline: none;
-
-  font-size: 0.8rem;
+  font-size: 1.2rem;
   color: var(--cor-icones);
   background: transparent;
-
   padding: 0 8px;
 }
 
 .botao-filtrar {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 10px;
   color: var(--cor-icones);
   margin-left: auto;
-
   background: none;
   border: none;
   cursor: pointer;
-
   color: var(--cor-icones);
   font-size: 1.2rem;
   font-weight: 500;
+  
+}
+
+.filtro-container {
+  position: relative;
+}
+
+.menu-filtro {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  width: 180px;
+  background: white;
+  border: 1px solid #dde6f0;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all 0.2s ease;
+  z-index: 999;
+}
+
+.menu-filtro.ativo {
+
+  opacity: 1;
+  visibility: visible;
+
+  transform: translateY(0);
+}
+
+.menu-filtro div {
+
+  padding: 12px 14px;
+
+  cursor: pointer;
+
+  font-size: 0.92rem;
+
+  transition: background 0.2s;
+}
+
+.menu-filtro div:hover {
+  background: #f4f8fc;
 }
 
 .botao-localizacao {
@@ -420,11 +455,9 @@ main{
   gap: 14px;
   color: #555;
   margin-top: 20px;
-}
 
-.area-mapa.ativo {
-  background: #d0e8d0;
-  background-image: none;
+  position: relative;
+  overflow: hidden;
 }
 
 .texto-mapa-desativado {
@@ -441,7 +474,28 @@ main{
   opacity: 0.7;
 }
 
-svg.icon { vertical-align: middle; }
+#mapa-leaflet {
+  width: 100%;
+  height: 100%;
+  display: none;
+  z-index: 1;
+}
+
+.placeholder-mapa {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  gap: 14px;
+
+  z-index: 2;
+}
+
+
 
 
 /* SEGUNDA PAGINA  */
@@ -534,6 +588,40 @@ article {
     width: 200px;
 }
 
+.links-redes {
+  /* background-color: red; */
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 15px 0px;
+  gap: 15px;
+  cursor: pointer;
+}
+
+.links-redes i {
+  font-size: 1.80rem;
+}
+
+.linkedin {
+  color: #007dbc;
+}
+
+.instagram {
+  background: linear-gradient(
+    45deg,
+    #833AB4,
+    #C13584,
+    #E1306C,
+    #F56040,
+    #FCAF45
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+
 .card img {
     width: 180px;
     height: 180px;
@@ -541,6 +629,11 @@ article {
     border-radius: 10%;
     margin-bottom: 16px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.04);
+    transition: all 0.4s;
+}
+
+.card img:hover {
+   transform: scale(1.1);
 }
 
 .card h3 {

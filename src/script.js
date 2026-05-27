@@ -22,13 +22,38 @@ function changePage(page) {
   }
 }
 
+function toggleFiltro() {
 
-function openFilter() {
-  alert('Pablo goat<3');
+  const menu = document.getElementById('menu-filtro');
+
+  menu.classList.toggle('ativo');
 }
 
-function bottaoNovo() {
+function filtrarCategoria(categoria) {
 
+  const cards = document.querySelectorAll('.cartao-ong');
+
+  cards.forEach(card => {
+
+    const categoriaCard = card.dataset.categoria || '';
+
+    if (
+      categoria === 'todas' ||
+      categoriaCard.includes(categoria)
+    ) {
+
+      card.style.display = '';
+
+    } else {
+
+      card.style.display = 'none';
+    }
+
+  });
+
+  document
+    .getElementById('menu-filtro')
+    .classList.remove('ativo');
 }
 
 function ativarLocalizacao() {
@@ -57,72 +82,66 @@ function ativarLocalizacao() {
   );
 }
 
+// MAPA COM LEAFLET AQUI PABLO 
+
+let mapa;
+let mapaInicializado = false;
+
 function toggleMap() {
 
   const toggle = document.getElementById('interruptor-mapa');
-  const mapArea = document.getElementById('area-mapa');
+
+  const mapaElemento = document.getElementById('mapa-leaflet');
+
+  const placeholder = document.getElementById('placeholder-mapa');
 
   if (toggle.checked) {
 
-    mapArea.classList.add('ativo');
+    mapaElemento.style.display = 'block';
 
-    mapArea.innerHTML = `
-      <div style="font-size:2.5rem;">🗺️</div>
+    placeholder.style.display = 'none';
 
-      <div style="font-size:1.1rem;font-weight:700;color:#2a7a2a;text-align:center;">
-        MAPA ATIVADO
-        <br>
+    if (!mapaInicializado) {
 
-        <span style="font-size:0.85rem;font-weight:400;color:#555;">
-          Ative a localização para ver ONGs próximas.
-        </span>
-      </div>
-    `;
+      mapa = L.map('mapa-leaflet').setView(
+        [-23.55052, -46.633308],
+        11
+      );
+
+      L.tileLayer(
+        'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+        {
+          attribution: '&copy; OpenStreetMap'
+        }
+      ).addTo(mapa);
+
+      mapaInicializado = true;
+
+      // marcador exemplo 1 aqui 
+      L.marker([-23.55052, -46.633308])
+        .addTo(mapa)
+        .bindPopup('Ong 1')
+        .openPopup();
+
+         L.marker([-23.52392, -46.6332343])
+        .addTo(mapa)
+        .bindPopup('Ong 2')
+        .openPopup();
+        
+         L.marker([-23.53232, -46.6222])
+        .addTo(mapa)
+        .bindPopup('Ong 3')
+        .openPopup();
+    }
+    setTimeout(() => {
+      mapa.invalidateSize();
+    }, 100);
 
   } else {
 
-    mapArea.classList.remove('ativo');
+    mapaElemento.style.display = 'none';
 
-    mapArea.innerHTML = `
-      <div class="icone-mapa-desativado">
-
-        <svg width="56" height="56" fill="none" stroke="#999" stroke-width="2.5" viewBox="0 0 24 24">
-
-          <circle cx="12" cy="10" r="3"/>
-
-          <path d="M12 2a8 8 0 0 1 8 8c0 5.25-8 14-8 14S4 15.25 4 10a8 8 0 0 1 8-8z"/>
-
-          <line x1="3" y1="3" x2="21" y2="21" stroke="#bbb" stroke-width="2.5"/>
-
-        </svg>
-
-      </div>
-
-      <div class="texto-mapa-desativado">
-        MAPA DESATIVADO
-      </div>
-    `;
+    placeholder.style.display = 'flex';
   }
 }
 
-document.getElementById('entrada-pesquisa').addEventListener('input', function() {
-
-  const val = this.value.toLowerCase();
-
-  const cards = document.querySelectorAll('.cartao-ong:not(.esqueleto)');
-
-  cards.forEach(card => {
-
-    const name = card.querySelector('.nome-ong');
-
-    if (name) {
-
-      card.style.display =
-        name.textContent.toLowerCase().includes(val)
-          ? ''
-          : 'none';
-    }
-
-  });
-
-});

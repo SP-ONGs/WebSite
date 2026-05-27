@@ -6,6 +6,10 @@
   <title>SP ONGS</title>
   <link rel="stylesheet" href="src/style.css" class="rel">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link 
+  rel="stylesheet" 
+  href="https://unpkg.com/leaflet/dist/leaflet.css"
+/>
 </head>
 <body>
 
@@ -28,22 +32,67 @@
 
   <div class="barra-pesquisa">
 
-    <i class="bi bi-search" id="icone-busca"></i>
+    <i class="bi bi-search"style="font-size: 1.5rem" icone-busca"></i>
 
     <input type="text" placeholder="Pesquise o nome da ONG" id="entrada-pesquisa"/>
 
+<!-- // FILTRO CATEGORIA -->
+    <div class="filtro-container">
 
-    <button class="botao-filtrar" onclick="openFilter()">
+     <button class="botao-filtrar" onclick="toggleFiltro()">
 
-      <i class="bi bi-funnel-fill" style="font-size: 1.47rem;" ></i>
+     <i class="bi bi-funnel-fill" style="font-size: 1.5rem"></i>
 
-      Filtrar
-    </button>
+     Filtrar
+
+  </button>
+
+  <div class="menu-filtro" id="menu-filtro">
+
+    <div onclick="filtrarCategoria('todas')">
+      Todas
+    </div>
+
+    <div onclick="filtrarCategoria('acolhimento')">
+      🤝 Acolhimento 
+    </div>
+
+    <div onclick="filtrarCategoria('animais')">
+  🐾    Animais
+    </div>
+
+    <div onclick="filtrarCategoria('comunidade')">
+      🏘️ Comunidade
+    </div>
+
+    <div onclick="filtrarCategoria('criancas')">
+      🧒 Crianças
+    </div>
+
+    <div onclick="filtrarCategoria('desenvolvimento')">
+      🚀 Desenvolvimento Pessoal
+    </div>
+
+    <div onclick="filtrarCategoria('desenvolvimentoSocio')">
+      🌍 Desenvolvimento Social
+    </div>
+
+    <div onclick="filtrarCategoria('pessoas com deficiência')">
+      ♿ Pessoas com Deficiência
+    </div>
+
+    <div onclick="filtrarCategoria('mulheres')">
+      👩 Mulheres
+    </div>
+
+  </div>
+
+</div>
 
 
     <button class="botao-localizacao" onclick="ativarLocalizacao()">
 
-      <i class="bi bi-geo-alt-fill" ></i>
+      <i class="bi bi-geo-alt-fill" style="font-size: 1.5rem;" ></i>
 
       <a href="#">Ative a sua localização</a>
     </button>
@@ -53,7 +102,8 @@
 
   <div class="listagem">
 
-  <div class="cartao-ong">
+  <div class="cartao-ong" data-categoria="animais">
+    
     <div class="imagem-ong" style="background:#e8eef5;"></div>
 
     <div class="info-ong">
@@ -72,9 +122,7 @@
 
       <div class="desc-right">
         <div class="etiquetas-ong">
-        <span class="etiqueta">🐾 Animais</span>
-        <span class="etiqueta">💰 Doação</span>
-        <span class="etiqueta">🤝 Voluntário</span>
+        <span class="etiqueta bi bi-heart-pulse-fill"> Animais</span>
         </div>
       </div>
   
@@ -89,7 +137,7 @@
     </button>
   </div>
 
-  <div class="cartao-ong">
+  <div class="cartao-ong" data-categoria="mulheres">
     <div class="imagem-ong" style="background:#e8eef5;"></div>
 
     <div class="info-ong">
@@ -108,9 +156,7 @@
 
       <div class="desc-right">
         <div class="etiquetas-ong">
-        <span class="etiqueta">🐾 Animais</span>
-        <span class="etiqueta">💰 Doação</span>
-        <span class="etiqueta">🤝 Voluntário</span>
+        <span class="etiqueta bi bi-gender-female"> Mulheres </span>
         </div>
       </div>
   
@@ -125,7 +171,7 @@
     </button>
   </div>
 
-  <div class="cartao-ong">
+  <div class="cartao-ong" data-categoria="comunidade">
     <div class="imagem-ong" style="background:#e8eef5;"></div>
 
     <div class="info-ong">
@@ -144,9 +190,7 @@
 
       <div class="desc-right">
         <div class="etiquetas-ong">
-        <span class="etiqueta">🐾 Animais</span>
-        <span class="etiqueta">💰 Doação</span>
-        <span class="etiqueta">🤝 Voluntário</span>
+        <span class="etiqueta bi bi-people-fill"> Comunidade </span>
         </div>
       </div>
   
@@ -161,7 +205,7 @@
     </button>
   </div>
 
-  <div class="cartao-ong">
+  <div class="cartao-ong" data-categoria="animais">
     <div class="imagem-ong" style="background:#e8eef5;"></div>
 
     <div class="info-ong">
@@ -180,9 +224,7 @@
 
       <div class="desc-right">
         <div class="etiquetas-ong">
-        <span class="etiqueta">🐾 Animais</span>
-        <span class="etiqueta">💰 Doação</span>
-        <span class="etiqueta">🤝 Voluntário</span>
+        <span class="etiqueta bi bi-heart-fill">Animais</span>
         </div>
       </div>
   
@@ -197,7 +239,7 @@
     </button>
   </div>
 
-  <div class="cartao-ong">
+  <div class="cartao-ong" data-categoria="acolhimento">
     <div class="imagem-ong" style="background:#e8eef5;"></div>
 
     <div class="info-ong">
@@ -216,9 +258,8 @@
 
       <div class="desc-right">
         <div class="etiquetas-ong">
-        <span class="etiqueta">🐾 Animais</span>
-        <span class="etiqueta">💰 Doação</span>
-        <span class="etiqueta">🤝 Voluntário</span>
+        <span class="etiqueta bi bi-heart-fill
+        ">Acolhimento</span>
         </div>
       </div>
   
@@ -232,6 +273,8 @@
       Acessar
     </button>
   </div>
+
+  
 
    <div class="paginacao">
 
@@ -275,16 +318,22 @@
     </div>
 
     <div class="area-mapa" id="area-mapa">
-       
-      <div class="icone-mapa-desativado">
-        <svg width="56" height="56" fill="none" stroke="#999" stroke-width="2.5" viewBox="0 0 24 24">
+
+        <div id="mapa-leaflet"></div>
+
+        <div class="placeholder-mapa" id="placeholder-mapa">
+
+        <div class="icone-mapa-desativado">
+          <svg width="56" height="56" fill="none" stroke="#999" stroke-width="2.5" viewBox="0 0 24 24">
           <circle cx="12" cy="10" r="3"/>
           <path d="M12 2a8 8 0 0 1 8 8c0 5.25-8 14-8 14S4 15.25 4 10a8 8 0 0 1 8-8z"/>
           <line x1="3" y1="3" x2="21" y2="21" stroke="#bbb" stroke-width="2.5"/>
-        </svg>
-      </div>
-      <div class="texto-mapa-desativado" id="texto-status-mapa">MAPA DESATIVADO</div>
-    </div>
+          </svg>
+        </div>
+
+        <div class="texto-mapa-desativado" id="texto-status-mapa">MAPA DESATIVADO</div>
+        </div>
+
   </div>
 
 </div>
@@ -308,6 +357,8 @@
                 com o objetivo de conectar pessoas às ONGs da principal
                 metrópole do país através do nosso site. Um ecossistema 
                 <strong>100% gratuito</strong> e sem fins lucrativos.
+
+                Alinhado ao 17° Objetivo de Desenvolvimento Social da ONU, o SPONGs busca fortalecer parcerias e ampliar o acesso às organizações não governamentais em São Paulo, promovendo mais visibilidade e impacto social. 
             </p>
         </div>
 
@@ -326,14 +377,26 @@
             <div class="card">
                 <img src="src/imagens/RodrigoNardy.png" alt="Rodrigo Nardy">
                 <h3>Rodrigo Nardy</h3>
-                <p>Front-end / Backlog</p>
+                <p>Gerente / Backlog</p>
+
+                <div class="links-redes">
+                  <a href=""> <i class="bi bi-linkedin linkedin"></i></a>
+                  <a href=""> <i class="bi bi-github"></i></a>
+                  <a href=""> <i class="bi bi-instagram instagram"></i></a>
+                </div>
             </div>
 
             
             <div class="card">
                 <img src="src/imagens/PabloOliveira.jpg" alt="Pablo Oliveira">
                 <h3>Pablo Oliveira</h3>
-                <p>Front-end / Dados</p>
+                <p>Front-end</p>
+                
+                <div class="links-redes">
+                  <a href=""> <i class="bi bi-linkedin linkedin"></i></a>
+                  <a href=""> <i class="bi bi-github"></i></a>
+                  <a href="https://www.instagram.com/pabloo_ihp?igsh=MXBieHBoamljYnoxcA=="> <i class="bi bi-instagram instagram"></i></a>
+                </div>
             </div>
 
           
@@ -341,6 +404,12 @@
                 <img src="src/imagens/RyanGualberto.jpg" alt="Ryan Gualberto Silva">
                 <h3>Ryan Gualberto</h3>
                 <p>Back-end / Design</p>
+                
+                <div class="links-redes">
+                  <a href=""> <i class="bi bi-linkedin linkedin"></i></a>
+                  <a href=""> <i class="bi bi-github"></i></a>
+                  <a href=""> <i class="bi bi-instagram instagram"></i></a>
+                </div>
             </div>
 
           
@@ -348,13 +417,25 @@
                 <img src="src/imagens/ThallysonNeves.jpg" alt="Thallyson Neves">
                 <h3>Thallyson Neves</h3>
                 <p>Front-end</p>
+                
+                <div class="links-redes">
+                  <a href=""> <i class="bi bi-linkedin linkedin"></i></a>
+                  <a href=""> <i class="bi bi-github"></i></a>
+                  <a href=""> <i class="bi bi-instagram instagram"></i></a>
+                </div>
             </div>
 
             
             <div class="card">
                 <img src="src/imagens/GustavoSantos.jpg" alt="Gustavo Santos">
                 <h3>Gustavo Santos</h3>
-                <p>Front-end / Design</p>
+                <p>Analista Geral</p>
+                
+                <div class="links-redes">
+                  <a href=""> <i class="bi bi-linkedin linkedin"></i></a>
+                  <a href=""> <i class="bi bi-github"></i></a>
+                  <a href=""> <i class="bi bi-instagram instagram"></i></a>
+                </div>
             </div>
         </div>
     </section>
@@ -376,5 +457,6 @@
 
 
 <script src="src/script.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </body>
 </html>
