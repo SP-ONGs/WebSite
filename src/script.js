@@ -6,7 +6,8 @@ const dadosOngs = [
 		whatsapp: "11 2049-2934",
 		instagram: "abcaurora",
 		website: "https://www.abcaurora.org.br/",
-		etiquetas: ["👧 Crianças"]
+		etiquetas: ["👧 Crianças"],
+		imagem: "src/imagens/ONGs/abc_aurora.png"
 	},
 	{
 		nome: "Centro Social Santo Estevão",
@@ -15,7 +16,8 @@ const dadosOngs = [
 		whatsapp: "11 2642-7395",
 		instagram: "centrosocialsantoestevao",
 		website: "https://www.atados.com.br/ong/centro-social-santo-estevao",
-		etiquetas: ["👧 Crianças"]
+		etiquetas: ["👧 Crianças"],
+		imagem: "src/imagens/ONGs/centro_social_santo_estevao.jpg"
 	},
 	{
 		nome: "Casa de Apoio ao Cidadão",
@@ -24,7 +26,8 @@ const dadosOngs = [
 		whatsapp: "11 3476-0623",
 		instagram: "casaapoiocidadao",
 		website: "https://www.atados.com.br/ong/caci-casa-de-apoio-ao-cidadao-383136",
-		etiquetas: ["🤝 Acolhimento"]
+		etiquetas: ["🤝 Acolhimento"],
+		imagem: "src/imagens/ONGs/casa_de_apoio_ao_cidado.png"
 	},
 	{
 		nome: "Anjos da Leste",
@@ -33,7 +36,8 @@ const dadosOngs = [
 		whatsapp: "11 95052-2407",
 		instagram: "anjosdaleste",
 		website: "https://www.anjosdaleste.org.br/",
-		etiquetas: ["🤝 Acolhimento"]
+		etiquetas: ["🤝 Acolhimento"],
+		imagem: "src/imagens/ONGs/anjos_da_leste.png"
 	},
 	{
 		nome: "Zl Somos Nós",
@@ -42,7 +46,8 @@ const dadosOngs = [
 		whatsapp: "11 94788-7744",
 		instagram: "zlsn_noticias",
 		website: "https://zlsn.com.br/",
-		etiquetas: ["🌍 Desenvolvimento Social"]
+		etiquetas: ["🌍 Desenvolvimento Social"],
+		imagem: "src/imagens/ONGs/zl_somo_nos.jpg"
 	},
 	{
 		nome: "Mooca Solidaria",
@@ -51,7 +56,8 @@ const dadosOngs = [
 		whatsapp: "11 94848-7269",
 		instagram: "moocasolidaria",
 		website: "https://moocasolidaria.org/",
-		etiquetas: ["🤝 Acolhimento"]
+		etiquetas: ["🤝 Acolhimento"],
+		imagem: "src/imagens/ONGs/mooca_solidaria.jpg"
 	},
 	{
 		nome: "Casa do Cristo Redentor",
@@ -60,7 +66,8 @@ const dadosOngs = [
 		whatsapp: "11 3058-6211",
 		instagram: "",
 		website: "https://casadocristo.org.br/contato/",
-		etiquetas: ["🤝 Acolhimento"]
+		etiquetas: ["🤝 Acolhimento"],
+		imagem: "src/imagens/ONGs/casa_do_cristo_redentor.jpg"
 	},
 	{
 		nome: "Núcleo Assistencial Fraterno",
@@ -69,7 +76,8 @@ const dadosOngs = [
 		whatsapp: "11 2296-3462",
 		instagram: "nucleoassistencialfraterno",
 		website: "https://fraterno.org.br/",
-		etiquetas: ["🤝 Acolhimento"]
+		etiquetas: ["🤝 Acolhimento"],
+		imagem: "src/imagens/ONGs/nucleo_assistencial_fraternal.jpg"
 	},
 	{
 		nome: "Ação Comunitária Paroquial do Jardim Colonial",
@@ -78,7 +86,8 @@ const dadosOngs = [
 		whatsapp: "11 2734-3761",
 		instagram: "",
 		website: "https://acaocomunitaria.org.br/",
-		etiquetas: ["🧒 Crianças"]
+		etiquetas: ["🧒 Crianças"],
+		imagem: "src/imagens/ONGs/acao_comunitaria_paroquial.jpg"
 	},
 	{
 		nome: "Complexo do Bem",
@@ -87,7 +96,8 @@ const dadosOngs = [
 		whatsapp: "11 98987-9230",
 		instagram: "complexodobem",
 		website: "https://complexodobem.org/",
-		etiquetas: ["🚀 Desenvolvimento Pessoal"]
+		etiquetas: ["🚀 Desenvolvimento Pessoal"],
+		imagem: "src/imagens/ONGs/complexo_do_bem.jpg"
 	},
 	{
 		nome: "Instituto LEMDA",
@@ -96,7 +106,8 @@ const dadosOngs = [
 		whatsapp: "11 2671-7677",
 		instagram: "llemdaoficial",
 		website: "https://institutolemda.org.br/",
-		etiquetas: ["♿ Deficientes"]
+		etiquetas: ["♿ Deficientes"],
+		imagem: "src/imagens/ONGs/instituto_LEMDA.jpg"
 	},
 ]
 
@@ -106,6 +117,11 @@ let currentOngs = [0,1,2,3,4];
 function updateOngCartao(id, ongId) {
 	const ong = dadosOngs[ongId];
 	const cartao = document.getElementById("ong-cartao" + id);
+
+	if (!cartao) {
+		console.error(`Cartão com id "ong-cartao${id}" não encontrado.`);
+		return;
+	}
 
 	// If ONG does not exist -> transform into grey bar
 	if (!ong) {
@@ -126,10 +142,11 @@ function updateOngCartao(id, ongId) {
 	cartao.querySelector(".info-ong").style.display = "";
 	cartao.querySelector(".botao-acessar").style.display = "";
 
-	if (!cartao) {
-		console.error(`Cartão com id "ong-cartao${id}" não encontrado.`);
-		return;
-	}
+	// Image
+	const imagem = cartao.querySelector(".imagem-ong");
+	imagem.style.backgroundImage = `url("${ong.imagem}")`;
+	imagem.style.backgroundSize = "cover";
+	imagem.style.backgroundPosition = "center";
 
 	// Nome
 	cartao.querySelector(".nome-ong").textContent = ong.nome;
