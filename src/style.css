@@ -691,8 +691,6 @@ footer p {
   z-index: 3000;
 }
 
-<<<<<<< HEAD
-=======
 .modal-ong.ativo {
   display: flex;
 }
@@ -900,5 +898,3 @@ footer p {
     justify-content: center;
   }
 }
-
->>>>>>> cddf29c (modal + botão acessar e voltar funcionando)
