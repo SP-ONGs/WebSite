@@ -32,7 +32,11 @@
 
   <div class="barra-pesquisa">
 
+<<<<<<< HEAD
     <i class="bi bi-search"style="font-size: 1.5rem" icone-busca"></i>
+=======
+    <i class="bi bi-search" style="font-size: 1.5rem" id="icone-busca"></i>
+>>>>>>> cddf29c (modal + botão acessar e voltar funcionando)
 
     <input type="text" placeholder="Pesquise o nome da ONG" id="entrada-pesquisa"/>
 
@@ -104,7 +108,11 @@
 
   <div class="cartao-ong" data-categoria="animais">
     
+<<<<<<< HEAD
     <div class="imagem-ong" style="background:#e8eef5;"></div>
+=======
+    <img src="src/imagens/cachorroparamodal.webp" alt="Imagem da ONG" class="imagem-ong">
+>>>>>>> cddf29c (modal + botão acessar e voltar funcionando)
 
     <div class="info-ong">
 
@@ -129,7 +137,7 @@
 
     </div>
 
-    <button class="botao-acessar">
+    <button class="botao-acessar" type="button" data-ong="cachorros-carentes">
 
       <i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
 
@@ -138,7 +146,11 @@
   </div>
 
   <div class="cartao-ong" data-categoria="mulheres">
+<<<<<<< HEAD
     <div class="imagem-ong" style="background:#e8eef5;"></div>
+=======
+    <img src="src/imagens/cachorroparamodal.webp" alt="Imagem da ONG" class="imagem-ong">
+>>>>>>> cddf29c (modal + botão acessar e voltar funcionando)
 
     <div class="info-ong">
 
@@ -163,7 +175,7 @@
 
     </div>
 
-    <button class="botao-acessar">
+    <button class="botao-acessar" type="button" data-ong="mulheres-carentes">
 
       <i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
 
@@ -172,7 +184,11 @@
   </div>
 
   <div class="cartao-ong" data-categoria="comunidade">
+<<<<<<< HEAD
     <div class="imagem-ong" style="background:#e8eef5;"></div>
+=======
+    <img src="src/imagens/cachorroparamodal.webp" alt="Imagem da ONG" class="imagem-ong">
+>>>>>>> cddf29c (modal + botão acessar e voltar funcionando)
 
     <div class="info-ong">
 
@@ -197,7 +213,7 @@
 
     </div>
 
-    <button class="botao-acessar">
+    <button class="botao-acessar" type="button" data-ong="comunidade-carentes">
 
       <i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
 
@@ -206,7 +222,11 @@
   </div>
 
   <div class="cartao-ong" data-categoria="animais">
+<<<<<<< HEAD
     <div class="imagem-ong" style="background:#e8eef5;"></div>
+=======
+    <img src="src/imagens/cachorroparamodal.webp" alt="Imagem da ONG" class="imagem-ong">
+>>>>>>> cddf29c (modal + botão acessar e voltar funcionando)
 
     <div class="info-ong">
 
@@ -231,7 +251,7 @@
 
     </div>
 
-    <button class="botao-acessar">
+    <button class="botao-acessar" type="button" data-ong="animais-carentes-2">
 
       <i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
 
@@ -240,7 +260,11 @@
   </div>
 
   <div class="cartao-ong" data-categoria="acolhimento">
+<<<<<<< HEAD
     <div class="imagem-ong" style="background:#e8eef5;"></div>
+=======
+    <img src="src/imagens/cachorroparamodal.webp" alt="Imagem da ONG" class="imagem-ong">
+>>>>>>> cddf29c (modal + botão acessar e voltar funcionando)
 
     <div class="info-ong">
 
@@ -266,7 +290,7 @@
 
     </div>
 
-    <button class="botao-acessar">
+    <button class="botao-acessar" type="button" data-ong="acolhimento-carentes">
 
       <i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
 
@@ -334,6 +358,8 @@
         <div class="texto-mapa-desativado" id="texto-status-mapa">MAPA DESATIVADO</div>
         </div>
 
+<<<<<<< HEAD
+=======
   </div>
 
 </div>
@@ -446,6 +472,177 @@
 </article>
 
 
+
+<!-- MODAL DAS ONGS -->
+<div class="modal-ong" id="modalOng" aria-hidden="true">
+
+  <div class="modal-conteudo" role="dialog" aria-modal="true" aria-labelledby="modalNome">
+
+    <button type="button" class="fechar-modal" id="fecharModal" aria-label="Fechar modal">
+      X
+    </button>
+
+    <div class="modal-topo">
+
+      <img src="" alt="Imagem da ONG" id="modalImagem" class="modal-imagem">
+
+      <div class="modal-info">
+
+        <h2 id="modalNome">Nome da ONG</h2>
+
+        <div class="modal-etiquetas" id="modalEtiquetas"></div>
+
+        <p class="modal-endereco">
+          <i class="bi bi-geo-alt-fill"></i>
+          <span id="modalEndereco">Endereço da ONG</span>
+        </p>
+
+      </div>
+
+    </div>
+
+    <h3 class="titulo-redes">REDES SOCIAIS</h3>
+
+    <div class="redes-container">
+
+      <a href="#" class="modal-rede-card modal-instagram" id="modalInstagram" target="_blank" rel="noopener noreferrer">
+        <i class="bi bi-instagram"></i>
+        <span>Instagram</span>
+      </a>
+
+      <a href="#" class="modal-rede-card modal-whatsapp" id="modalWhatsapp" target="_blank" rel="noopener noreferrer">
+        <i class="bi bi-whatsapp"></i>
+        <span>Whatsapp</span>
+      </a>
+
+      <a href="#" class="modal-rede-card modal-website" id="modalWebsite" target="_blank" rel="noopener noreferrer">
+        <i class="bi bi-globe2"></i>
+        <span>Website</span>
+      </a>
+
+    </div>
+
+>>>>>>> cddf29c (modal + botão acessar e voltar funcionando)
+  </div>
+
+</div>
+
+<br><br><br>
+
+<<<<<<< HEAD
+</main>
+
+
+<!-- Segunda página aqui tropa  -->
+
+<article>
+
+  <section class="container" id="sobre">
+
+    <section class="sobre">
+        <div class="texto">
+            <h2>Quem Somos Nós</h2>
+            <p>
+                O <strong>SP ONGs</strong> é um projeto nascido dentro da FATEC Zona Leste,
+                com o objetivo de conectar pessoas às ONGs da principal
+                metrópole do país através do nosso site. Um ecossistema 
+                <strong>100% gratuito</strong> e sem fins lucrativos.
+
+                Alinhado ao 17° Objetivo de Desenvolvimento Social da ONU, o SPONGs busca fortalecer parcerias e ampliar o acesso às organizações não governamentais em São Paulo, promovendo mais visibilidade e impacto social. 
+            </p>
+        </div>
+
+        <div class="imagem-fatec">
+            <img src="src/imagens/Fatec_foto.jpg" alt="FATEC Zona Leste">
+            <span>Foto: FATEC Zona Leste</span>
+        </div>
+    </section>
+=======
+<footer>
+
+  <p>  <i class="bi bi-c-circle"></i> 
+    2026 SP ONGs, direitos reservados FATEC da Zona Leste.</p>
+</footer>
+>>>>>>> cddf29c (modal + botão acessar e voltar funcionando)
+
+    
+    <section class="integrantes">
+        <h2>Integrantes</h2>
+        
+        <div class="cards">
+          
+            <div class="card">
+                <img src="src/imagens/RodrigoNardy.png" alt="Rodrigo Nardy">
+                <h3>Rodrigo Nardy</h3>
+                <p>Gerente / Backlog</p>
+
+                <div class="links-redes">
+                  <a href=""> <i class="bi bi-linkedin linkedin"></i></a>
+                  <a href=""> <i class="bi bi-github"></i></a>
+                  <a href=""> <i class="bi bi-instagram instagram"></i></a>
+                </div>
+            </div>
+
+            
+            <div class="card">
+                <img src="src/imagens/PabloOliveira.jpg" alt="Pablo Oliveira">
+                <h3>Pablo Oliveira</h3>
+                <p>Front-end</p>
+                
+                <div class="links-redes">
+                  <a href=""> <i class="bi bi-linkedin linkedin"></i></a>
+                  <a href=""> <i class="bi bi-github"></i></a>
+                  <a href="https://www.instagram.com/pabloo_ihp?igsh=MXBieHBoamljYnoxcA=="> <i class="bi bi-instagram instagram"></i></a>
+                </div>
+            </div>
+
+          
+            <div class="card">
+                <img src="src/imagens/RyanGualberto.jpg" alt="Ryan Gualberto Silva">
+                <h3>Ryan Gualberto</h3>
+                <p>Back-end / Design</p>
+                
+                <div class="links-redes">
+                  <a href=""> <i class="bi bi-linkedin linkedin"></i></a>
+                  <a href=""> <i class="bi bi-github"></i></a>
+                  <a href=""> <i class="bi bi-instagram instagram"></i></a>
+                </div>
+            </div>
+
+          
+            <div class="card">
+                <img src="src/imagens/ThallysonNeves.jpg" alt="Thallyson Neves">
+                <h3>Thallyson Neves</h3>
+                <p>Front-end</p>
+                
+                <div class="links-redes">
+                  <a href=""> <i class="bi bi-linkedin linkedin"></i></a>
+                  <a href=""> <i class="bi bi-github"></i></a>
+                  <a href=""> <i class="bi bi-instagram instagram"></i></a>
+                </div>
+            </div>
+
+            
+            <div class="card">
+                <img src="src/imagens/GustavoSantos.jpg" alt="Gustavo Santos">
+                <h3>Gustavo Santos</h3>
+                <p>Analista Geral</p>
+                
+                <div class="links-redes">
+                  <a href=""> <i class="bi bi-linkedin linkedin"></i></a>
+                  <a href=""> <i class="bi bi-github"></i></a>
+                  <a href=""> <i class="bi bi-instagram instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</section>
+
+
+</article>
+
+
 <footer>
 
   <p>  <i class="bi bi-c-circle"></i> 
@@ -456,6 +653,7 @@
 
 
 
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="src/script.js"></script>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </body>

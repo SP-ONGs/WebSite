@@ -145,3 +145,157 @@ function toggleMap() {
   }
 }
 
+<<<<<<< HEAD
+=======
+
+/* MODAL DAS ONGS */
+
+const dadosOngs = {
+  "cachorros-carentes": {
+    nome: "Cachorros carentes",
+    imagem: "src/imagens/cachorroparamodal.webp",
+    endereco: "São Paulo, SP, Rua Doutor Joviano Pacheco de Aguirre, 255",
+    etiquetas: ["🐾 Animais", "💰 Doação", "🤝 Voluntário"],
+    instagram: "https://instagram.com",
+    whatsapp: "https://wa.me/5511999999999",
+    website: "https://google.com"
+  },
+
+  "mulheres-carentes": {
+    nome: "Cachorros carentes",
+    imagem: "src/imagens/cachorroparamodal.webp",
+    endereco: "São Paulo, SP, Rua Doutor Joviano Pacheco de Aguirre, 255",
+    etiquetas: ["👩 Mulheres", "💰 Doação", "🤝 Voluntário"],
+    instagram: "https://instagram.com",
+    whatsapp: "https://wa.me/5511999999999",
+    website: "https://google.com"
+  },
+
+  "comunidade-carentes": {
+    nome: "Cachorros carentes",
+    imagem: "src/imagens/cachorroparamodal.webp",
+    endereco: "São Paulo, SP, Rua Doutor Joviano Pacheco de Aguirre, 255",
+    etiquetas: ["🏘️ Comunidade", "💰 Doação", "🤝 Voluntário"],
+    instagram: "https://instagram.com",
+    whatsapp: "https://wa.me/5511999999999",
+    website: "https://google.com"
+  },
+
+  "animais-carentes-2": {
+    nome: "Cachorros carentes",
+    imagem: "src/imagens/cachorroparamodal.webp",
+    endereco: "São Paulo, SP, Rua Doutor Joviano Pacheco de Aguirre, 255",
+    etiquetas: ["🐾 Animais", "💰 Doação", "🤝 Voluntário"],
+    instagram: "https://instagram.com",
+    whatsapp: "https://wa.me/5511999999999",
+    website: "https://google.com"
+  },
+
+  "acolhimento-carentes": {
+    nome: "Chachorros carente",
+    imagem: "src/imagens/cachorroparamodal.webp",
+    endereco: "São Paulo, SP, Rua Doutor Joviano Pacheco de Aguirre, 255",
+    etiquetas: ["🤝 Acolhimento", "💰 Doação", "🤝 Voluntário"],
+    instagram: "https://instagram.com",
+    whatsapp: "https://wa.me/5511999999999",
+    website: "https://google.com"
+  }
+};
+
+const modalOng = document.getElementById("modalOng");
+const fecharModal = document.getElementById("fecharModal");
+
+const modalNome = document.getElementById("modalNome");
+const modalImagem = document.getElementById("modalImagem");
+const modalEndereco = document.getElementById("modalEndereco");
+const modalEtiquetas = document.getElementById("modalEtiquetas");
+
+const modalInstagram = document.getElementById("modalInstagram");
+const modalWhatsapp = document.getElementById("modalWhatsapp");
+const modalWebsite = document.getElementById("modalWebsite");
+
+function configurarLinkModal(elemento, url) {
+  if (!elemento) return;
+
+  if (url && url.trim() !== "#") {
+    elemento.href = url;
+    elemento.style.display = "flex";
+  } else {
+    elemento.href = "#";
+    elemento.style.display = "none";
+  }
+}
+
+function abrirModalOng(chaveOng) {
+  if (!modalOng) return;
+
+  const dados = dadosOngs[chaveOng];
+
+  if (!dados) return;
+
+  modalNome.textContent = dados.nome;
+  modalEndereco.textContent = dados.endereco;
+
+  modalImagem.classList.remove("sem-imagem");
+  modalImagem.src = dados.imagem;
+  modalImagem.alt = `Imagem da ONG ${dados.nome}`;
+
+  modalImagem.onerror = function() {
+    modalImagem.removeAttribute("src");
+    modalImagem.classList.add("sem-imagem");
+  };
+
+  modalEtiquetas.innerHTML = "";
+
+  dados.etiquetas.forEach(function(etiqueta) {
+    const span = document.createElement("span");
+    span.classList.add("modal-etiqueta");
+    span.textContent = etiqueta;
+    modalEtiquetas.appendChild(span);
+  });
+
+  configurarLinkModal(modalInstagram, dados.instagram);
+  configurarLinkModal(modalWhatsapp, dados.whatsapp);
+  configurarLinkModal(modalWebsite, dados.website);
+
+  modalOng.classList.add("ativo");
+  modalOng.setAttribute("aria-hidden", "false");
+  document.body.classList.add("modal-aberto");
+}
+
+function fecharModalOng() {
+  if (!modalOng) return;
+
+  modalOng.classList.remove("ativo");
+  modalOng.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("modal-aberto");
+}
+
+const botoesAcessar = document.querySelectorAll(".botao-acessar[data-ong]");
+
+botoesAcessar.forEach(function(botao) {
+  botao.addEventListener("click", function() {
+    const chaveOng = botao.getAttribute("data-ong");
+    abrirModalOng(chaveOng);
+  });
+});
+
+if (fecharModal) {
+  fecharModal.addEventListener("click", fecharModalOng);
+}
+
+if (modalOng) {
+  modalOng.addEventListener("click", function(evento) {
+    if (evento.target === modalOng) {
+      fecharModalOng();
+    }
+  });
+}
+
+document.addEventListener("keydown", function(evento) {
+  if (evento.key === "Escape") {
+    fecharModalOng();
+  }
+});
+
+>>>>>>> cddf29c (modal + botão acessar e voltar funcionando)
