@@ -1,6 +1,7 @@
 const dadosOngs = [
 	{
 		nome: "ABC Aurora",
+		CEP: "08223010",
 		endereco: "Rua Caxinguelê, 648",
 		email: "abcaurora@abcaurora.org.br",
 		whatsapp: "11 2049-2934",
@@ -11,6 +12,7 @@ const dadosOngs = [
 	},
 	{
 		nome: "Centro Social Santo Estevão",
+		CEP: "03610000",
 		endereco: "Rua Jaborandi, 621",
 		email: "centrosocialsantoestevao@hotmail.com",
 		whatsapp: "11 2642-7395",
@@ -21,6 +23,7 @@ const dadosOngs = [
 	},
 	{
 		nome: "Casa de Apoio ao Cidadão",
+		CEP: "08080570",
 		endereco: "Av. Oliveira Freire, 1587",
 		email: "departamento_rh@caci.ong.br",
 		whatsapp: "11 3476-0623",
@@ -41,6 +44,7 @@ const dadosOngs = [
 	},
 	{
 		nome: "Zl Somos Nós",
+		CEP: "08032250",
 		endereco: "Rua Dr. zacarias Colaço Filho, 45",
 		email: "marcosalves@zonalestesomos.com.br",
 		whatsapp: "11 94788-7744",
@@ -51,6 +55,7 @@ const dadosOngs = [
 	},
 	{
 		nome: "Mooca Solidaria",
+		CEP: "03181010",
 		endereco: "Rua Major Basílio, 644",
 		email: "contato@moocasolidaria.org",
 		whatsapp: "11 94848-7269",
@@ -61,6 +66,7 @@ const dadosOngs = [
 	},
 	{
 		nome: "Casa do Cristo Redentor",
+		CEP: "08260030",
 		endereco: "Rua Agrimensor Sugaya, 986",
 		email: "criacao@casadocristo.org.br",
 		whatsapp: "11 3058-6211",
@@ -71,6 +77,7 @@ const dadosOngs = [
 	},
 	{
 		nome: "Núcleo Assistencial Fraterno",
+		CEP: "03420000",
 		endereco: "Rua Dentista Barreto, 978",
 		email: "contato@fraterno.com.br",
 		whatsapp: "11 2296-3462",
@@ -81,6 +88,7 @@ const dadosOngs = [
 	},
 	{
 		nome: "Ação Comunitária Paroquial do Jardim Colonial",
+		CEP: "08370190",
 		endereco: "Rua Lorenzo Penha, 350",
 		email: "",
 		whatsapp: "11 2734-3761",
@@ -91,6 +99,7 @@ const dadosOngs = [
 	},
 	{
 		nome: "Complexo do Bem",
+		CEP: "03978360",
 		endereco: "Rua dos Meiros, s/n°",
 		email: "",
 		whatsapp: "11 98987-9230",
@@ -101,6 +110,7 @@ const dadosOngs = [
 	},
 	{
 		nome: "Instituto LEMDA",
+		CEP: "03335090",
 		endereco: "Rua Francisco Zicardi, 420",
 		email: "institutolemda@institutolemda.org.br",
 		whatsapp: "11 2671-7677",
@@ -333,69 +343,6 @@ function ativarLocalizacao() {
 
 
 
-// MAPA COM LEAFLET AQUI PABLO 
-
-let mapa;
-let mapaInicializado = false;
-
-function toggleMap() {
-
-	const toggle = document.getElementById('interruptor-mapa');
-
-	const mapaElemento = document.getElementById('mapa-leaflet');
-
-	const placeholder = document.getElementById('placeholder-mapa');
-
-	if (toggle.checked) {
-
-		mapaElemento.style.display = 'block';
-
-		placeholder.style.display = 'none';
-
-		if (!mapaInicializado) {
-
-			mapa = L.map('mapa-leaflet').setView(
-				[-23.55052, -46.633308],
-				11
-			);
-
-			L.tileLayer(
-				'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-				{
-					attribution: '&copy; OpenStreetMap'
-				}
-			).addTo(mapa);
-
-			mapaInicializado = true;
-
-			// marcador exemplo 1 aqui 
-			L.marker([-23.55052, -46.633308])
-				.addTo(mapa)
-				.bindPopup('Ong 1')
-				.openPopup();
-
-			L.marker([-23.52392, -46.6332343])
-				.addTo(mapa)
-				.bindPopup('Ong 2')
-				.openPopup();
-
-			L.marker([-23.53232, -46.6222])
-				.addTo(mapa)
-				.bindPopup('Ong 3')
-				.openPopup();
-		}
-		setTimeout(() => {
-			mapa.invalidateSize();
-		}, 100);
-
-	} else {
-
-		mapaElemento.style.display = 'none';
-
-		placeholder.style.display = 'flex';
-	}
-}
-
 /* MODAL DAS ONGS */
 const modalOng = document.getElementById("modalOng");
 const fecharModal = document.getElementById("fecharModal");
@@ -421,11 +368,10 @@ function configurarLinkModal(elemento, url) {
 	}
 }
 
-function abrirModalOng(cartaoId) {
+function abrirModalOng(ongIndex) {
 	if (!modalOng) return;
 
-	const ongId = currentOngs[cartaoId - 1]
-	const dados = dadosOngs[ongId];
+	const dados = dadosOngs[ongIndex];
 
 	if (!dados) return;
 
@@ -467,6 +413,11 @@ function fecharModalOng() {
 	document.body.classList.remove("modal-aberto");
 }
 
+function visualizarOng(cartaoId) {
+	const ongIndex = currentOngs[cartaoId - 1]
+	abrirModalOng(ongIndex)
+}
+
 const botoesAcessar = document.querySelectorAll(".botao-acessar[data-ong]");
 
 if (fecharModal) {
@@ -486,3 +437,101 @@ document.addEventListener("keydown", function(evento) {
 		fecharModalOng();
 	}
 });
+
+
+
+// MAPA COM LEAFLET AQUI PABLO 
+let mapa;
+let mapaInicializado = false;
+
+async function obterCoordenadasPorCEP(cep) {
+	const viaCep = await fetch(
+		`https://viacep.com.br/ws/${cep}/json/`
+	).then(res => res.json());
+
+	const endereco = `${viaCep.logradouro}, ${viaCep.localidade}, ${viaCep.uf}, Brasil`;
+
+	const resultado = await fetch(
+		`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(endereco)}`
+	).then(res => res.json());
+
+	if (resultado.length === 0) {
+		throw new Error("Endereço não encontrado");
+	}
+
+	return {
+		lat: parseFloat(resultado[0].lat),
+		lon: parseFloat(resultado[0].lon)
+	};
+}
+
+async function createOngPopup(ongIndex, ongNome, ongCEP) {
+	const { lat, lon } = await obterCoordenadasPorCEP(ongCEP);
+	console.log("ong popup:", ongIndex, ongNome, lat, lon);
+
+	L.marker([lat, lon])
+		.addTo(mapa)
+		//.bindPopup(ongNome)
+		.on("click", () => {
+			abrirModalOng(ongIndex)
+		})
+}
+
+function toggleMap() {
+	const mapaToggleButton = document.getElementById('interruptor-mapa');
+	const mapaElemento = document.getElementById('mapa-leaflet');
+	const placeholderMapa = document.getElementById('placeholder-mapa');
+
+	if (!mapaToggleButton.checked) {
+		mapaElemento.style.display = 'none';
+		placeholderMapa.style.display = 'flex';
+
+		return;
+	}
+
+	mapaElemento.style.display = 'block';
+	placeholderMapa.style.display = 'none';
+
+	if (!mapaInicializado) {
+		mapaInicializado = true;
+
+		mapa = L.map('mapa-leaflet').setView(
+			[-23.55052, -46.633308],
+			11
+		);
+
+		L.tileLayer(
+			'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+			{
+				attribution: '&copy; OpenStreetMap'
+			}
+		).addTo(mapa);
+
+		// marcador exemplo 1 aqui 
+		for (const [ongIndex, ong] of Object.entries(dadosOngs)) {
+			if (ong.CEP) {
+				console.log()
+				createOngPopup(ongIndex, ong.nome, ong.CEP)
+			}
+		}
+
+		/*L.marker([-23.55052, -46.633308])
+			.addTo(mapa)
+			.bindPopup('Ong 1')
+			.openPopup();
+
+		L.marker([-23.52392, -46.6332343])
+			.addTo(mapa)
+			.bindPopup('Ong 2')
+			.openPopup();
+
+		L.marker([-23.53232, -46.6222])
+			.addTo(mapa)
+			.bindPopup('Ong 3')
+			.openPopup();*/
+	}
+
+	setTimeout(() => {
+		mapa.invalidateSize();
+	}, 100);
+}
