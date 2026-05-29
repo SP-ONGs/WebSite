@@ -6,7 +6,7 @@ const dadosOngs = [
 		whatsapp: "11 2049-2934",
 		instagram: "abcaurora",
 		website: "https://www.abcaurora.org.br/",
-		etiquetas: ["👧 Crianças"],
+		etiquetas: ["criancas"],
 		imagem: "src/imagens/ONGs/abc_aurora.png"
 	},
 	{
@@ -16,7 +16,7 @@ const dadosOngs = [
 		whatsapp: "11 2642-7395",
 		instagram: "centrosocialsantoestevao",
 		website: "https://www.atados.com.br/ong/centro-social-santo-estevao",
-		etiquetas: ["👧 Crianças"],
+		etiquetas: ["criancas"],
 		imagem: "src/imagens/ONGs/centro_social_santo_estevao.jpg"
 	},
 	{
@@ -26,7 +26,7 @@ const dadosOngs = [
 		whatsapp: "11 3476-0623",
 		instagram: "casaapoiocidadao",
 		website: "https://www.atados.com.br/ong/caci-casa-de-apoio-ao-cidadao-383136",
-		etiquetas: ["🤝 Acolhimento"],
+		etiquetas: ["acolhimento"],
 		imagem: "src/imagens/ONGs/casa_de_apoio_ao_cidado.png"
 	},
 	{
@@ -36,7 +36,7 @@ const dadosOngs = [
 		whatsapp: "11 95052-2407",
 		instagram: "anjosdaleste",
 		website: "https://www.anjosdaleste.org.br/",
-		etiquetas: ["🤝 Acolhimento"],
+		etiquetas: ["acolhimento"],
 		imagem: "src/imagens/ONGs/anjos_da_leste.png"
 	},
 	{
@@ -46,7 +46,7 @@ const dadosOngs = [
 		whatsapp: "11 94788-7744",
 		instagram: "zlsn_noticias",
 		website: "https://zlsn.com.br/",
-		etiquetas: ["🌍 Desenvolvimento Social"],
+		etiquetas: ["desenvolvimentoSocial"],
 		imagem: "src/imagens/ONGs/zl_somo_nos.jpg"
 	},
 	{
@@ -56,7 +56,7 @@ const dadosOngs = [
 		whatsapp: "11 94848-7269",
 		instagram: "moocasolidaria",
 		website: "https://moocasolidaria.org/",
-		etiquetas: ["🤝 Acolhimento"],
+		etiquetas: ["acolhimento"],
 		imagem: "src/imagens/ONGs/mooca_solidaria.jpg"
 	},
 	{
@@ -66,7 +66,7 @@ const dadosOngs = [
 		whatsapp: "11 3058-6211",
 		instagram: "",
 		website: "https://casadocristo.org.br/contato/",
-		etiquetas: ["🤝 Acolhimento"],
+		etiquetas: ["acolhimento"],
 		imagem: "src/imagens/ONGs/casa_do_cristo_redentor.jpg"
 	},
 	{
@@ -76,7 +76,7 @@ const dadosOngs = [
 		whatsapp: "11 2296-3462",
 		instagram: "nucleoassistencialfraterno",
 		website: "https://fraterno.org.br/",
-		etiquetas: ["🤝 Acolhimento"],
+		etiquetas: ["acolhimento"],
 		imagem: "src/imagens/ONGs/nucleo_assistencial_fraternal.jpg"
 	},
 	{
@@ -86,7 +86,7 @@ const dadosOngs = [
 		whatsapp: "11 2734-3761",
 		instagram: "",
 		website: "https://acaocomunitaria.org.br/",
-		etiquetas: ["🧒 Crianças"],
+		etiquetas: ["criancas"],
 		imagem: "src/imagens/ONGs/acao_comunitaria_paroquial.jpg"
 	},
 	{
@@ -96,7 +96,7 @@ const dadosOngs = [
 		whatsapp: "11 98987-9230",
 		instagram: "complexodobem",
 		website: "https://complexodobem.org/",
-		etiquetas: ["🚀 Desenvolvimento Pessoal"],
+		etiquetas: ["desenvolvimento"],
 		imagem: "src/imagens/ONGs/complexo_do_bem.jpg"
 	},
 	{
@@ -106,14 +106,27 @@ const dadosOngs = [
 		whatsapp: "11 2671-7677",
 		instagram: "llemdaoficial",
 		website: "https://institutolemda.org.br/",
-		etiquetas: ["♿ Deficientes"],
+		etiquetas: ["deficientes"],
 		imagem: "src/imagens/ONGs/instituto_LEMDA.jpg"
 	},
 ]
+const tagsTexto = {
+	"acolhimento": "🤝 Acolhimento",
+	"animais": "🐾 Animais",
+	"comunidade": "🏘️ Comunidade",
+	"criancas": "👧 Crianças",
+	"desenvolvimento": "🚀 Desenvolvimento Pessoal",
+	"desenvolvimentoSocial": "🌍 Desenvolvimento Social",
+	"deficientes": "♿ Deficientes",
+	"mulheres": "👩 Mulheres"
+}
 
 let currentPage = 1;
-let currentOngs = [0,1,2,3,4];
+let currentOngs = [0, 1, 2, 3, 4];
+let inFilter;
 
+
+// Atualizar cards das ONGs
 function updateOngCartao(id, ongId) {
 	const ong = dadosOngs[ongId];
 	const cartao = document.getElementById("ong-cartao" + id);
@@ -164,9 +177,10 @@ function updateOngCartao(id, ongId) {
 
 	ong.etiquetas.forEach((etiqueta) => {
 		const span = document.createElement("span");
+		const tagTexto = tagsTexto[etiqueta];
 
 		span.className = "etiqueta";
-		span.textContent = etiqueta;
+		span.textContent = tagTexto;
 
 		etiquetasContainer.appendChild(span);
 	});
@@ -195,7 +209,18 @@ function changePage(page) {
 
 	const initialIndex = (page - 1) * 5
 
-	currentOngs = [initialIndex, initialIndex + 1, initialIndex + 2, initialIndex + 3, initialIndex + 4];
+	if (inFilter) {
+		currentOngs = [
+			inFilter[initialIndex],
+			inFilter[initialIndex + 1],
+			inFilter[initialIndex + 2],
+			inFilter[initialIndex + 3],
+			inFilter[initialIndex + 4]
+		];
+	} else {
+		currentOngs = [initialIndex, initialIndex + 1, initialIndex + 2, initialIndex + 3, initialIndex + 4];
+	}
+
 	updateAllCards()
 
 	// remove ativo de todos
@@ -216,38 +241,36 @@ function changePage(page) {
 	}
 }
 
-function toggleFiltro() {
 
+// Filtrar por tag
+let inTagFilter;
+let inNameFilter;
+
+function toggleTagMenu() {
 	const menu = document.getElementById('menu-filtro');
-
 	menu.classList.toggle('ativo');
 }
 
 function filtrarCategoria(categoria) {
+	toggleTagMenu()
 
-	const cards = document.querySelectorAll('.cartao-ong');
+	if (categoria == "todas") {
+		inFilter = null;
+		currentOngs = [0, 1, 2, 3, 4]
+		updateAllCards()
+		return
+	}
 
-	cards.forEach(card => {
+	inFilter = []
 
-		const categoriaCard = card.dataset.categoria || '';
-
-		if (
-			categoria === 'todas' ||
-			categoriaCard.includes(categoria)
-		) {
-
-			card.style.display = '';
-
-		} else {
-
-			card.style.display = 'none';
+	for (const [ongIndex, data] of Object.entries(dadosOngs)) {
+		if (data.etiquetas.indexOf(categoria) > -1) {
+			inFilter.push(ongIndex)
 		}
+	}
 
-	});
-
-	document
-		.getElementById('menu-filtro')
-		.classList.remove('ativo');
+	currentOngs = [inFilter[0], inFilter[1], inFilter[2], inFilter[3], inFilter[4]]
+	updateAllCards()
 }
 
 function ativarLocalizacao() {
