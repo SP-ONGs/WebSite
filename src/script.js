@@ -273,6 +273,38 @@ function filtrarCategoria(categoria) {
 	updateAllCards()
 }
 
+// Filtrar por nome
+function filtrarPorNome(nome) {
+	if (nome == "") {
+		inFilter = null;
+		currentOngs = [0, 1, 2, 3, 4]
+		updateAllCards()
+		return
+	}
+
+	inFilter = []
+	const nomeLowerCase = nome.toLowerCase()
+
+	for (const [ongIndex, data] of Object.entries(dadosOngs)) {
+		const ongNome = data.nome.toLowerCase()
+
+		if (ongNome.includes(nomeLowerCase)) {
+			inFilter.push(ongIndex)
+		}
+	}
+
+	currentOngs = [inFilter[0], inFilter[1], inFilter[2], inFilter[3], inFilter[4]]
+	updateAllCards()
+}
+
+
+const input = document.getElementById("ong-pesquisa-nome");
+
+input.addEventListener("input", (event) => {
+	filtrarPorNome(event.target.value)
+});
+
+
 function ativarLocalizacao() {
 
 	if (!navigator.geolocation) {
