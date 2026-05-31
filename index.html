@@ -276,16 +276,15 @@
 					<div class="paginacao">
 
 
-						<a class="botao-nav" onclick="changePage(currentPage - 1)">&#8249;</a>
-
-						<a id="pagina-1" class="ativo" onclick="changePage(1)">1</a>
-						<a id="pagina-2" onclick="changePage(2)">2</a>
-						<a id="pagina-3" onclick="changePage(3)">3</a>
-						<a id="pagina-4" onclick="changePage(4)">4</a>
-						<a id="pagina-5" onclick="changePage(5)">5</a>
-						<span>...</span>
-						<a onclick="changePage(50)">50</a>
-						<a class="botao-nav" onclick="changePage(currentPage + 1)">&#8250;</a>
+						<a class="botao-nav" onclick="changePagePrevius()">&#8249;</a>
+						<a id="pageButton-1" onclick="changePageButton(1)">1</a>
+						<a id="pageButton-2" onclick="changePageButton(2)">2</a>
+						<a id="pageButton-3" onclick="changePageButton(3)">3</a>
+						<a id="pageButton-4" onclick="changePageButton(4)">4</a>
+						<a id="pageButton-5" onclick="changePageButton(5)">5</a>
+						<a id="pageButton-6" onclick="changePageButton(6)">...</a>
+						<a id="pageButton-7" onclick="changePageButton(7)">50</a>
+						<a class="botao-nav" onclick="changePageNext()">&#8250;</a>
 					</div>
 
 				</div>

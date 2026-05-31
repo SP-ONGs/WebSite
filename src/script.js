@@ -131,7 +131,6 @@ const tagsTexto = {
 	"mulheres": "👩 Mulheres"
 }
 
-let currentPage = 1;
 let currentOngs = [0, 1, 2, 3, 4];
 let inFilter;
 
@@ -213,12 +212,91 @@ function updateAllCards() {
 
 updateAllCards()
 
-function changePage(page) {
 
-	if (page < 1 || page > 50) return;
 
-	const initialIndex = (page - 1) * 5
+// Atualizar contagem de card
+let currentPage = 1;
+let activePageButton;
+let maxPage;
 
+function getPageViewType() {
+	if (maxPage <= 7 | currentPage < 5) {
+		return "InStart"
+	} else if (maxPage > 7 && currentPage >= maxPage - 3) {
+		return "InEnd"
+	} else {
+		return "InMiddle"
+	}
+}
+
+function updatePagesButtons() {
+	const pageButton1 = document.getElementById("pageButton-1");
+	const pageButton2 = document.getElementById("pageButton-2");
+	const pageButton3 = document.getElementById("pageButton-3");
+	const pageButton4 = document.getElementById("pageButton-4");
+	const pageButton5 = document.getElementById("pageButton-5");
+	const pageButton6 = document.getElementById("pageButton-6");
+	const pageButton7 = document.getElementById("pageButton-7");
+
+	// Update if the current page is in middle of max pages
+	const pageViewType = getPageViewType()
+
+	pageButton1.textContent = "1";
+
+	if (pageViewType == "InStart") {
+		pageButton2.textContent = "2"
+		pageButton3.textContent = "3"
+		pageButton4.textContent = "4"
+		pageButton5.textContent = "5"
+		pageButton6.textContent = "..."
+
+	} else if (pageViewType == "InMiddle") {
+		pageButton2.textContent = "..."
+		pageButton3.textContent = (currentPage - 1).toString()
+		pageButton4.textContent = currentPage.toString()
+		pageButton5.textContent = (currentPage + 1).toString()
+		pageButton6.textContent = "..."
+	} else {
+		pageButton2.textContent = "..."
+		pageButton3.textContent = (maxPage - 4).toString()
+		pageButton4.textContent = (maxPage - 3).toString()
+		pageButton5.textContent = (maxPage - 2).toString()
+		pageButton6.textContent = (maxPage - 1).toString()
+	}
+
+	pageButton7.textContent = maxPage
+
+	// Update if there is not enough pages
+	for (let index = 0; index < 7; index++) {
+		const buttonNumber = (7 - index);
+		const pageButton = document.getElementById("pageButton-" + buttonNumber);
+
+		if (buttonNumber > maxPage) {
+			pageButton.style.display = "None"
+		} else {
+			pageButton.style.display = ""
+		}
+	}
+}
+
+function updateMaxPage(ongsAmount) {
+	maxPage = Math.max(Math.ceil(ongsAmount / 5), 1);
+	updatePagesButtons()
+}
+
+function selectPageButton(pageButton) {
+	if (activePageButton) {
+		activePageButton.classList.remove('ativo');
+	}
+
+	pageButton.classList.add('ativo');
+	activePageButton = pageButton;
+}
+
+function changePage(pageNumber) {
+	const initialIndex = (pageNumber - 1) * 5
+
+	// Update ongs card
 	if (inFilter) {
 		currentOngs = [
 			inFilter[initialIndex],
@@ -231,25 +309,81 @@ function changePage(page) {
 		currentOngs = [initialIndex, initialIndex + 1, initialIndex + 2, initialIndex + 3, initialIndex + 4];
 	}
 
+	currentPage = pageNumber;
+
 	updateAllCards()
 
-	// remove ativo de todos
-	const paginas = document.querySelectorAll('.paginacao a');
+	// Update pages button
+	let buttonNumber = pageNumber;
+	const pageViewType = getPageViewType()
 
-	paginas.forEach(link => {
-		link.classList.remove('ativo');
-	});
+	if (pageViewType == "InMiddle") {
+		buttonNumber = 4;
+	} else if (pageViewType == "InEnd") {
+		buttonNumber = 7 - (maxPage - pageNumber)
+	}
 
-	// atualiza página atual
-	currentPage = page;
+	const pageButton = document.getElementById(`pageButton-${buttonNumber}`);
 
-	// adiciona ativo na página clicada
-	const curr = document.getElementById(`pagina-${currentPage}`);
+	selectPageButton(pageButton)
+	updatePagesButtons()
+}
 
-	if (curr) {
-		curr.classList.add('ativo');
+function changePageButton(buttonIndex) {
+	const pageViewType = getPageViewType()
+
+	if (pageViewType == "InStart") {
+		if (buttonIndex == 6) {
+			return;
+		}
+
+		if (buttonIndex == 7) {
+			changePage(maxPage);
+		} else {
+			changePage(buttonIndex);
+		}
+	} else if (pageViewType == "InMiddle") {
+		if (buttonIndex == 2 | buttonIndex == 6) {
+			return;
+		}
+
+		if (buttonIndex == 1) {
+			changePage(1);
+		} else if (buttonIndex == 7) {
+			changePage(maxPage);
+		} else {
+			changePage(currentPage + (buttonIndex - 4));
+		}
+	} else {
+		if (buttonIndex == 2) {
+			return;
+		}
+
+		if (buttonIndex == 1) {
+			changePage(1);
+		} else {
+			changePage(maxPage - (7 - buttonIndex));
+		}
 	}
 }
+
+function changePagePrevius() {
+	if (currentPage > 1) {
+		changePage(currentPage - 1)
+	}
+}
+
+function changePageNext() {
+	if (!maxPage | currentPage < maxPage) {
+		changePage(currentPage + 1)
+	}
+}
+
+const firstPageButton = document.getElementById("pageButton-1");
+//updateMaxPage(dadosOngs.length);
+updateMaxPage(100);
+selectPageButton(firstPageButton);
+
 
 
 // Filtrar por tag
@@ -266,9 +400,11 @@ function filtrarCategoria(categoria) {
 
 	if (categoria == "todas") {
 		inFilter = null;
-		currentOngs = [0, 1, 2, 3, 4]
-		updateAllCards()
-		return
+		currentOngs = [0, 1, 2, 3, 4];
+
+		updateAllCards();
+		updateMaxPage(dadosOngs.length);
+		return;
 	}
 
 	inFilter = []
@@ -281,15 +417,20 @@ function filtrarCategoria(categoria) {
 
 	currentOngs = [inFilter[0], inFilter[1], inFilter[2], inFilter[3], inFilter[4]]
 	updateAllCards()
+	updateMaxPage(inFilter.length)
 }
+
+
 
 // Filtrar por nome
 function filtrarPorNome(nome) {
 	if (nome == "") {
 		inFilter = null;
-		currentOngs = [0, 1, 2, 3, 4]
-		updateAllCards()
-		return
+		currentOngs = [0, 1, 2, 3, 4];
+
+		updateAllCards();
+		updateMaxPage(dadosOngs.length);
+		return;
 	}
 
 	inFilter = []
@@ -305,6 +446,7 @@ function filtrarPorNome(nome) {
 
 	currentOngs = [inFilter[0], inFilter[1], inFilter[2], inFilter[3], inFilter[4]]
 	updateAllCards()
+	updateMaxPage(inFilter.length)
 }
 
 
@@ -316,7 +458,6 @@ input.addEventListener("input", (event) => {
 
 
 function ativarLocalizacao() {
-
 	if (!navigator.geolocation) {
 		alert('Geolocalização não suportada neste navegador.');
 		return;
@@ -467,7 +608,6 @@ async function obterCoordenadasPorCEP(cep) {
 
 async function createOngPopup(ongIndex, ongNome, ongCEP) {
 	const { lat, lon } = await obterCoordenadasPorCEP(ongCEP);
-	console.log("ong popup:", ongIndex, ongNome, lat, lon);
 
 	L.marker([lat, lon])
 		.addTo(mapa)
@@ -510,7 +650,6 @@ function toggleMap() {
 		// marcador exemplo 1 aqui 
 		for (const [ongIndex, ong] of Object.entries(dadosOngs)) {
 			if (ong.CEP) {
-				console.log()
 				createOngPopup(ongIndex, ong.nome, ong.CEP)
 			}
 		}
