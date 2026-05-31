@@ -5,7 +5,7 @@ const dadosOngs = [
 		endereco: "Rua Caxinguelê, 648",
 		email: "abcaurora@abcaurora.org.br",
 		whatsapp: "11 2049-2934",
-		instagram: "abcaurora",
+		instagram: "https://www.instagram.com/abcaurora/",
 		website: "https://www.abcaurora.org.br/",
 		etiquetas: ["criancas"],
 		imagem: "src/imagens/ONGs/abc_aurora.png"
@@ -16,7 +16,7 @@ const dadosOngs = [
 		endereco: "Rua Jaborandi, 621",
 		email: "centrosocialsantoestevao@hotmail.com",
 		whatsapp: "11 2642-7395",
-		instagram: "centrosocialsantoestevao",
+		instagram: "https://www.instagram.com/ccasantoestevao/",
 		website: "https://www.atados.com.br/ong/centro-social-santo-estevao",
 		etiquetas: ["criancas"],
 		imagem: "src/imagens/ONGs/centro_social_santo_estevao.jpg"
@@ -27,7 +27,7 @@ const dadosOngs = [
 		endereco: "Av. Oliveira Freire, 1587",
 		email: "departamento_rh@caci.ong.br",
 		whatsapp: "11 3476-0623",
-		instagram: "casaapoiocidadao",
+		instagram: "https://www.instagram.com/casaapoiocidadao/",
 		website: "https://www.atados.com.br/ong/caci-casa-de-apoio-ao-cidadao-383136",
 		etiquetas: ["acolhimento"],
 		imagem: "src/imagens/ONGs/casa_de_apoio_ao_cidado.png"
@@ -37,7 +37,7 @@ const dadosOngs = [
 		endereco: "Rua Major Basílio, 644",
 		email: "anjosdaleste@gmail.com",
 		whatsapp: "11 95052-2407",
-		instagram: "anjosdaleste",
+		instagram: "https://www.instagram.com/anjosdaleste/",
 		website: "https://www.anjosdaleste.org.br/",
 		etiquetas: ["acolhimento"],
 		imagem: "src/imagens/ONGs/anjos_da_leste.png"
@@ -48,7 +48,7 @@ const dadosOngs = [
 		endereco: "Rua Dr. zacarias Colaço Filho, 45",
 		email: "marcosalves@zonalestesomos.com.br",
 		whatsapp: "11 94788-7744",
-		instagram: "zlsn_noticias",
+		instagram: "https://www.instagram.com/zlsn_noticias/",
 		website: "https://zlsn.com.br/",
 		etiquetas: ["desenvolvimentoSocial"],
 		imagem: "src/imagens/ONGs/zl_somo_nos.jpg"
@@ -59,7 +59,7 @@ const dadosOngs = [
 		endereco: "Rua Major Basílio, 644",
 		email: "contato@moocasolidaria.org",
 		whatsapp: "11 94848-7269",
-		instagram: "moocasolidaria",
+		instagram: "https://www.instagram.com/moocasolidaria/?hl=pt",
 		website: "https://moocasolidaria.org/",
 		etiquetas: ["acolhimento"],
 		imagem: "src/imagens/ONGs/mooca_solidaria.jpg"
@@ -70,7 +70,7 @@ const dadosOngs = [
 		endereco: "Rua Agrimensor Sugaya, 986",
 		email: "criacao@casadocristo.org.br",
 		whatsapp: "11 3058-6211",
-		instagram: "",
+		instagram: "https://www.instagram.com/casadocristo/",
 		website: "https://casadocristo.org.br/contato/",
 		etiquetas: ["acolhimento"],
 		imagem: "src/imagens/ONGs/casa_do_cristo_redentor.jpg"
@@ -81,7 +81,7 @@ const dadosOngs = [
 		endereco: "Rua Dentista Barreto, 978",
 		email: "contato@fraterno.com.br",
 		whatsapp: "11 2296-3462",
-		instagram: "nucleoassistencialfraterno",
+		instagram: "https://www.instagram.com/naf.fraterno/",
 		website: "https://fraterno.org.br/",
 		etiquetas: ["acolhimento"],
 		imagem: "src/imagens/ONGs/nucleo_assistencial_fraternal.jpg"
@@ -92,7 +92,7 @@ const dadosOngs = [
 		endereco: "Rua Lorenzo Penha, 350",
 		email: "",
 		whatsapp: "11 2734-3761",
-		instagram: "",
+		instagram: "https://www.instagram.com/ccajdcolonial/",
 		website: "https://acaocomunitaria.org.br/",
 		etiquetas: ["criancas"],
 		imagem: "src/imagens/ONGs/acao_comunitaria_paroquial.jpg"
@@ -103,7 +103,7 @@ const dadosOngs = [
 		endereco: "Rua dos Meiros, s/n°",
 		email: "",
 		whatsapp: "11 98987-9230",
-		instagram: "complexodobem",
+		instagram: "https://www.instagram.com/complexodobem/",
 		website: "https://complexodobem.org/",
 		etiquetas: ["desenvolvimento"],
 		imagem: "src/imagens/ONGs/complexo_do_bem.jpg"
@@ -114,11 +114,119 @@ const dadosOngs = [
 		endereco: "Rua Francisco Zicardi, 420",
 		email: "institutolemda@institutolemda.org.br",
 		whatsapp: "11 2671-7677",
-		instagram: "llemdaoficial",
+		instagram: "https://www.instagram.com/lemdaoficial/",
 		website: "https://institutolemda.org.br/",
 		etiquetas: ["deficientes"],
 		imagem: "src/imagens/ONGs/instituto_LEMDA.jpg"
+	},{
+    	nome: "VivaZN",
+    	CEP: "02018070",
+    	endereco: "Rua Engenheiro César, s/n",
+    	email: "vivazn@vivazn.com",
+    	whatsapp: "11 99989-6654",
+    	instagram: "https://www.instagram.com/vivazn/",
+    	website: "https://vivazn.com/",
+    	etiquetas: ["criancas"],
+    	imagem: "src/imagens/ONGs/vivazn.jpg"
 	},
+
+	{
+    	nome: "Instituto Resgatando Vidas",
+    	CEP: "02670070",
+    	endereco: "Rua Augusto Gil, 465",
+    	email: "contato@institutoresgatandovidas.org.br",
+    	whatsapp: "11 3774-5931",
+    	instagram: "https://www.instagram.com/institutoresgatandovidas/",
+    	website: "https://www.institutoresgatandovidas.org.br/",
+    	etiquetas: ["desenvolvimento"],
+    	imagem: "src/imagens/ONGs/resgatandoVidas.png"
+	},
+
+	{
+    	nome: "Instituto Center Norte",
+    	CEP: "02047050",
+    	endereco: "Travessa Casalbuono, 120",
+    	email: "institutocenternorte@centernorte.com.br",
+    	whatsapp: null,
+    	instagram: "https://www.instagram.com/centernorte_/",
+    	website: "https://www.institutocenternorte.com.br/",
+    	etiquetas: ["comunidade"],
+    	imagem: "src/imagens/ONGs/institutoCenterNorte.png"
+	},
+
+	{
+    	nome: "Instituto Encantos",
+    	CEP: "02672000",
+    	endereco: "Av. Massao Watanabe, 73",
+    	email: "instituto.encantos@hotmail.com",
+    	whatsapp: "11 3424-6994",
+    	instagram: "https://www.instagram.com/institutoencantos/", 
+    	website: "https://encantos.org.br/",
+    	etiquetas: ["desenvolvimento"],
+    	imagem: "src/imagens/ONGs/institutoEncantos.png"
+	},
+
+	{
+    	nome: "Instituto C",
+    	CEP: "02842280",
+    	endereco: "Av. João Paulo I, s/n",
+    	email: null,
+    	whatsapp: "11 3924-3877",
+    	instagram: "https://www.instagram.com/instituto.c/?hl=pt-br",
+    	website:  "https://institutoc.org.br/",
+    	etiquetas: ["comunidade"],
+    	imagem: "src/imagens/ONGs/institutoC.png"
+	}, 
+
+	{
+    	nome: "Mensageiros da Esperança",
+    	CEP: "05068010",
+    	endereco: "R. Moxei, 96",
+    	email: "veca_machado@hotmail.com",
+    	whatsapp: null,
+    	instagram: "https://www.instagram.com/mensageirosdaesperancaong/",
+    	website: null,
+    	etiquetas: ["mulheres"],
+    	imagem: "src/imagens/ONGs/mensageirosDaEsperança.jpg"
+	},
+
+	{
+    	nome: "Instituto Papel do Menino e Menina",
+    	CEP: "05409020",
+    	endereco: "R. Prof. Rubião Meira, 59",
+    	email: "gestao@papeldemenino.org.br",
+    	whatsapp: null,
+    	instagram: "https://www.instagram.com/ipapeldemenino/",
+    	website: "https://papeldemenino.org.br/",
+    	etiquetas: ["acolhimento"],
+    	imagem: "src/imagens/ONGs/institutoPapelMeninoeMenina.png"
+	},
+
+	{
+    	nome: "Casa do Pequeno Cidadão",
+    	CEP: "05088000",
+    	endereco: "R. Aliança Liberal, 84",
+    	email: "contato@casadopequenocidadao.org.br",
+    	whatsapp: "11 3837-9619",
+    	instagram: "https://www.instagram.com/casadopequenocidadao/",
+    	website: "https://www.casadopequenocidadao.org.br/",
+    	etiquetas: ["criancas"],
+    	imagem: "src/imagens/ONGs/casadopequenocidadao.jpg"
+	},
+
+	{
+    	nome: "Lar Vinicius",
+    	CEP: "05594060",
+    	endereco: "R. Min. Eduardo de Campos Maia, 25",
+    	email: null,
+    	whatsapp: "11 3733-6342",
+    	instagram: "https://www.instagram.com/larviniciusorg/?hl=pt-br",
+    	website: "https://www.larvinicius.org.br/",
+    	etiquetas: ["acolhimento"],
+    	imagem: "src/imagens/ONGs/larVinicius.png"
+	},
+
+
 ]
 const tagsTexto = {
 	"acolhimento": "🤝 Acolhimento",
