@@ -5,7 +5,7 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>SP ONGS</title>
-	<link rel="stylesheet" href="src/style.css" class="rel">
+	<link rel="stylesheet" href="src/styles/style.css" class="rel">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
@@ -14,12 +14,12 @@
 
 	<header>
 		<div class="logo-area">
-			<img src="src/imagens/SPONGs_icon-fb.png" class="icone-logo" alt="SP ONGS Logo">
+			<img src="images/SPONGs_icon-fb.png" class="icone-logo" alt="SP ONGS Logo">
 			<h1>SP ONGS</h1>
 		</div>
 	</header>
 
-	<!-- // MAIN AQUI TROPA  -->
+	<!-- MAIN -->
 
 	<main>
 
@@ -34,10 +34,10 @@
 
 					<input type="text" placeholder="Pesquise o nome da ONG" id="ong-pesquisa-nome" />
 
-					<!-- // FILTRO CATEGORIA -->
+					<!-- FILTRO CATEGORIA -->
 					<div class="filtro-container">
 
-						<button class="botao-filtrar" onclick="toggleTagMenu()">
+						<button class="botao-filtrar" id="tag-menu">
 
 							<i class="bi bi-funnel-fill" style="font-size: 1.5rem"></i>
 
@@ -47,39 +47,39 @@
 
 						<div class="menu-filtro" id="menu-filtro">
 
-							<div onclick="filtrarCategoria('todas')">
+							<div class="tag-button" data-tag="todas">
 								Todas
 							</div>
 
-							<div onclick="filtrarCategoria('acolhimento')">
+							<div class="tag-button" data-tag="acolhimento">
 								🤝 Acolhimento
 							</div>
 
-							<div onclick="filtrarCategoria('animais')">
+							<div class="tag-button" data-tag="animais">
 								🐾 Animais
 							</div>
 
-							<div onclick="filtrarCategoria('comunidade')">
+							<div class="tag-button" data-tag="comunidade">
 								🏘️ Comunidade
 							</div>
 
-							<div onclick="filtrarCategoria('criancas')">
+							<div class="tag-button" data-tag="criancas">
 								🧒 Crianças
 							</div>
 
-							<div onclick="filtrarCategoria('desenvolvimento')">
+							<div class="tag-button" data-tag="desenvolvimento">
 								🚀 Desenvolvimento Pessoal
 							</div>
 
-							<div onclick="filtrarCategoria('desenvolvimentoSocial')">
+							<div class="tag-button" data-tag="desenvolvimentoSocial">
 								🌍 Desenvolvimento Social
 							</div>
 
-							<div onclick="filtrarCategoria('deficientes')">
+							<div class="tag-button" data-tag="deficientes">
 								♿ Pessoas com Deficiência
 							</div>
 
-							<div onclick="filtrarCategoria('mulheres')">
+							<div class="tag-button" data-tag="mulheres">
 								👩 Mulheres
 							</div>
 
@@ -126,7 +126,7 @@
 
 						</div>
 
-						<button class="botao-acessar" type="button" onclick="visualizarOng(1)">
+						<button class="botao-acessar" type="button" id="ong-button1">
 
 							<i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
 
@@ -160,7 +160,7 @@
 
 						</div>
 
-						<button class="botao-acessar" type="button" onclick="visualizarOng(2)">
+						<button class="botao-acessar" type="button" id="ong-button2">
 
 							<i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
 
@@ -194,7 +194,7 @@
 
 						</div>
 
-						<button class="botao-acessar" type="button" onclick="visualizarOng(3)">
+						<button class="botao-acessar" type="button" id="ong-button3">
 
 							<i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
 
@@ -228,7 +228,7 @@
 
 						</div>
 
-						<button class="botao-acessar" type="button" onclick="visualizarOng(4)">
+						<button class="botao-acessar" type="button" id="ong-button4">
 
 							<i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
 
@@ -263,37 +263,27 @@
 
 						</div>
 
-						<button class="botao-acessar" type="button" onclick="visualizarOng(5)">
-
+						<button class="botao-acessar" type="button" id="ong-button5">
 							<i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
-
 							Acessar
 						</button>
 					</div>
 
-
-
 					<div class="paginacao">
-
-
-						<a class="botao-nav" onclick="changePagePrevius()">&#8249;</a>
-						<a id="pageButton-1" onclick="changePageButton(1)">1</a>
-						<a id="pageButton-2" onclick="changePageButton(2)">2</a>
-						<a id="pageButton-3" onclick="changePageButton(3)">3</a>
-						<a id="pageButton-4" onclick="changePageButton(4)">4</a>
-						<a id="pageButton-5" onclick="changePageButton(5)">5</a>
-						<a id="pageButton-6" onclick="changePageButton(6)">...</a>
-						<a id="pageButton-7" onclick="changePageButton(7)">50</a>
-						<a class="botao-nav" onclick="changePageNext()">&#8250;</a>
+						<a class="botao-nav" id="previusPageButton">&#8249;</a>
+						<a class="page-button" id="pageButton-1">1</a>
+						<a class="page-button" id="pageButton-2">2</a>
+						<a class="page-button" id="pageButton-3">3</a>
+						<a class="page-button" id="pageButton-4">4</a>
+						<a class="page-button" id="pageButton-5">5</a>
+						<a class="page-button" id="pageButton-6">...</a>
+						<a class="page-button" id="pageButton-7">50</a>
+						<a class="botao-nav" id="nextPageButton">&#8250;</a>
 					</div>
 
 				</div>
 
-
-
 			</div>
-
-
 
 			<div class="coluna-direita">
 
@@ -308,7 +298,7 @@
 				<div class="ativar-mapa">
 					<span>Visualizar mapa</span>
 					<label class="interruptor">
-						<input type="checkbox" id="interruptor-mapa" onchange="toggleMap()" />
+						<input type="checkbox" id="interruptor-mapa" />
 						<span class="deslizador"></span>
 					</label>
 				</div>
@@ -401,7 +391,7 @@
 	</main>
 
 
-	<!-- Segunda página aqui tropa  -->
+	<!-- SOBRE NÓS  -->
 
 	<article>
 
@@ -423,7 +413,7 @@
 				</div>
 
 				<div class="imagem-fatec">
-					<img src="src/imagens/Fatec_foto.jpg" alt="FATEC Zona Leste">
+					<img src="images/Fatec_foto.jpg" alt="FATEC Zona Leste">
 					<span>Foto: FATEC Zona Leste</span>
 				</div>
 			</section>
@@ -434,25 +424,27 @@
 				<div class="cards">
 
 					<div class="card">
-						<img src="src/imagens/RodrigoNardy.png" alt="Rodrigo Nardy">
+						<img src="images/RodrigoNardy.png" alt="Rodrigo Nardy">
 						<h3>Rodrigo Nardy</h3>
 						<p>Gerente / Backlog</p>
 
 						<div class="links-redes">
 							<a href=""> <i class="bi bi-linkedin linkedin"></i></a>
 							<a href="https://github.com/RodrigoNardy2008"> <i class="bi bi-github"></i></a>
-							<a href="https://www.instagram.com/rodrigo__ng2544?igsh=MXM2M2t5MW52cHo5Yw=="> <i class="bi bi-instagram instagram"></i></a>
+							<a href="https://www.instagram.com/rodrigo__ng2544?igsh=MXM2M2t5MW52cHo5Yw=="> <i
+									class="bi bi-instagram instagram"></i></a>
 						</div>
 					</div>
 
 
 					<div class="card">
-						<img src="src/imagens/PabloOliveira.jpg" alt="Pablo Oliveira">
+						<img src="images/PabloOliveira.jpg" alt="Pablo Oliveira">
 						<h3>Pablo Oliveira</h3>
 						<p>Front-end</p>
 
 						<div class="links-redes">
-							<a href="https://www.linkedin.com/in/pablo-oliveira-97a315343"> <i class="bi bi-linkedin linkedin"></i></a>
+							<a href="https://www.linkedin.com/in/pablo-oliveira-97a315343"> <i
+									class="bi bi-linkedin linkedin"></i></a>
 							<a href="https://github.com/Pablo07os"> <i class="bi bi-github"></i></a>
 							<a href="https://www.instagram.com/pabloo_ihp?igsh=MXBieHBoamljYnoxcA=="> <i
 									class="bi bi-instagram instagram"></i></a>
@@ -461,12 +453,13 @@
 
 
 					<div class="card">
-						<img src="src/imagens/RyanGualberto.jpg" alt="Ryan Gualberto Silva">
+						<img src="images/RyanGualberto.jpg" alt="Ryan Gualberto Silva">
 						<h3>Ryan Gualberto</h3>
 						<p>Back-end / Design</p>
 
 						<div class="links-redes">
-							<a href="https://www.linkedin.com/in/ryan-gualberto-105204402/"> <i class="bi bi-linkedin linkedin"></i></a>
+							<a href="https://www.linkedin.com/in/ryan-gualberto-105204402/"> <i
+									class="bi bi-linkedin linkedin"></i></a>
 							<a href="https://github.com/ryangualbert"> <i class="bi bi-github"></i></a>
 							<a href="#"> <i class="bi bi-instagram instagram"></i></a>
 						</div>
@@ -474,12 +467,14 @@
 
 
 					<div class="card">
-						<img src="src/imagens/ThallysonNeves.jpg" alt="Thallyson Neves">
+						<img src="images/ThallysonNeves.jpg" alt="Thallyson Neves">
 						<h3>Thallyson Neves</h3>
 						<p>Front-end</p>
 
 						<div class="links-redes">
-							<a href="https://www.linkedin.com/in/thallyson-neves-8392222a9?utm_source=share_via&utm_content=profile&utm_medium=member_android"> <i class="bi bi-linkedin linkedin"></i></a>
+							<a
+								href="https://www.linkedin.com/in/thallyson-neves-8392222a9?utm_source=share_via&utm_content=profile&utm_medium=member_android">
+								<i class="bi bi-linkedin linkedin"></i></a>
 							<a href="https://github.com/thallysont"> <i class="bi bi-github"></i></a>
 							<a href=""> <i class="bi bi-instagram instagram"></i></a>
 						</div>
@@ -487,14 +482,15 @@
 
 
 					<div class="card">
-						<img src="src/imagens/GustavoSantos.jpg" alt="Gustavo Santos">
+						<img src="images/GustavoSantos.jpg" alt="Gustavo Santos">
 						<h3>Gustavo Santos</h3>
 						<p>Analista Geral</p>
 
 						<div class="links-redes">
 							<a href=""> <i class="bi bi-linkedin linkedin"></i></a>
 							<a href="https://github.com/gusantoss11"> <i class="bi bi-github"></i></a>
-							<a href="https://www.instagram.com/guxtaaa.nk?igsh=MWlpMHhhaTRidXhiNQ=="> <i class="bi bi-instagram instagram"></i></a>
+							<a href="https://www.instagram.com/guxtaaa.nk?igsh=MWlpMHhhaTRidXhiNQ=="> <i
+									class="bi bi-instagram instagram"></i></a>
 						</div>
 					</div>
 				</div>
@@ -512,12 +508,8 @@
 			2026 SP ONGs, direitos reservados FATEC da Zona Leste.</p>
 	</footer>
 
-
-
-
-
 	<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-	<script src="src/script.js"></script>
+	<script type="module" src="src/main.js"></script>
 	<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </body>
 
