@@ -54,7 +54,7 @@ header {
 }
 
 header h1 {
-	font-size: 6rem;
+	font-size: clamp(2rem, 8vw, 6rem);
 	font-weight: 800;
 	color: var(--cor-primaria);
 	letter-spacing: -2px;
@@ -90,7 +90,7 @@ main {
 }
 
 .coluna-direita {
-	width: 480px;
+	width: min(480px, 100%);
 	flex-shrink: 0;
 	display: flex;
 	flex-direction: column;
@@ -922,4 +922,230 @@ footer p {
 	.redes-container {
 		justify-content: center;
 	}
+}
+/* =========================================
+   RESPONSIVO MOBILE E TABLET
+========================================= */
+
+@media (max-width: 768px) {
+
+    body {
+        padding-top: 95px;
+        overflow-x: hidden;
+    }
+
+    /* HEADER */
+
+    header {
+        padding: 12px;
+        height: auto;
+    }
+
+    .logo-area {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .icone-logo {
+        width: 55px;
+        height: 55px;
+    }
+
+    header h1 {
+        font-size: clamp(2rem, 9vw, 3rem);
+        letter-spacing: 0;
+    }
+
+    /* LAYOUT */
+
+    .layout-principal {
+        flex-direction: column;
+        padding: 0 12px;
+        gap: 20px;
+    }
+
+    .coluna-esquerda,
+    .coluna-direita {
+        width: 100%;
+        margin: 0;
+        flex: none;
+    }
+
+    /* PESQUISA */
+
+    .barra-cinza,
+    .barra-pesquisa {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .barra-pesquisa {
+        flex-wrap: wrap;
+        gap: 10px;
+        height: auto;
+        padding: 10px;
+    }
+
+    .barra-pesquisa input {
+        width: 100%;
+        flex: 1 1 100%;
+        font-size: 1rem;
+    }
+
+    .botao-filtrar,
+    .botao-localizacao {
+        font-size: .95rem;
+    }
+
+    /* CARDS ONG */
+
+    .cartao-ong {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .imagem-ong {
+        width: 100%;
+        height: 180px;
+        object-fit: contain;
+        background: #fff;
+    }
+
+    .info-ong {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .nome-ong {
+        font-size: 1.5rem;
+    }
+
+    .endereco-ong {
+        font-size: .95rem;
+    }
+
+    .etiquetas-ong {
+        flex-wrap: wrap;
+    }
+
+    .botao-acessar {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* MAPA */
+
+    .coluna-direita {
+        margin-top: 20px;
+    }
+
+    .area-mapa {
+        height: 300px;
+    }
+
+    /* PAGINAÇÃO */
+
+    .paginacao {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    /* QUEM SOMOS */
+
+    .container {
+        padding: 60px 15px;
+    }
+
+    .sobre {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .texto,
+    .imagem-fatec {
+        max-width: 100%;
+    }
+
+    .texto h2,
+    .integrantes h2 {
+        font-size: clamp(2rem, 8vw, 2.8rem);
+    }
+
+    .texto p {
+        font-size: 1rem;
+    }
+
+    .imagem-fatec img {
+        height: auto;
+    }
+
+    /* INTEGRANTES */
+
+    /* INTEGRANTES */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 15px;
+    justify-items: center;
+    margin-top: 30px;
+}
+
+.card {
+    width: 100%;
+    max-width: 150px;
+    text-align: center;
+    align-items: center;
+}
+
+.card img {
+    width: 110px;
+    height: 110px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.card h3 {
+    font-size: 1rem;
+    margin-top: 8px;
+}
+
+.card p {
+    font-size: .85rem;
+}
+
+.links-redes {
+    justify-content: center;
+    gap: 10px;
+    padding: 8px 0;
+}
+
+.links-redes i {
+    font-size: 1.4rem;
+}
+
+/* último integrante centralizado */
+
+.card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+}
+    /* MODAL */
+
+    .modal-conteudo {
+        width: 95vw;
+        padding: 15px;
+    }
+
+    .modal-topo {
+        flex-direction: column;
+    }
+
+    .modal-info h2 {
+        font-size: 2rem;
+    }
+
+    .redes-container {
+        justify-content: center;
+    }
 }
