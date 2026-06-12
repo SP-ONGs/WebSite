@@ -1148,4 +1148,12 @@ footer p {
     .redes-container {
         justify-content: center;
     }
+	footer p {
+    text-align: center;
+}
+
+footer p span {
+    display: block;
+    text-align: center;
+}
 }
