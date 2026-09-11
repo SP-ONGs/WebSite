@@ -1,4 +1,9 @@
-import { Initialize as InitMap } from "./components/map.js";
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+
+import App from './App.jsx'
+
+/*import { Initialize as InitMap } from "./components/map.js";
 import { Initialize as InitOngsCard } from "./components/ongCard.js";
 import { Initialize as InitModal } from "./components/ongModal.js";
 import { Initialize as InitPageBar } from "./components/pageBar.js";
@@ -10,4 +15,10 @@ InitOngsCard()
 InitModal()
 InitPageBar()
 InitTagMenu()
-InitNameFilterBar()
+InitNameFilterBar()*/
+
+createRoot(document.getElementById('root')).render(
+	<StrictMode>
+		<App />
+	</StrictMode>,
+)
