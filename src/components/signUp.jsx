@@ -1,18 +1,28 @@
-import "../styles/signUp.css";
-import logo from "../../images/SPONGs_icon-nobg.png";
+// --> Variables <-- //
 
+// CSS
+import "../styles/signUp.css";
+
+// Images
+import logoImage from "../../images/SPONGs_icon-nobg.png";
+import closeIconImage from "../../images/elements_vectors/CloseIcon.png";
+
+
+
+// --> Functions <-- //
 function SignupModal() {
 	return (
-		<div className="overlay">
+		<div className="focus_BG">
 
 			<div className="signup-modal">
 
-				<button className="close-button">
-					×
-				</button>
+				<div className="close-button">
+					<img src={closeIconImage} alt="Close button" />
+					<button ></button>
+				</div>
 
 				<div className="brand">
-					<img src={logo} alt="SP ONGS logo" />
+					<img src={logoImage} alt="SP ONGS logo" />
 					<span>SP ONGS</span>
 				</div>
 

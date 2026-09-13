@@ -7,7 +7,8 @@ body {
 	font-family: Arial, sans-serif;
 }
 
-.overlay {
+/* Fundo preto */
+.focus_BG {
 	position: fixed;
 	inset: 0;
 
@@ -18,6 +19,39 @@ body {
 	align-items: center;
 }
 
+
+/* Botão de fechar */
+.close-button {
+	position: absolute;
+
+	top: 20px;
+	right: 20px;
+
+	width: 30px;
+	height: 30px;
+
+	border: 0px;
+	padding: 0px;
+
+	background-color: rgba(255, 255, 255, 0);
+}
+
+.close-button img,
+.close-button button {
+	position: absolute;
+	cursor: pointer;
+
+	width: 100%;
+	height: 100%;
+
+	border: 0px;
+	padding: 0px;
+
+	background-color: rgba(255, 255, 255, 0);
+}
+
+
+/* Fundo branco */
 .signup-modal {
 	width: 464px;
 	height: 490px;
@@ -33,12 +67,8 @@ body {
 	position: relative;
 }
 
-.close-button {
-	position: absolute;
-	top: 20px;
-	right: 20px;
-}
 
+/* SP ONGS Logo */
 .brand {
 	height: 86px;
 
@@ -63,6 +93,8 @@ body {
 	font-weight: 700;
 }
 
+
+/* Sign up texto */
 .signup-modal h2 {
 	margin: 0 0 18px;
 
@@ -72,6 +104,8 @@ body {
 	font-weight: 400;
 }
 
+
+/* Sign up inputs */
 .input-group {
 	margin-bottom: 6px;
 }
@@ -101,6 +135,8 @@ body {
 	outline: none;
 }
 
+
+/* Botão de sign up */
 .signup-button {
 	width: 100%;
 
@@ -119,6 +155,8 @@ body {
 	cursor: pointer;
 }
 
+
+/* Opção de cadastrar */
 .or {
 	display: block;
 
