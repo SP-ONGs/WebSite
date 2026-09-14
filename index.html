@@ -2,26 +2,25 @@
 <html lang="pt-BR">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>SP ONGS</title>
-	<link rel="stylesheet" href="src/style.css" class="rel">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-	<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SP ONGS</title>
+    <link rel="stylesheet" href="src/styles/style.css" class="rel">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 
 <body>
 
-	<header>
-		<div class="logo-area">
-			<img src="src/imagens/SPONGs_icon-fb.png" class="icone-logo" alt="SP ONGS Logo">
-			<h1>SP ONGS</h1>
-		</div>
-	</header>
+    <header>
+        <div class="logo-area">
+            <img src="images/SPONGs_icon-fb.png" class="icone-logo" alt="SP ONGS Logo">
+            <h1>SP ONGS</h1>
+        </div>
+    </header>
 
-	<!-- // MAIN AQUI TROPA  -->
+    <main>
 
-	<main>
 
 		<div class="barra-cinza"> </div>
 
@@ -34,10 +33,10 @@
 
 					<input type="text" placeholder="Pesquise o nome da ONG" id="ong-pesquisa-nome" />
 
-					<!-- // FILTRO CATEGORIA -->
+					<!-- FILTRO CATEGORIA -->
 					<div class="filtro-container">
 
-						<button class="botao-filtrar" onclick="toggleTagMenu()">
+						<button class="botao-filtrar" id="tag-menu">
 
 							<i class="bi bi-funnel-fill" style="font-size: 1.5rem"></i>
 
@@ -47,39 +46,39 @@
 
 						<div class="menu-filtro" id="menu-filtro">
 
-							<div onclick="filtrarCategoria('todas')">
+							<div class="tag-button" data-tag="todas">
 								Todas
 							</div>
 
-							<div onclick="filtrarCategoria('acolhimento')">
+							<div class="tag-button" data-tag="acolhimento">
 								🤝 Acolhimento
 							</div>
 
-							<div onclick="filtrarCategoria('animais')">
+							<div class="tag-button" data-tag="animais">
 								🐾 Animais
 							</div>
 
-							<div onclick="filtrarCategoria('comunidade')">
+							<div class="tag-button" data-tag="comunidade">
 								🏘️ Comunidade
 							</div>
 
-							<div onclick="filtrarCategoria('criancas')">
+							<div class="tag-button" data-tag="criancas">
 								🧒 Crianças
 							</div>
 
-							<div onclick="filtrarCategoria('desenvolvimento')">
+							<div class="tag-button" data-tag="desenvolvimento">
 								🚀 Desenvolvimento Pessoal
 							</div>
 
-							<div onclick="filtrarCategoria('desenvolvimentoSocial')">
+							<div class="tag-button" data-tag="desenvolvimentoSocial">
 								🌍 Desenvolvimento Social
 							</div>
 
-							<div onclick="filtrarCategoria('deficientes')">
+							<div class="tag-button" data-tag="deficientes">
 								♿ Pessoas com Deficiência
 							</div>
 
-							<div onclick="filtrarCategoria('mulheres')">
+							<div class="tag-button" data-tag="mulheres">
 								👩 Mulheres
 							</div>
 
@@ -98,7 +97,7 @@
 
 				<!-- LISTAGEM AQUI PABLOOOO -->
 
-				<div class="listagem">
+        <div class="coluna-esquerda">
 
 					<div class="cartao-ong" id="ong-cartao1">
 
@@ -126,7 +125,7 @@
 
 						</div>
 
-						<button class="botao-acessar" type="button" onclick="visualizarOng(1)">
+						<button class="botao-acessar" type="button" id="ong-button1">
 
 							<i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
 
@@ -160,7 +159,7 @@
 
 						</div>
 
-						<button class="botao-acessar" type="button" onclick="visualizarOng(2)">
+						<button class="botao-acessar" type="button" id="ong-button2">
 
 							<i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
 
@@ -194,7 +193,7 @@
 
 						</div>
 
-						<button class="botao-acessar" type="button" onclick="visualizarOng(3)">
+						<button class="botao-acessar" type="button" id="ong-button3">
 
 							<i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
 
@@ -228,7 +227,7 @@
 
 						</div>
 
-						<button class="botao-acessar" type="button" onclick="visualizarOng(4)">
+						<button class="botao-acessar" type="button" id="ong-button4">
 
 							<i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
 
@@ -263,261 +262,389 @@
 
 						</div>
 
-						<button class="botao-acessar" type="button" onclick="visualizarOng(5)">
-
+						<button class="botao-acessar" type="button" id="ong-button5">
 							<i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
-
 							Acessar
 						</button>
 					</div>
 
-
-
 					<div class="paginacao">
-
-
-						<a class="botao-nav" onclick="changePagePrevius()">&#8249;</a>
-						<a id="pageButton-1" onclick="changePageButton(1)">1</a>
-						<a id="pageButton-2" onclick="changePageButton(2)">2</a>
-						<a id="pageButton-3" onclick="changePageButton(3)">3</a>
-						<a id="pageButton-4" onclick="changePageButton(4)">4</a>
-						<a id="pageButton-5" onclick="changePageButton(5)">5</a>
-						<a id="pageButton-6" onclick="changePageButton(6)">...</a>
-						<a id="pageButton-7" onclick="changePageButton(7)">50</a>
-						<a class="botao-nav" onclick="changePageNext()">&#8250;</a>
-					</div>
-
-				</div>
-
-
-
-			</div>
-
-
-
-			<div class="coluna-direita">
-
-				<div class="caixa-info">
-					<div class="caixa-info-esquerda">
-						<strong>QUEM SOMOS NÓS?</strong>
-						<a href="#sobre">Clique aqui</a>
-					</div>
-
-				</div>
-
-				<div class="ativar-mapa">
-					<span>Visualizar mapa</span>
-					<label class="interruptor">
-						<input type="checkbox" id="interruptor-mapa" onchange="toggleMap()" />
-						<span class="deslizador"></span>
-					</label>
-				</div>
-
-				<div class="area-mapa" id="area-mapa">
-
-					<div id="mapa-leaflet"></div>
-
-					<div class="placeholder-mapa" id="placeholder-mapa">
-
-						<div class="icone-mapa-desativado">
-							<svg width="56" height="56" fill="none" stroke="#999" stroke-width="2.5" viewBox="0 0 24 24">
-								<circle cx="12" cy="10" r="3" />
-								<path d="M12 2a8 8 0 0 1 8 8c0 5.25-8 14-8 14S4 15.25 4 10a8 8 0 0 1 8-8z" />
-								<line x1="3" y1="3" x2="21" y2="21" stroke="#bbb" stroke-width="2.5" />
-							</svg>
-						</div>
-
-						<div class="texto-mapa-desativado" id="texto-status-mapa">MAPA DESATIVADO</div>
+						<a class="botao-nav" id="previusPageButton">&#8249;</a>
+						<a class="page-button" id="pageButton-1">1</a>
+						<a class="page-button" id="pageButton-2">2</a>
+						<a class="page-button" id="pageButton-3">3</a>
+						<a class="page-button" id="pageButton-4">4</a>
+						<a class="page-button" id="pageButton-5">5</a>
+						<a class="page-button" id="pageButton-6">...</a>
+						<a class="page-button" id="pageButton-7">50</a>
+						<a class="botao-nav" id="nextPageButton">&#8250;</a>
 					</div>
 
 				</div>
 
 			</div>
 
-			<br><br><br>
 
-	</main>
+            <div class="coluna-direita">
 
+                <div class="caixa-info">
+                    <div class="caixa-info-esquerda">
+                        <strong>QUEM SOMOS NÓS?</strong>
+                        <a href="#sobre">Clique aqui</a>
+                    </div>
 
+                </div>
 
-	<!-- MODAL DAS ONGS -->
-	<div class="modal-ong" id="modalOng" aria-hidden="true">
+                <div class="ativar-mapa">
+                    <span>Visualizar mapa</span>
+                    <label class="interruptor">
+                        <input type="checkbox" id="interruptor-mapa" onchange="toggleMap()" />
+                        <span class="deslizador"></span>
+                    </label>
+                </div>
 
-		<div class="modal-conteudo" role="dialog" aria-modal="true" aria-labelledby="modalNome">
+                <div class="area-mapa" id="area-mapa">
 
-			<button type="button" class="fechar-modal" id="fecharModal" aria-label="Fechar modal">
-				X
-			</button>
+                    <div id="mapa-leaflet"></div>
 
-			<div class="modal-topo">
+                    <div class="placeholder-mapa" id="placeholder-mapa">
 
-				<img src="" alt="Imagem da ONG" id="modalImagem" class="modal-imagem">
+                        <div class="icone-mapa-desativado">
+                            <svg width="56" height="56" fill="none" stroke="#999" stroke-width="2.5" viewBox="0 0 24 24">
+                                <circle cx="12" cy="10" r="3" />
+                                <path d="M12 2a8 8 0 0 1 8 8c0 5.25-8 14-8 14S4 15.25 4 10a8 8 0 0 1 8-8z" />
+                                <line x1="3" y1="3" x2="21" y2="21" stroke="#bbb" stroke-width="2.5" />
+                            </svg>
+                        </div>
 
-				<div class="modal-info">
+                        <div class="texto-mapa-desativado" id="texto-status-mapa">MAPA DESATIVADO</div>
+                    </div>
 
-					<h2 id="modalNome">Nome da ONG</h2>
+                </div>
 
-					<div class="modal-etiquetas" id="modalEtiquetas"></div>
+            </div>
 
-					<p class="modal-endereco">
-						<i class="bi bi-geo-alt-fill"></i>
-						<span id="modalEndereco">Endereço da ONG</span>
-					</p>
+        </div>
 
-				</div>
+    </main>
 
-			</div>
+    <!-- MODAL DAS ONGS -->
+    <div class="modal-ong" id="modalOng" aria-hidden="true">
 
-			<h3 class="titulo-redes">REDES SOCIAIS</h3>
+        <div class="modal-conteudo" role="dialog" aria-modal="true" aria-labelledby="modalNome">
 
-			<div class="redes-container">
+            <!-- LEFT SIDE -->
+            <div class="modalLeftSide">
 
-				<a href="#" class="modal-rede-card modal-instagram" id="modalInstagram" target="_blank"
-					rel="noopener noreferrer">
-					<i class="bi bi-instagram"></i>
-					<span>Instagram</span>
-				</a>
+                <button type="button" class="fechar-modal" id="fecharModal" aria-label="Fechar modal">
+                    Voltar
+                </button>
 
-				<a href="#" class="modal-rede-card modal-whatsapp" id="modalWhatsapp" target="_blank"
-					rel="noopener noreferrer">
-					<i class="bi bi-whatsapp"></i>
-					<span>Whatsapp</span>
-				</a>
+                <div class="modal-topo">
 
-				<a href="#" class="modal-rede-card modal-website" id="modalWebsite" target="_blank"
-					rel="noopener noreferrer">
-					<i class="bi bi-globe2"></i>
-					<span>Website</span>
-				</a>
+                    <img src="" alt="Imagem da ONG" id="modalImagem" class="modal-imagem">
 
-			</div>
+                    <div class="modal-info">
 
-		</div>
+                        <h2 id="modalNome">Nome da ONG</h2>
 
-	</div>
+                        <div class="modal-etiquetas" id="modalEtiquetas"></div>
 
-	<br><br><br>
+                        <p class="modal-endereco">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <span id="modalEndereco">Endereço da ONG</span>
+                        </p>
 
-	</main>
+                    </div>
 
+                </div>
 
-	<!-- Segunda página aqui tropa  -->
+                <div class="redes-container">
+                    <div class="acessarOng">
+                        <h3 class="titulo-redes">Acesse a ONG</h3>
+                        <span>(Clique abaixo)</span>
+                    </div>
 
-	<article>
+                    <div class="redesSociais">
 
-		<section class="container" id="sobre">
+                        <a href="#" class="modal-rede-card modal-instagram" id="modalInstagram" target="_blank" rel="noopener noreferrer">
+                            <i class="bi bi-instagram"></i>
+                            <span>Instagram</span>
+                        </a>
 
-			<section class="sobre">
-				<div class="texto">
-					<h2>Quem Somos Nós</h2>
-					<p>
-						O <strong>SP ONGs</strong> é um projeto nascido dentro da FATEC Zona Leste,
-						com o objetivo de conectar pessoas às ONGs da principal
-						metrópole do país através do nosso site. Um ecossistema
-						<strong>100% gratuito</strong> e sem fins lucrativos.
+                        <a href="#" class="modal-rede-card modal-whatsapp" id="modalWhatsapp" target="_blank" rel="noopener noreferrer">
+                            <i class="bi bi-whatsapp"></i>
+                            <span>Whatsapp</span>
+                        </a>
 
-						Alinhado ao 17° Objetivo de Desenvolvimento Social da ONU, o SPONGs busca fortalecer parcerias e
-						ampliar o acesso às organizações não governamentais em São Paulo, promovendo mais visibilidade e
-						impacto social.
-					</p>
-				</div>
+                        <a href="#" class="modal-rede-card modal-website" id="modalWebsite" target="_blank" rel="noopener noreferrer">
+                            <i class="bi bi-globe2"></i>
+                            <span>Website</span>
+                        </a>
 
-				<div class="imagem-fatec">
-					<img src="src/imagens/Fatec_foto.jpg" alt="FATEC Zona Leste">
-					<span>Foto: FATEC Zona Leste</span>
-				</div>
-			</section>
+                    </div>
 
-			<section class="integrantes">
-				<h2>Integrantes</h2>
+                </div>
 
-				<div class="cards">
+                <!-- AVALIAÇÕES -->
+                <div class="avaliacoes-container">
 
-					<div class="card">
-						<img src="src/imagens/RodrigoNardy.png" alt="Rodrigo Nardy">
-						<h3>Rodrigo Nardy</h3>
-						<p>Gerente / Backlog</p>
+                    <!-- ratings left side -->
+                    <div class="ratingsLeft">
 
-						<div class="links-redes">
-							<a href=""> <i class="bi bi-linkedin linkedin"></i></a>
-							<a href="https://github.com/RodrigoNardy2008"> <i class="bi bi-github"></i></a>
-							<a href="https://www.instagram.com/rodrigo__ng2544?igsh=MXM2M2t5MW52cHo5Yw=="> <i class="bi bi-instagram instagram"></i></a>
-						</div>
-					</div>
+                        <div class="avaliacaoMedia">
+                            <span>4.9</span>
 
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
 
-					<div class="card">
-						<img src="src/imagens/PabloOliveira.jpg" alt="Pablo Oliveira">
-						<h3>Pablo Oliveira</h3>
-						<p>Front-end</p>
+                            <span class="totalAvaliado">(201)</span>
+                        </div>
 
-						<div class="links-redes">
-							<a href="https://www.linkedin.com/in/pablo-oliveira-97a315343"> <i class="bi bi-linkedin linkedin"></i></a>
-							<a href="https://github.com/Pablo07os"> <i class="bi bi-github"></i></a>
-							<a href="https://www.instagram.com/pabloo_ihp?igsh=MXBieHBoamljYnoxcA=="> <i
-									class="bi bi-instagram instagram"></i></a>
-						</div>
-					</div>
+                        <div class="BarrasAvaliacoes">
 
+                            <div class="linhaAvaliacao">
+                                <span>5</span>
 
-					<div class="card">
-						<img src="src/imagens/RyanGualberto.jpg" alt="Ryan Gualberto Silva">
-						<h3>Ryan Gualberto</h3>
-						<p>Back-end / Design</p>
+                                <div class="barra">
+                                    <div class="preencherBarra" style="width: 85%"></div>
+                                </div>
+                            </div>
 
-						<div class="links-redes">
-							<a href="https://www.linkedin.com/in/ryan-gualberto-105204402/"> <i class="bi bi-linkedin linkedin"></i></a>
-							<a href="https://github.com/ryangualbert"> <i class="bi bi-github"></i></a>
-							<a href="#"> <i class="bi bi-instagram instagram"></i></a>
-						</div>
-					</div>
+                            <div class="linhaAvaliacao">
+                                <span>4</span>
 
+                                <div class="barra">
+                                    <div class="preencherBarra" style="width: 60%"></div>
+                                </div>
+                            </div>
 
-					<div class="card">
-						<img src="src/imagens/ThallysonNeves.jpg" alt="Thallyson Neves">
-						<h3>Thallyson Neves</h3>
-						<p>Front-end</p>
+                            <div class="linhaAvaliacao">
+                                <span>3</span>
 
-						<div class="links-redes">
-							<a href="https://www.linkedin.com/in/thallyson-neves-8392222a9?utm_source=share_via&utm_content=profile&utm_medium=member_android"> <i class="bi bi-linkedin linkedin"></i></a>
-							<a href="https://github.com/thallysont"> <i class="bi bi-github"></i></a>
-							<a href=""> <i class="bi bi-instagram instagram"></i></a>
-						</div>
-					</div>
+                                <div class="barra">
+                                    <div class="preencherBarra" style="width: 30%"></div>
+                                </div>
+                            </div>
 
+                            <div class="linhaAvaliacao">
+                                <span>2</span>
 
-					<div class="card">
-						<img src="src/imagens/GustavoSantos.jpg" alt="Gustavo Santos">
-						<h3>Gustavo Santos</h3>
-						<p>Analista Geral</p>
+                                <div class="barra">
+                                    <div class="preencherBarra" style="width: 15%"></div>
+                                </div>
+                            </div>
 
-						<div class="links-redes">
-							<a href=""> <i class="bi bi-linkedin linkedin"></i></a>
-							<a href="https://github.com/gusantoss11"> <i class="bi bi-github"></i></a>
-							<a href="https://www.instagram.com/guxtaaa.nk?igsh=MWlpMHhhaTRidXhiNQ=="> <i class="bi bi-instagram instagram"></i></a>
-						</div>
-					</div>
-				</div>
-			</section>
+                            <div class="linhaAvaliacao">
+                                <span>1</span>
 
-		</section>
+                                <div class="barra">
+                                    <div class="preencherBarra" style="width: 8%"></div>
+                                </div>
+                            </div>
 
+                        </div>
 
-	</article>
+                    </div>
 
+                    <!-- ratings right side -->
+                    <div class="ratingsRight">
+                        <div class="avaliacoesRealizadas">
+                            <h2>201 avaliações</h2>
+                            <div class="avaliacao">
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <i class="bi bi-star"></i>
+                                <span>Adicione uma avaliação</span>
+                            </div>
 
-	<footer>
+                            <div class="caixa-avaliacoes">
+                                <div class="scroll-avaliacoes">
 
-		<p> <i class="bi bi-c-circle"></i>
-			2026 SP ONGs, direitos reservados FATEC da Zona Leste.</p>
-	</footer>
+                                    <div class="avaliacao">
+                                        <h3>Ryan Gualberto ⭐⭐⭐⭐⭐</h3>
+                                        <p>A ONG é muito boa, já salvou a vida do meu bairro.</p>
+                                    </div>
 
+                                    <div class="avaliacao">
+                                        <h3>Rodrigo ⭐⭐⭐⭐</h3>
+                                        <p>Excelente trabalho, muito bom o pessoal envolvido!</p>
+                                    </div>
 
+                                    <div class="avaliacao">
+                                        <h3>Pablo Oliveira ⭐</h3>
+                                        <p>Não tenho nada a reclamar, mas quero reclamar.</p>
+                                    </div>
 
+                                    <div class="avaliacao">
+                                        <h3>Maria ⭐⭐⭐⭐⭐</h3>
+                                        <p>Projeto excelente!</p>
+                                    </div>
 
+                                    <div class="avaliacao">
+                                        <h3>João ⭐⭐⭐⭐⭐</h3>
+                                        <p>Recomendo muito essa ONG.</p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- FIM AVALIAÇÕES -->
+
+            </div>
+            <!-- FIM PARTE ESQUERDA -->
+
+<div class="modalRightSide">
+    <div class="header-Modal">
+        <div class="logo">
+            <img src="images/SPONGs_icon-fb.png" alt="Logo-SPOngs">
+        </div>
+        
+        <div class="titulo-Modal">
+            <h1>SP ONGS</h1>
+            <h3>CONECTANDO SÃO PAULO</h3>
+        </div>
+    </div>
+
+    <div class="view-Mapa">
+     
+        <div class="info-Mapa">
+			<div class="search-icon">
+            <i class="bi bi-geo-alt-fill"></i>
+        	</div>
+            <h3>Veja a localização da ONG!</h3>
+            <span>Rua Doutor Marinho, 745</span>
+        </div>
+
+        <div class="linhaDivisoriaMapa"></div>
+
+        <div class="imagem-Mapa">
+            <img src="images/mapa.png" alt="MapaProvisorio">
+        </div>
+    </div>
+</div>
+
+        </div>
+
+    </div>
+
+    <!-- SEGUNDA PÁGINA - SOBRE -->
+    <article>
+
+        <section class="container" id="sobre">
+
+            <section class="sobre">
+                <div class="texto">
+                    <h2>Quem Somos Nós</h2>
+                    <p>
+                        O <strong>SP ONGs</strong> é um projeto nascido dentro da FATEC Zona Leste,
+                        com o objetivo de conectar pessoas às ONGs da principal
+                        metrópole do país através do nosso site. Um ecossistema
+                        <strong>100% gratuito</strong> e sem fins lucrativos.
+
+                        Alinhado ao 17° Objetivo de Desenvolvimento Social da ONU, o SPONGs busca fortalecer parcerias e
+                        ampliar o acesso às organizações não governamentais em São Paulo, promovendo mais visibilidade e
+                        impacto social.
+                    </p>
+                </div>
+
+                <div class="imagem-fatec">
+                    <img src="images/Fatec_foto.jpg" alt="FATEC Zona Leste">
+                    <span>Foto: FATEC Zona Leste</span>
+                </div>
+            </section>
+
+            <section class="integrantes">
+                <h2>Integrantes</h2>
+
+                <div class="cards">
+
+                    <div class="card">
+                        <img src="images/RodrigoNardy.png" alt="Rodrigo Nardy">
+                        <h3>Rodrigo Nardy</h3>
+                        <p>Gerente / Backlog</p>
+
+                        <div class="links-redes">
+                            <a href="#"> <i class="bi bi-linkedin linkedin"></i></a>
+                            <a href="https://github.com/RodrigoNardy2008"> <i class="bi bi-github"></i></a>
+                            <a href="https://www.instagram.com/rodrigo__ng2544?igsh=MXM2M2t5MW52cHo5Yw=="> <i class="bi bi-instagram instagram"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img src="images/PabloOliveira.jpg" alt="Pablo Oliveira">
+                        <h3>Pablo Oliveira</h3>
+                        <p>Front-end</p>
+
+                        <div class="links-redes">
+                            <a href="https://www.linkedin.com/in/pablo-oliveira-97a315343"> <i class="bi bi-linkedin linkedin"></i></a>
+                            <a href="https://github.com/Pablo07os"> <i class="bi bi-github"></i></a>
+                            <a href="https://www.instagram.com/pabloo_ihp?igsh=MXBieHBoamljYnoxcA=="> <i class="bi bi-instagram instagram"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img src="images/RyanGualberto.jpg" alt="Ryan Gualberto Silva">
+                        <h3>Ryan Gualberto</h3>
+                        <p>Back-end / Design</p>
+
+                        <div class="links-redes">
+                            <a href="https://www.linkedin.com/in/ryan-gualberto-105204402/"> <i class="bi bi-linkedin linkedin"></i></a>
+                            <a href="https://github.com/ryangualbert"> <i class="bi bi-github"></i></a>
+                            <a href="#"> <i class="bi bi-instagram instagram"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img src="images/ThallysonNeves.jpg" alt="Thallyson Neves">
+                        <h3>Thallyson Neves</h3>
+                        <p>Front-end</p>
+
+                        <div class="links-redes">
+                            <a href="https://www.linkedin.com/in/thallyson-neves-8392222a9?utm_source=share_via&utm_content=profile&utm_medium=member_android"> <i class="bi bi-linkedin linkedin"></i></a>
+                            <a href="https://github.com/thallysont"> <i class="bi bi-github"></i></a>
+                            <a href="#"> <i class="bi bi-instagram instagram"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img src="images/GustavoSantos.jpg" alt="Gustavo Santos">
+                        <h3>Gustavo Santos</h3>
+                        <p>Analista Geral</p>
+
+                        <div class="links-redes">
+                            <a href="#"> <i class="bi bi-linkedin linkedin"></i></a>
+                            <a href="https://github.com/gusantoss11"> <i class="bi bi-github"></i></a>
+                            <a href="https://www.instagram.com/guxtaaa.nk?igsh=MWlpMHhhaTRidXhiNQ=="> <i class="bi bi-instagram instagram"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </section>
+
+    </article>
+
+    <footer>
+
+        <p> <i class="bi bi-c-circle"></i>
+            2026 SP ONGs, direitos reservados FATEC da Zona Leste.</p>
+    </footer>
 
 	<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-	<script src="src/script.js"></script>
+	<script type="module" src="src/main.js"></script>
 	<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </body>
 

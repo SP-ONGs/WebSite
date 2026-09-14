@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+
 :root {
   --cor-texto: #222; 
   --cor-texto2: #666; 
@@ -13,17 +16,15 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  scroll-behavior: smooth
+  
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 body {
   font-family: 'Inter', sans-serif;
   background: var(--background1); 
   color: var(--cor-texto);
   min-height: 100vh;
-  padding-top: 245px; /* espaço da barra fixa */
+  padding-top: 145px; 
 }
 
 /* HEADER FIXA AQUI PABLO */
@@ -58,12 +59,7 @@ header h1 {
   line-height: 1;
 }
 
-body {
-  padding-top: 145px;
-}
-
-
-/* main */
+/* main AQUI PSBLO */
 
 main{
  background-color: var(--background2);
@@ -93,8 +89,6 @@ main{
   flex-direction: column;
 }
 
-/* barra que fica abaixo do sp ongs, da outra forma tava atrapalhando o alinhamento*/
-
 .barra-cinza {
   width: 67%;
   height: 8px;
@@ -108,13 +102,13 @@ main{
   display: flex;
   align-items: center;
   width: 70%;
+  max-width: 100%;
   height: 44px;
   gap: 40px;
   border: 1.5px solid var(--borda);
   border-radius: 8px;
   padding: 0 12px;
   margin-bottom: 18px;
-  /* background-color: cadetblue; */
 }
 
 
@@ -165,21 +159,15 @@ main{
 }
 
 .menu-filtro.ativo {
-
   opacity: 1;
   visibility: visible;
-
   transform: translateY(0);
 }
 
 .menu-filtro div {
-
-  padding: 12px 14px;
-
+  padding: 12px 14px; 
   cursor: pointer;
-
   font-size: 0.92rem;
-
   transition: background 0.2s;
 }
 
@@ -191,11 +179,9 @@ main{
   display: flex;
   align-items: center;
   gap: 6px;
- 
   background: none;
   border: none;
   cursor: pointer;
-
   color: var(--cor-icones);
   font-size: 1.47rem;
   font-weight: 500;
@@ -209,12 +195,10 @@ main{
 
 .botao-localizacao a:hover { color: #1261a0; }
 
-/* LISTAGEM  */
+/* LISTAGEM DE ONGS  */
 
 .listagem {
-    /* background-color: red;   */
-    height: 60vh;
-
+    min-height: 60vh;
 }
 
 .cartao-ong {
@@ -298,7 +282,7 @@ main{
   font-weight: 600;
   cursor: pointer;
   display: flex;
-  align-items: end;
+  align-items: center; 
   gap: 6px;
   white-space: nowrap;
   transition: background 0.2s, transform 0.2s;
@@ -312,8 +296,6 @@ main{
   gap: 4px;
   margin-top: 12px;
   font-size: 0.97rem;
-  
-  /* background-color: red; */
 }
 
 .paginacao a, .paginacao span {
@@ -350,12 +332,6 @@ main{
 
 /* MAPA    */
 
-.coluna-direita {
-  flex: 0.4;
-  display: flex;
-  flex-direction: column;
-  margin-left: 24px;
-}
 
 .caixa-info {
   background: var(--cor-primaria);
@@ -436,26 +412,21 @@ main{
 
 .area-mapa {
   background-color: #cddff1;
-
-  /* Textura ruído adicionada no fundo do mapa desativado*/
-
   background-image: 
   linear-gradient(rgba(205, 223, 241, 0.55), rgba(205, 223, 241, 0.55)),
   url("imagens/84425e6cdccb6087df60120b640a61dbba4436a4.png");
   background-repeat: repeat;
   background-size: 200px 200px;;
   border-radius: 0 0 8px 8px;
+  min-height: 40vh;
   height: 50vh;
-
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
   gap: 14px;
   color: #555;
   margin-top: 20px;
-
   position: relative;
   overflow: hidden;
 }
@@ -484,24 +455,18 @@ main{
 .placeholder-mapa {
   position: absolute;
   inset: 0;
-
-  display: flex;
+   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
   gap: 14px;
-
   z-index: 2;
 }
 
 
-
-
-/* SEGUNDA PAGINA  */
+/* QUEM SOMOS NÓS AQUI PABLO */
 
 article {
-  /* background-color: yellow; */
   min-height: 140vh;
 }
 
@@ -510,7 +475,6 @@ article {
     margin: 0 auto;
     padding: 180px 40px 80px;
     font-family: 'Inter', sans-serif;
-    /* background-color: red; */
 }
 
 .sobre {
@@ -589,7 +553,6 @@ article {
 }
 
 .links-redes {
-  /* background-color: red; */
   width: 100%;
   display: flex;
   justify-content: flex-start;
@@ -619,8 +582,6 @@ article {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
-
 
 .card img {
     width: 180px;
@@ -679,16 +640,13 @@ footer p {
   inset: 0;
   width: 100%;
   height: 100%;
-
   background: rgba(0, 0, 0, 0.45);
-
   display: none;
   align-items: center;
   justify-content: center;
-
-  padding: 24px;
-
+  padding: 20px;
   z-index: 3000;
+
 }
 
 .modal-ong.ativo {
@@ -697,163 +655,202 @@ footer p {
 
 .modal-conteudo {
   position: relative;
-
-  width: min(760px, 95vw);
+  width: min(95%, 1600px);
+  height: min(88vh, 750vh);
   max-height: 90vh;
-  overflow-y: auto;
+  border-radius: 20px;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
+  display: flex;
+  background-color: transparent;
+  padding: 10px 6px;
+  gap: 30px; 
 
-  background: #fff;
-  border-radius: 8px;
-
-  padding: 18px 24px 16px;
-
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.28);
 }
+
+/* LADO ESQUEROD MODAL =   */
+
+.modalLeftSide{
+  width: 55%;
+  height: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column; 
+  flex-shrink: 0; 
+  overflow: hidden;
+
+}
+
 
 .fechar-modal {
   position: absolute;
-  top: 4px;
-  right: 8px;
-
-  width: 42px;
-  height: 42px;
-
-  border: none;
-  border-radius: 8px;
-
-  background: #ff4b4b;
-  color: #fff;
-
-  font-size: 28px;
+  top: 6px;
+  right: 45.2%;
+  width: 120px;
+  height: 40px;
+  border: solid 2px red;
+  border-radius: 18px;
+  background: #fff;
+  color:red;
+  font-size: 22px;
   font-weight: 900;
   line-height: 1;
-
   cursor: pointer;
   transition: transform 0.2s, background 0.2s;
+  z-index: 10;
+  letter-spacing: 1.5px;
+
 }
 
 .fechar-modal:hover {
   background: #d93636;
   transform: scale(1.05);
+  color: white;
 }
+
+/* TOPO MODAL  */
 
 .modal-topo {
   display: flex;
   align-items: flex-start;
-  gap: 24px;
+  gap: 20px;
+  padding: 20px; 
+  margin-bottom: 10px;
+  background-color: #fff;
+  border: solid 1px transparent;
+  border-radius: 8px; 
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
+  flex-shrink: 0;
 
-  padding-right: 46px;
 }
 
 .modal-imagem {
   width: 100px;
   height: 100px;
-
   object-fit: cover;
-  border-radius: 6px;
-
-  background: #e8eef5;
+  border-radius: 12px;
   flex-shrink: 0;
+  border: 2px solid #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .modal-imagem.sem-imagem {
   background: #e8eef5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #9aa8b9;
+  font-size: 32px;
 }
 
 .modal-info {
   min-width: 0;
+  flex: 1;
 }
 
 .modal-info h2 {
-  font-size: 40px;
-  line-height: 1.05;
-  font-weight: 500;
-
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: 700;
   color: #1a1a1a;
-
-  margin-bottom: 8px;
+  margin: 0 0 6px 0;
+  letter-spacing: -1px;
 }
 
 .modal-etiquetas {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-
-  margin-bottom: 10px;
+ display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #eef3fa;
+  border: none;
+  border-radius: 30px;
+  padding: 3px 14px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #4a6cf7;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
 }
 
 .modal-etiqueta {
   display: inline-flex;
   align-items: center;
   gap: 4px;
-
   background: #e8eef5;
   border: 1px solid #c8d6e5;
   border-radius: 20px;
-
   padding: 3px 10px;
-
   font-size: 0.78rem;
   color: #444;
-}
+} 
 
 .modal-endereco {
   display: flex;
   align-items: center;
-  gap: 10px;
-
-  font-size: 18px;
-  color: #555;
+  gap: 8px;
+  font-size: 16px;
+  color: #5a6a7a;
+  margin: 8px 0 0 0;
 }
 
 .modal-endereco i {
-  font-size: 32px;
-  color: #444;
+  font-size: 20px;
+  color: #4a6af7;
   flex-shrink: 0;
 }
 
-.titulo-redes {
-  display: inline-block;
-
-  font-size: 30px;
-  font-weight: 900;
-  line-height: 1;
-
-  margin-top: 20px;
-  margin-bottom: 10px;
-
-  color: #1a1a1a;
-  border-bottom: 3px solid #1a1a1a;
-}
+/* REDES SOCIAIS */
 
 .redes-container {
-  background: #e5e5e5;
-  border-radius: 8px;
+  padding: 14px 16px 18px;  
+  margin: 4px 0 12px 0;
+  background-color: #fff;
+  border: solid 1px transparent;
+  border-radius: 8px; 
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
+  flex-shrink: 0;
+}
 
-  padding: 10px 12px;
-
+.acessarOng {
   display: flex;
-  gap: 6px;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 30px;
+}
+
+.acessarOng span {
+  font-weight: 700;
+}
+
+.titulo-redes {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1a1a2e;
+  letter-spacing: 0.5px;
+  margin: 0;
+  border-bottom: 3px solid #1a1a2e;
+  padding-bottom: 2px;
+}
+
+.redesSociais{
+  display: flex;
   flex-wrap: wrap;
+  justify-content: space-around; 
+  gap: 5px; 
+  margin-bottom: 6px;
 }
 
 .modal-rede-card {
-  width: 105px;
+  width: 240px;
   height: 105px;
-
-  border-radius: 8px;
-
+  border-radius: 16px;
   color: #fff;
   text-decoration: none;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
   font-size: 20px;
   font-weight: 700;
-
   transition: transform 0.2s, filter 0.2s;
 }
 
@@ -898,3 +895,339 @@ footer p {
     justify-content: center;
   }
 }
+
+		/* <!-- AVALIAÇÕES --> */
+
+.avaliacoes-container{
+  flex: 1 1 0;
+  display: flex;
+  gap: 16px;
+  min-height: 0;
+  margin-top: 0;
+  padding: 16px ;
+  background-color: hsl(0, 0%, 100%);
+  border: solid 1px transparent;
+  border-radius: 16px; 
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+}
+
+/* LADO ESQUERDO DAS AVALIAÇÕES AQUI  */
+
+.ratingsLeft {
+    width: 40%;
+    padding: 0 4px 0 0;
+}
+
+.avaliacaoMedia {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+
+
+.avaliacaoMedia span:first-child {
+  font-size: 34px;
+  font-weight: 800;
+  color: #1a1a2e;
+}
+
+.avaliacaoMedia i {
+  color: #fbbf24;
+  font-size: 20px;
+}
+
+.avaliacaoMedia .totalAvaliado {
+  font-size: 20px;
+  font-weight: 400;
+  color: #6a7a8a;
+}
+
+.BarrasAvaliacoes {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.linhaAvaliacao {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 50px;
+}
+
+.linhaAvaliacao span {
+  width: 18px;
+  font-size: 27px;
+  font-weight: 600;
+  color: #3a4a5a;
+}
+
+.barra {
+  flex: 1;
+  height: 7px;
+  background: #e8edf4;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.preencherBarra {
+  height: 100%;
+  background: linear-gradient(90deg, #fbbf24, #f59e0b);
+  border-radius: 6px;
+  transition: width 0.6s ease;
+}
+
+/* LADO DIREITO AVALIAÇÕES AQUI PABLO  */
+
+.ratingsRight{
+  width: 50%;
+  padding: 0 0 0 12px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+  top: 0px;
+  right: -6%;
+}
+
+.avaliacoesRealizadas h2{
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin: 0 0 4px 0;
+
+}
+
+.avaliacoesRealizadas .avaliacao {
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+.avaliacoesRealizadas .avaliacao i {
+  color: #d0d5db; 
+  font-size: 16px;
+}
+
+.avaliacoesRealizadas .avaliacao span {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+
+.caixa-avaliacoes {
+   flex: 1;
+    width: 100%;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border-left: 2px solid #e0e0e0;
+}
+
+
+.caixa-avaliacoes h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 24px;    
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.scroll-avaliacoes {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.avaliacao {
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    border-left: 4px solid #f4b400;
+    transition: 0.3s;
+}
+
+.avaliacao:hover {
+    transform: translateX(5px);
+    background-color: #f0f0f0;
+}
+
+.avaliacao h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+.avaliacao p {
+    margin: 8px 0 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.5;
+}
+
+.scroll-avaliacoes::-webkit-scrollbar {
+    width: 20px;
+}
+
+
+.scroll-avaliacoes::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+
+.scroll-avaliacoes::-webkit-scrollbar-thumb {
+    background: #bbb;
+    border-radius: 10px;
+}
+
+
+.scroll-avaliacoes::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
+/* LADO DIREITO MODAL   */
+
+.modalRightSide {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    height: 90vh; 
+    padding: 0px 10px;
+}
+
+.header-Modal {
+    width: 100%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    background-color: hsl(0, 0%, 100%);
+    border: solid 1px transparent;
+    border-radius: 16px; 
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
+    margin-bottom: 20px;
+}
+
+.header-Modal .logo {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background-color: #fff;
+}
+
+.header-Modal .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+}
+
+.titulo-Modal {
+    background-color: rgb(255, 254, 254);
+    color: #007dbc; 
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 75%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.titulo-Modal h1 {
+    font-size: 62px;
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin: 0;
+    line-height: 1;
+}
+
+.titulo-Modal h3 {
+    margin: 5px 0 0 0;
+    font-weight: 400;
+    font-size: 26px;
+    letter-spacing: 2px;
+}
+
+.view-Mapa {
+    background-color: rgb(255, 254, 254);
+    width: 100%;
+    max-height: 78%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    padding: 16px ;
+    border: solid 1px transparent;
+    border-radius: 26px; 
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
+    
+}
+
+.info-Mapa {
+    width: 100%;
+    text-align: center;
+    display: grid; 
+    grid-template-columns: auto 1fr;
+    align-items: center;
+  
+}
+
+.search-icon {
+    width: 100%;
+    display: flex;
+    font-size: 68px;
+    color: #666;
+    grid-row: span 2;
+}
+
+
+.info-Mapa h3 {
+    margin: 0;
+    font-size: 42px;
+    font-weight: 500;
+    color: #989393;
+    letter-spacing: -1.5px;
+}
+
+.info-Mapa span {
+    font-size: 22px;
+    color: #666;
+}
+
+.linhaDivisoriaMapa {
+    width: 90%;
+    height: 4px;
+    background-color: gray;
+    margin: 10px 0;
+}
+
+.imagem-Mapa {
+    width: 100%;
+    flex: 1;
+    min-height: 10px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.imagem-Mapa img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
