@@ -52,16 +52,13 @@ body {
 
 
 /* Fundo branco */
-.signup-modal {
+.login-modal {
 	width: 464px;
-	height: 490px;
-
-	padding: 14px 21px 18px;
+	height: 480px;
+	padding: 20px 35px 18px;
 
 	background: white;
-
 	border-radius: 15px;
-
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.235);
 
 	position: relative;
@@ -74,83 +71,98 @@ body {
 
 	display: flex;
 	align-items: center;
-	justify-content: center;
-
-	gap: 6px;
-
-	margin-bottom: 17px;
+	gap: 7.5px;
 }
 
 .brand img {
-	width: 40px;
-	height: 40px;
+	object-fit: contain;
+
+	width: 86px;
+	height: 86px;
 }
 
 .brand span {
-	color: #087db7;
+	color: #007DBC;
 
-	font-size: 29px;
-	font-weight: 700;
+	font-size: 60px;
+	font-weight: 900;
 }
 
 
-/* Sign up texto */
-.signup-modal h2 {
-	margin: 0 0 18px;
+/* Login texto */
+.login-modal h2 {
+	margin-top: 24px;
+	margin-bottom: 30px;
 
 	color: #444;
 
-	font-size: 16px;
-	font-weight: 400;
+	font-size: 28px;
+	font-weight: 500;
+	text-align: center;
 }
 
 
-/* Sign up inputs */
+/* Login inputs */
+.input-container {
+	display: flex;
+	flex-direction: column;
+
+	gap: 10px;
+	padding-bottom: 20px;
+}
+
 .input-group {
-	margin-bottom: 6px;
+	height: 55px;
+
+	position: relative;
+
+	background: #ddd;
+	border-radius: 6px;
 }
 
 .input-group label {
-	display: block;
-
-	margin-bottom: 2px;
-
 	color: #666;
+	font-size: 13px;
+	font-weight: 300;
 
-	font-size: 7px;
+	position: absolute;
+	padding-top: 5px;
+	padding-left: 10px;
 }
 
 .input-group input {
 	width: 100%;
+	height: 55%;
 
-	padding: 7px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+
+	padding-left: 10px;
+	padding-bottom: 10px;
+
+	font-size: 20px;
 
 	border: none;
-	border-radius: 6px;
-
-	background: #ddd;
-
-	font-size: 12px;
-
+	background: rgba(255, 255, 255, 0);
 	outline: none;
 }
 
 
-/* Botão de sign up */
-.signup-button {
+/* Botão de login */
+.login-button {
+	height: 50px;
 	width: 100%;
-
-	margin-top: 4px;
-	padding: 7px;
 
 	border: none;
 	border-radius: 6px;
 
-	background: #0785c1;
+	background: #007DBC;
 
 	color: white;
 
-	font-size: 14px;
+	font-size: 24px;
+	font-weight: 500;
 
 	cursor: pointer;
 }
@@ -159,22 +171,24 @@ body {
 /* Opção de cadastrar */
 .or {
 	display: block;
-
-	margin: 6px 0;
+	margin-top: 10px;
 
 	text-align: center;
 
 	color: #444;
 
-	font-size: 14px;
+	font-size: 22px;
+	font-weight: 500px;
 }
 
-.login-link {
+.signin-link {
 	display: block;
+	margin-top: 5px;
 
 	text-align: center;
 
 	color: #36a9e1;
 
-	font-size: 14px;
+	font-size: 24px;
+	font-weight: 500px;
 }

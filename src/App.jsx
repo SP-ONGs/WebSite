@@ -1,9 +1,9 @@
-import SignUpComponent from './components/signUp.jsx'
+import LoginONGComponent from './components/loginONG.jsx'
 
 function App() {
 	return (
 		<>
-			<SignUpComponent />
+			<LoginONGComponent />
 		</>
 	)
 }
