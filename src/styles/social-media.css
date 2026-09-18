@@ -1,0 +1,87 @@
+.instagram {
+	background: linear-gradient(-165deg,
+			#B62CCC,
+			#D959A8,
+			#E76B99,
+			#FF8932,
+			#FFC65C);
+}
+
+.whatsapp {
+	background: linear-gradient(#53D970, #50AF64)
+}
+
+.website {
+	background: linear-gradient(#41A4E1, #308FCD, #277DBA);
+}
+
+
+/* Sign up */
+.add-midia-container {
+	width: 185px;
+	height: 45px;
+
+	border-radius: 10px;
+	position: relative;
+}
+
+.add-midia-icon {
+	width: 33px;
+	height: 33px;
+
+	position: absolute;
+	top: 6px;
+	left: 6px;
+}
+
+.remove-midia {
+	width: 23px;
+	height: 23px;
+
+	position: absolute;
+	right: 9px;
+	top: 11px;
+}
+
+.remove-midia-icon {
+	pointer-events: none;
+}
+
+.remove-midia-button {
+	background: rgba(255, 255, 255, 0);
+	border: rgba(255, 255, 255, 0);
+
+	cursor: pointer;
+}
+
+.add-midia-container h2 {
+	font-size: 18px;
+	font-weight: 700;
+	color: white;
+
+	position: absolute;
+	top: 4.5px;
+	left: 43px;
+}
+
+.add-midia-container label {
+	font-size: 10px;
+	font-weight: 500;
+	color: #EDEDED;
+
+	position: absolute;
+	bottom: 7px;
+	left: 43px;
+}
+
+.midia-bg-fade {
+	height: 50%;
+	width: 100%;
+
+	background: linear-gradient(to top, rgba(0, 0, 0, .12), rgba(0, 0, 0, 0));
+	border-radius: 10px;
+
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+}

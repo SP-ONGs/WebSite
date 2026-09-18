@@ -10,7 +10,7 @@ import closeIconImage from "../../images/elements_vectors/CloseIcon.png";
 
 
 // --> Functions <-- //
-function LoginONGModal() {
+function LoginONGComponent() {
 	return (
 		<div className="focus_BG">
 
@@ -30,18 +30,18 @@ function LoginONGModal() {
 
 				<div className="input-container">
 					<div className="input-group">
-						<label htmlFor="email"> EMAIL	</label>
+						<label htmlFor="email">EMAIL</label>
 						<input id="email" type="email" />
 					</div>
 
 					<div className="input-group">
-						<label htmlFor="password"> SENHA </label>
+						<label htmlFor="password">SENHA</label>
 						<input id="password" type="password" />
 					</div>
 				</div>
 
 				<button className="login-button">
-					Cadastrar
+					Conectar
 				</button>
 
 				<span className="or">
@@ -56,12 +56,6 @@ function LoginONGModal() {
 	);
 }
 
-function LoginONGComponent() {
-	return (
-		<>
-			<LoginONGModal />
-		</>
-	);
-}
+
 
 export default LoginONGComponent;
