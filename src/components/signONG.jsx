@@ -4,6 +4,9 @@
 import "../styles/signONG.css";
 import "../styles/social-media.css";
 
+// Controllers
+import {setModal, modal} from "../controllers/layoutController.js"
+
 // Images
 import addPhotoIconImage from "../../images/elements_vectors/AddPhotoIcon.png";
 import locationIconImage from "../../images/elements_vectors/LocationIcon.png";
@@ -24,7 +27,7 @@ import closeIconImage from "../../images/elements_vectors/CloseIcon.png";
 
 
 // --> Functions <-- //
-function SignONGComponent() {
+function ReactSignONG() {
 	return (
 		<>
 			<div className="focus_BG"></div>
@@ -123,7 +126,7 @@ function SignONGComponent() {
 				<div className="divide-bar"></div>
 
 				<div className="right-box">
-					<div className="close-button">
+					<div className="close-button" onClick={() => {setModal("loginONG")}}>
 						<img src={closeIconImage} alt="Close button" />
 						<button ></button>
 					</div>
@@ -157,6 +160,16 @@ function SignONGComponent() {
 			</div>
 		</>
 	);
+}
+
+function SignONGComponent() {
+	return(
+		<>
+			{modal == "signONG" && (
+				<ReactSignONG />
+			)}
+		</>
+	)
 }
 
 

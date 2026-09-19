@@ -4,7 +4,7 @@ import SignONGComponent from './components/signONG.jsx'
 function App() {
 	return (
 		<>
-			<LoginONGComponent />
+			<SignONGComponent />
 		</>
 	)
 }

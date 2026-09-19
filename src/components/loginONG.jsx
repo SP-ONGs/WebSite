@@ -3,6 +3,9 @@
 // CSS
 import "../styles/loginONG.css";
 
+// Controllers
+import {setModal, modal} from "../controllers/layoutController.js"
+
 // Images
 import logoImage from "../../images/SPONGs_icon-nobg.png";
 import closeIconImage from "../../images/elements_vectors/CloseIcon.png";
@@ -10,7 +13,7 @@ import closeIconImage from "../../images/elements_vectors/CloseIcon.png";
 
 
 // --> Functions <-- //
-function LoginONGComponent() {
+function ReactLoginONG() {
 	return (
 		<div className="focus_BG">
 
@@ -48,12 +51,22 @@ function LoginONGComponent() {
 					ou
 				</span>
 
-				<a href="#" className="signin-link">Adicionar nova ONG</a>
+				<a href="#" className="signin-link"  onClick={() => {setModal("signONG")}}>Adicionar nova ONG</a>
 
 			</div>
 
 		</div>
 	);
+}
+
+function LoginONGComponent() {
+	return(
+		<>
+			{modal == "loginONG" && (
+				<ReactLoginONG />
+			)}
+		</>
+	)
 }
 
 
