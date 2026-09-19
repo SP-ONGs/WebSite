@@ -2,7 +2,7 @@
 
 // React
 import { useState } from "react";
-export const [modal, setModal] = useState("login");
+export const [modal, setModal] = useState("loginONG");
 
 
 // --> Functions <-- //
