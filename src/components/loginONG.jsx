@@ -13,7 +13,7 @@ import closeIconImage from "../../images/elements_vectors/CloseIcon.png";
 
 
 // --> Functions <-- //
-function ReactLoginONG() {
+function LoginONGComponent() {
 	const { setModal } = useLayout();
 	
 	return (
@@ -59,16 +59,6 @@ function ReactLoginONG() {
 
 		</div>
 	);
-}
-
-function LoginONGComponent() {
-  const { modal } = useLayout();
-
-	return(
-		<>
-			{modal == "loginONG" && <ReactLoginONG />}
-		</>
-	)
 }
 
 

@@ -27,7 +27,7 @@ import closeIconImage from "../../images/elements_vectors/CloseIcon.png";
 
 
 // --> Functions <-- //
-function ReactSignONG() {
+function SignONGComponent() {
 	const { setModal } = useLayout();
 
 	return (
@@ -162,18 +162,6 @@ function ReactSignONG() {
 			</div>
 		</>
 	);
-}
-
-function SignONGComponent() {
-  const { modal } = useLayout();
-
-	return(
-		<>
-			{modal == "signONG" && (
-				<ReactSignONG />
-			)}
-		</>
-	)
 }
 
 
