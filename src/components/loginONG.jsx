@@ -4,7 +4,7 @@
 import "../styles/loginONG.css";
 
 // Controllers
-import {setModal, modal} from "../controllers/layoutController.js"
+import {useLayout} from "../controllers/layoutController.js"
 
 // Images
 import logoImage from "../../images/SPONGs_icon-nobg.png";
@@ -14,6 +14,8 @@ import closeIconImage from "../../images/elements_vectors/CloseIcon.png";
 
 // --> Functions <-- //
 function ReactLoginONG() {
+	const { setModal } = useLayout();
+	
 	return (
 		<div className="focus_BG">
 
@@ -60,11 +62,11 @@ function ReactLoginONG() {
 }
 
 function LoginONGComponent() {
+  const { modal } = useLayout();
+
 	return(
 		<>
-			{modal == "loginONG" && (
-				<ReactLoginONG />
-			)}
+			{modal == "loginONG" && <ReactLoginONG />}
 		</>
 	)
 }

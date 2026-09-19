@@ -5,7 +5,7 @@ import "../styles/signONG.css";
 import "../styles/social-media.css";
 
 // Controllers
-import {setModal, modal} from "../controllers/layoutController.js"
+import {useLayout} from "../controllers/layoutController.js"
 
 // Images
 import addPhotoIconImage from "../../images/elements_vectors/AddPhotoIcon.png";
@@ -28,6 +28,8 @@ import closeIconImage from "../../images/elements_vectors/CloseIcon.png";
 
 // --> Functions <-- //
 function ReactSignONG() {
+	const { setModal } = useLayout();
+
 	return (
 		<>
 			<div className="focus_BG"></div>
@@ -163,6 +165,8 @@ function ReactSignONG() {
 }
 
 function SignONGComponent() {
+  const { modal } = useLayout();
+
 	return(
 		<>
 			{modal == "signONG" && (
