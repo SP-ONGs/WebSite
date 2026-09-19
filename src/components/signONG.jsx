@@ -4,9 +4,6 @@
 import "../styles/signONG.css";
 import "../styles/social-media.css";
 
-// Controllers
-import {useLayout} from "../controllers/layoutController.js"
-
 // Images
 import addPhotoIconImage from "../../images/elements_vectors/AddPhotoIcon.png";
 import locationIconImage from "../../images/elements_vectors/LocationIcon.png";
@@ -28,8 +25,6 @@ import closeIconImage from "../../images/elements_vectors/CloseIcon.png";
 
 // --> Functions <-- //
 function SignONGComponent() {
-	const { setModal } = useLayout();
-
 	return (
 		<>
 			<div className="focus_BG"></div>

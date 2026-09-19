@@ -3,9 +3,6 @@
 // CSS
 import "../styles/loginONG.css";
 
-// Controllers
-import {useLayout} from "../controllers/layoutController.js"
-
 // Images
 import logoImage from "../../images/SPONGs_icon-nobg.png";
 import closeIconImage from "../../images/elements_vectors/CloseIcon.png";
@@ -14,8 +11,6 @@ import closeIconImage from "../../images/elements_vectors/CloseIcon.png";
 
 // --> Functions <-- //
 function LoginONGComponent() {
-	const { setModal } = useLayout();
-	
 	return (
 		<div className="focus_BG">
 
