@@ -17,7 +17,7 @@
 
 
 /* Sign up */
-.add-midia-container {
+.add_midia_container {
 	width: 185px;
 	height: 45px;
 
@@ -25,7 +25,7 @@
 	position: relative;
 }
 
-.add-midia-icon {
+.add_midia_icon {
 	width: 33px;
 	height: 33px;
 
@@ -34,7 +34,7 @@
 	left: 6px;
 }
 
-.remove-midia {
+.remove_midia {
 	width: 23px;
 	height: 23px;
 
@@ -43,18 +43,18 @@
 	top: 11px;
 }
 
-.remove-midia-icon {
+.remove_midia_icon {
 	pointer-events: none;
 }
 
-.remove-midia-button {
+.remove_midia_button {
 	background: rgba(255, 255, 255, 0);
 	border: rgba(255, 255, 255, 0);
 
 	cursor: pointer;
 }
 
-.add-midia-container h2 {
+.add_midia_container h2 {
 	font-size: 18px;
 	font-weight: 700;
 	color: white;
@@ -64,7 +64,7 @@
 	left: 43px;
 }
 
-.add-midia-container label {
+.add_midia_container label {
 	font-size: 10px;
 	font-weight: 500;
 	color: #EDEDED;
@@ -74,7 +74,7 @@
 	left: 43px;
 }
 
-.midia-bg-fade {
+.midia_bg_fade {
 	height: 50%;
 	width: 100%;
 

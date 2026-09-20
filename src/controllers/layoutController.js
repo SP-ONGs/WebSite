@@ -1,6 +1,0 @@
-// --> Variables <-- //
-
-// React
-
-
-// --> Functions <-- //
