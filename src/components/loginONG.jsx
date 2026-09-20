@@ -75,7 +75,8 @@ function OrSignComponent({ setCurrentModal }) {
 function LoginONGComponent({ currentModal, setCurrentModal }) {
 	return (
 		currentModal === "loginONG" && (
-			<div className={loginStyle.focus_BG}>
+			<>
+				<div className={loginStyle.focus_BG}></div>
 
 				<div className={loginStyle.login_modal}>
 					<CloseModalButton setCurrentModal={setCurrentModal} />
@@ -87,7 +88,7 @@ function LoginONGComponent({ currentModal, setCurrentModal }) {
 					<LoginButton />
 					<OrSignComponent setCurrentModal={setCurrentModal} />
 				</div>
-			</div>
+			</>
 		)
 	);
 }

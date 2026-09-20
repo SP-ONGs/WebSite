@@ -11,13 +11,8 @@ body {
 /* Fundo preto */
 .focus_BG {
 	position: fixed;
-	inset: 0;
-
 	background: rgba(0, 0, 0, .15);
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	inset: 0;
 }
 
 
@@ -31,7 +26,22 @@ body {
 	border-radius: 15px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.235);
 
-	position: relative;
+	position: fixed;
+	transform: translate(-50%, -50%);
+	top: 50%;
+	left: 50%;
+
+	animation: modalOpen .175s cubic-bezier(.3, 1.5, .925, 1);
+}
+
+@keyframes modalOpen {
+	from {
+		transform: translate(-50%, -50%) scale(.8);
+	}
+
+	to {
+		transform: translate(-50%, -50%) scale(1);
+	}
 }
 
 
