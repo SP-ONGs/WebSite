@@ -38,6 +38,12 @@
 }
 
 
+/* Aviso de erro (Error warning) */
+.error_outline {
+	outline: 2px solid #E32424;
+}
+
+
 /* Botão de fechar */
 .close_button {
 	position: fixed;
@@ -518,4 +524,11 @@
 	font-weight: 500;
 
 	cursor: pointer;
+}
+
+.signin_button_disabled {
+	background: rgba(0, 125, 188, .6);
+	color: rgba(255, 255, 255, .6);
+
+	cursor: default;
 }
