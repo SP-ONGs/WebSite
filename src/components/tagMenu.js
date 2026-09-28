@@ -14,6 +14,7 @@ function toggleTagMenu() {
 	clearBarText();
 }
 
+
 export function Initialize() {
 	document.getElementById("tag-menu").addEventListener("click", toggleTagMenu)
 

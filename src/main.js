@@ -4,6 +4,7 @@ import { Initialize as InitModal } from "./components/ongModal.js";
 import { Initialize as InitPageBar } from "./components/pageBar.js";
 import { Initialize as InitTagMenu } from "./components/tagMenu.js";
 import { Initialize as InitNameFilterBar } from "./components/nameFilterBar.js";
+import { Initialize as InitWelcome } from "./components/welcome.js";
 
 InitMap()
 InitOngsCard()
@@ -11,3 +12,5 @@ InitModal()
 InitPageBar()
 InitTagMenu()
 InitNameFilterBar()
+InitWelcome()
+

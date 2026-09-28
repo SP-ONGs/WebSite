@@ -23,3 +23,4 @@ export function Initialize() {
 		filtrarPorNome(event.target.value)
 	});
 }
+
