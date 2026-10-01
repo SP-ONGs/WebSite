@@ -492,7 +492,7 @@
 }
 
 .input_group input {
-	width: 100%;
+	width: 85%;
 	height: 55%;
 
 	position: absolute;
@@ -507,6 +507,19 @@
 	border: none;
 	background: rgba(255, 255, 255, 0);
 	outline: none;
+}
+
+.input_group_hideButton {
+	width: 30px;
+	height: 30px;
+
+	cursor: pointer;
+	object-fit: contain;
+
+	position: absolute;
+	transform: translateY(-50%);
+	top: 50%;
+	right: 15px;
 }
 
 .signin_button {

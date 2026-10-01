@@ -1,5 +1,8 @@
 // --> Variables <-- //
 
+// React
+import { useState } from "react";
+
 // CSS
 import signStyle from "../styles/signONG.module.css";
 import "../styles/social-media.css";
@@ -17,6 +20,9 @@ import websiteIconImage from "../../images/elements_vectors/WebsiteIcon.png";
 import petTagIconImage from "../../images/elements_vectors/PetTagIcon.png";
 import voluntarioTagIconImage from "../../images/elements_vectors/VoluntarioTagIcon.png";
 import donationTagIconImage from "../../images/elements_vectors/DonationTagIcon.png";
+
+import hideIconImage from "../../images/elements_vectors/HideIcon.png";
+import nonHideIconImage from "../../images/elements_vectors/NonHideIcon.png";
 
 import logoImage from "../../images/SPONGs_icon-nobg.png";
 import closeIconImage from "../../images/elements_vectors/CloseIcon.png";
@@ -233,6 +239,30 @@ function SPONGS_Brand() {
 }
 
 function SignInputsContainer() {
+	const [hidePassword, setHidePassword] = useState(true);
+	const [hideConfirm, setHideConfirm] = useState(true);
+
+	function onHideClick(tag) {
+		const hidePasswordElement = document.getElementById("signONG-hide-password")
+		const hideConfirmPasswordElement = document.getElementById("signONG-hide-confirm_password")
+
+		const element = tag == "password" ? hidePasswordElement : hideConfirmPasswordElement;
+		const setStateFunction = tag == "password" ? setHidePassword : setHideConfirm;
+
+		const unHideClass = signStyle.input_group_unHideButton
+		const IS_HIDE = !element.classList.contains(unHideClass)
+
+		if (IS_HIDE) {
+			element.classList.add(unHideClass)
+			element.src = nonHideIconImage
+			setStateFunction(false)
+		} else {
+			element.classList.remove(unHideClass)
+			element.src = hideIconImage
+			setStateFunction(true)
+		}
+	}
+
 	return (
 		<div className={signStyle.signONG_input_container}>
 			<div className={signStyle.input_group}>
@@ -242,12 +272,14 @@ function SignInputsContainer() {
 
 			<div className={signStyle.input_group}>
 				<label htmlFor="password">SENHA</label>
-				<input id="signONG-password" type="password" onChange={UpdateSignButtonEnabled} onSelect={ResetErrors} />
+				<img id="signONG-hide-password" src={hideIconImage} className={signStyle.input_group_hideButton} onClick={() => onHideClick("password")} />
+				<input id="signONG-password" type={hidePassword ? "password" : "text"} onChange={UpdateSignButtonEnabled} onSelect={ResetErrors} />
 			</div>
 
 			<div className={signStyle.input_group}>
 				<label htmlFor="password">CONFIMAR SENHA</label>
-				<input id="signONG-confirm_password" type="password" onChange={UpdateSignButtonEnabled} onSelect={ResetErrors} />
+				<img id="signONG-hide-confirm_password" src={hideIconImage} className={signStyle.input_group_hideButton} onClick={() => onHideClick("confirm")} />
+				<input id="signONG-confirm_password" type={hideConfirm ? "password" : "text"} onChange={UpdateSignButtonEnabled} onSelect={ResetErrors} />
 			</div>
 		</div>
 	)
