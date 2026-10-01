@@ -1,11 +1,17 @@
 // --> Variables <-- //
 
+// React
+import { useState } from "react";
+
 // CSS
 import loginStyle from "../styles/loginONG.module.css";
 
 // Images
 import logoImage from "../../images/SPONGs_icon-nobg.png";
 import closeIconImage from "../../images/elements_vectors/CloseIcon.png";
+
+import hideIconImage from "../../images/elements_vectors/HideIcon.png";
+import nonHideIconImage from "../../images/elements_vectors/NonHideIcon.png";
 
 
 
@@ -34,16 +40,36 @@ function SPONGS_Brand() {
 
 // Functions 2: Input components //
 function InputContainerComponent() {
+	const [hidePassword, setHidePassword] = useState(true);
+
+	function onHideClick(event) {
+		const element = event.currentTarget;
+
+		const unHideClass = loginStyle.input_group_unHideButton
+		const IS_HIDE = !element.classList.contains(unHideClass)
+
+		if (IS_HIDE) {
+			element.classList.add(unHideClass)
+			element.src = nonHideIconImage
+			setHidePassword(false)
+		} else {
+			element.classList.remove(unHideClass)
+			element.src = hideIconImage
+			setHidePassword(true)
+		}
+	}
+
 	return (
-		<div className={loginStyle.loginONG_input_container}>
-			<div className={loginStyle.loginONG_input_group}>
+		<div className={loginStyle.input_container}>
+			<div className={loginStyle.input_group}>
 				<label htmlFor="email">EMAIL</label>
 				<input id="email" type="email" />
 			</div>
 
-			<div className={loginStyle.loginONG_input_group}>
+			<div className={loginStyle.input_group}>
 				<label htmlFor="password">SENHA</label>
-				<input id="password" type="password" />
+				<img id="hide-password" src={hideIconImage} className={loginStyle.input_group_hideButton} onClick={onHideClick} />
+				<input id="password" type={hidePassword ? "password" : "text"} />
 			</div>
 		</div>
 	);
