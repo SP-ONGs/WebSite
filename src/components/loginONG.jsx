@@ -5,6 +5,7 @@ import { useState } from "react";
 
 // CSS
 import loginStyle from "../styles/loginONG.module.css";
+import "../styles/modals.css";
 
 // Images
 import logoImage from "../../images/SPONGs_icon-nobg.png";
@@ -102,7 +103,7 @@ function LoginONGComponent({ currentModal, setCurrentModal }) {
 	return (
 		currentModal === "loginONG" && (
 			<>
-				<div className={loginStyle.focus_BG}></div>
+				<div className="focus_BG"></div>
 
 				<div className={loginStyle.login_modal}>
 					<CloseModalButton setCurrentModal={setCurrentModal} />

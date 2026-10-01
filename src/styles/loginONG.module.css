@@ -8,14 +8,6 @@ body {
 }
 
 
-/* Fundo preto */
-.focus_BG {
-	position: fixed;
-	background: rgba(0, 0, 0, .15);
-	inset: 0;
-}
-
-
 /* Fundo branco */
 .login_modal {
 	width: 464px;

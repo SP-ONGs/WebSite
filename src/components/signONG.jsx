@@ -5,7 +5,9 @@ import { useState } from "react";
 
 // CSS
 import signStyle from "../styles/signONG.module.css";
+import signMediaStyle from "../styles/signONG_social-media.module.css";
 import "../styles/social-media.css";
+import "../styles/modals.css";
 
 // Images
 import addPhotoIconImage from "../../images/elements_vectors/AddPhotoIcon.png";
@@ -137,14 +139,18 @@ function AddNameContainer() {
 				</div>
 				<div className={signStyle.location_container}>
 					<img src={locationIconImage} alt="Localização" />
-					<h1 id="signONG-location_text"> São Paulo, SP, Rua Doutor Joviano Pacheco de Aguirre, 255</h1>
+					<h1 id="signONG-location_text">---</h1>
 				</div>
 			</div>
 		</div>
 	)
 }
 
-function AddSocialMediaContainer() {
+function AddSocialMediaContainer({ setMediaModal }) {
+	function onAddMedia() {
+		setMediaModal("options")
+	}
+
 	return (
 		<div className={signStyle.left_middle_container}>
 			<div className={signStyle.midia_title_container}>
@@ -156,15 +162,14 @@ function AddSocialMediaContainer() {
 				<div className={signStyle.add_social_midia} id="signONG-add-midia">
 					<img src={addGreyIconImage} alt="Adicionar midia social" />
 					<label>Adicionar</label>
-					<button></button>
+					<button onClick={onAddMedia}></button>
 				</div>
 
 				<div className="add_midia_container instagram" id="signONG-instagram">
 					<img src={instagramIconImage} className="add_midia_icon" alt="Instagram" />
 					<h2>Instagram</h2>
 					<label>@cachorros.carentes</label>
-					<img src={cancelMediaIconImage} className="remove_midia remove_midia_icon" alr="Remover" />
-					<button className="remove_midia remove_midia_button"></button>
+					<img src={cancelMediaIconImage} className="remove_midia remove_midia_icon" alr="Remove" />
 				</div>
 
 				<div className="add_midia_container whatsapp" id="signONG-whatsapp">
@@ -172,8 +177,7 @@ function AddSocialMediaContainer() {
 					<img src={whatsappIconImage} className="add_midia_icon" alt="Whatsapp" />
 					<h2>Whatsapp</h2>
 					<label>+55 (11) 95710-0577</label>
-					<img src={cancelMediaIconImage} className="remove_midia remove_midia_icon" alr="Remover" />
-					<button className="remove_midia remove_midia_button"></button>
+					<img src={cancelMediaIconImage} className="remove_midia remove_midia_icon" alr="Remove" />
 				</div>
 
 				<div className="add_midia_container website" id="signONG-website">
@@ -181,8 +185,7 @@ function AddSocialMediaContainer() {
 					<img src={websiteIconImage} className="add_midia_icon" alt="Website" />
 					<h2>Website</h2>
 					<label>cachorroscarentes.com</label>
-					<img src={cancelMediaIconImage} className="remove_midia remove_midia_icon" alr="Remover" />
-					<button className="remove_midia remove_midia_button"></button>
+					<img src={cancelMediaIconImage} className="remove_midia remove_midia_icon" alr="Remove" />
 				</div>
 			</div>
 		</div>
@@ -219,12 +222,116 @@ function AddTagContainer() {
 
 
 
-// Functions 3: Right side (Email & password) //
+// Functions 3: Add social media options //
+function SocialMediaOptions({ setMediaModal, setAddMedia }) {
+	function onCloseOptions() {
+		setMediaModal(null)
+	}
+
+	function onInstagramOption() {
+		setAddMedia("instagram")
+		setMediaModal("add_media")
+	}
+
+	function onWhatsappOption() {
+		setAddMedia("whatsapp")
+		setMediaModal("add_media")
+	}
+
+	function onWebsiteOption() {
+		setAddMedia("website")
+		setMediaModal("add_media")
+	}
+
+	return (
+		<>
+			<div className="focus_BG"></div>
+
+			<div className={signMediaStyle.options_modal}>
+				<div className={signMediaStyle.close_button} onClick={onCloseOptions}>
+					<img src={closeIconImage} alt="Close button" />
+				</div>
+
+				<div className={signMediaStyle.options_brand}>
+					<img src={logoImage} alt="SP ONGS logo" />
+					<span>SP ONGS</span>
+				</div>
+
+				<h1>Selecione a Rede Social</h1>
+
+				<div className={signMediaStyle.options_container}>
+					<div className={[signMediaStyle.media_option, "instagram"].join(" ")} onClick={onInstagramOption} >
+						<img src={instagramIconImage} className={signMediaStyle.media_icon} />
+						<h2>Instagram</h2>
+						<img src={addPhotoIconImage} className={signMediaStyle.add_icon} />
+					</div>
+
+					<div className={[signMediaStyle.media_option, "whatsapp"].join(" ")} onClick={onWhatsappOption} >
+						<div className={signMediaStyle.option_fade}></div>
+						<img src={whatsappIconImage} className={signMediaStyle.media_icon} />
+						<h2>Whatsapp</h2>
+						<img src={addPhotoIconImage} className={signMediaStyle.add_icon} />
+					</div>
+
+					<div className={[signMediaStyle.media_option, "website"].join(" ")} onClick={onWebsiteOption} >
+						<div className={signMediaStyle.option_fade}></div>
+						<img src={websiteIconImage} className={signMediaStyle.media_icon} />
+						<h2>Website</h2>
+						<img src={addPhotoIconImage} className={signMediaStyle.add_icon} />
+					</div>
+				</div>
+			</div>
+		</>
+	)
+}
+
+function SocialMediaInputModal({ setMediaModal, currentAddMedia }) {
+	function onCloseSignMedia() {
+		setMediaModal(null)
+	}
+
+	return (
+		<>
+			<div className="focus_BG"></div>
+
+			<div className={signMediaStyle.sign_media_modal}>
+				<div className={signMediaStyle.big_close_button} onClick={onCloseSignMedia}>
+					<img src={closeIconImage} alt="Close button" />
+				</div>
+
+				<div className={signMediaStyle.add_media_brand}>
+					<img src={logoImage} alt="SP ONGS logo" />
+					<span>SP ONGS</span>
+				</div>
+
+				<div className={signMediaStyle.sign_media_container}>
+					<div className={[signMediaStyle.media_icon_view, "instagram"].join(" ")}>
+						<img src={instagramIconImage} />
+					</div>
+
+					<div className={signMediaStyle.media_input_container}>
+						<h1>NOME DE USUÁRIO</h1>
+						<div className={signMediaStyle.media_input}>
+							<input type="text" />
+						</div>
+					</div>
+				</div>
+
+				<div className={[signMediaStyle.add_media_button, signMediaStyle.add_media_button_disabled].join(" ")}>
+					<label>Adicionar</label>
+				</div>
+			</div>
+		</>
+	)
+}
+
+
+
+// Functions 4: Right side (Email & password) //
 function CloseModalButton({ setCurrentModal }) {
 	return (
 		<div className={signStyle.close_button} onClick={() => { setCurrentModal("loginONG") }}>
 			<img src={closeIconImage} alt="Close button" />
-			<button></button>
 		</div>
 	)
 }
@@ -287,17 +394,20 @@ function SignInputsContainer() {
 
 
 
-// Functions 4: Sign ONG component //
+// Functions 5: Sign ONG component //
 function SignONGComponent({ currentModal, setCurrentModal }) {
+	const [currentMediaModal, setMediaModal] = useState(null);
+	const [currentAddMedia, setAddMedia] = useState(null);
+
 	return (
 		currentModal === "signONG" && (
 			<>
-				<div className={signStyle.focus_BG}></div>
+				<div className="focus_BG"></div>
 
 				<div className={signStyle.signONG_modal}>
 					<div className={signStyle.left_box}>
 						<AddNameContainer />
-						<AddSocialMediaContainer />
+						<AddSocialMediaContainer setMediaModal={setMediaModal} />
 						<AddTagContainer />
 					</div>
 
@@ -313,6 +423,14 @@ function SignONGComponent({ currentModal, setCurrentModal }) {
 						<SignButtonComponent />
 					</div>
 				</div>
+
+				{currentMediaModal === "options" && (
+					<SocialMediaOptions setMediaModal={setMediaModal} setAddMedia={setAddMedia} />
+				)}
+
+				{currentMediaModal === "add_media" && (
+					<SocialMediaInputModal setMediaModal={setMediaModal} currentAddMedia={currentAddMedia} />
+				)}
 			</>
 		)
 	);

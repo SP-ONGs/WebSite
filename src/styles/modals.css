@@ -1,0 +1,6 @@
+/* Fundo preto */
+.focus_BG {
+	position: fixed;
+	background: rgba(0, 0, 0, .15);
+	inset: 0;
+}
