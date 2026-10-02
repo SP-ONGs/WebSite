@@ -80,8 +80,6 @@ function OnSign() {
 	if (!IS_SAME_PASSWORD) {
 		return
 	}
-
-	console.log("Sign click")
 }
 
 function UpdateSignButtonEnabled() {
@@ -96,7 +94,6 @@ function UpdateSignButtonEnabled() {
 	const HAVE_PASSWORD = passwordInput.value !== "" && confirmPasswordInput.value !== "";
 
 	const CAN_SIGNIN = HAVE_EMAIL & HAVE_PASSWORD
-	console.log("Button updated " + CAN_SIGNIN)
 
 	if (!CAN_SIGNIN) {
 		signButton.classList.add(signStyle.signin_button_disabled);
@@ -146,9 +143,48 @@ function AddNameContainer() {
 	)
 }
 
-function AddSocialMediaContainer({ setMediaModal }) {
+function AddSocialMediaContainer({ setMediaModal, instagramONG, whatsappONG, websiteONG, setInstagramONG, setWhatsappONG, setWebsiteONG }) {
 	function onAddMedia() {
 		setMediaModal("options")
+	}
+
+	function removeMedia(setFunction) {
+		setFunction(null);
+	}
+
+	function InstagramPreview() {
+		return (
+			<div className="add_midia_container instagram" id="signONG-instagram">
+				<img src={instagramIconImage} className="add_midia_icon" alt="Instagram" />
+				<h2>Instagram</h2>
+				<label>@{instagramONG}</label>
+				<img src={cancelMediaIconImage} className="remove_midia" alr="Remove" onClick={() => removeMedia(setInstagramONG)} />
+			</div>
+		)
+	}
+
+	function WhatsappPreview() {
+		return (
+			<div className="add_midia_container whatsapp" id="signONG-whatsapp">
+				<div className="midia_bg_fade"></div>
+				<img src={whatsappIconImage} className="add_midia_icon" alt="Whatsapp" />
+				<h2>Whatsapp</h2>
+				<label>{whatsappONG}</label>
+				<img src={cancelMediaIconImage} className="remove_midia" alr="Remove" onClick={() => removeMedia(setWhatsappONG)} />
+			</div>
+		)
+	}
+
+	function WebsitePreview() {
+		return (
+			<div className="add_midia_container website" id="signONG-website">
+				<div className="midia_bg_fade"></div>
+				<img src={websiteIconImage} className="add_midia_icon" alt="Website" />
+				<h2>Website</h2>
+				<label>{websiteONG}</label>
+				<img src={cancelMediaIconImage} className="remove_midia" alr="Remove" onClick={() => removeMedia(setWebsiteONG)} />
+			</div>
+		)
 	}
 
 	return (
@@ -165,28 +201,9 @@ function AddSocialMediaContainer({ setMediaModal }) {
 					<button onClick={onAddMedia}></button>
 				</div>
 
-				<div className="add_midia_container instagram" id="signONG-instagram">
-					<img src={instagramIconImage} className="add_midia_icon" alt="Instagram" />
-					<h2>Instagram</h2>
-					<label>@cachorros.carentes</label>
-					<img src={cancelMediaIconImage} className="remove_midia remove_midia_icon" alr="Remove" />
-				</div>
-
-				<div className="add_midia_container whatsapp" id="signONG-whatsapp">
-					<div className="midia_bg_fade"></div>
-					<img src={whatsappIconImage} className="add_midia_icon" alt="Whatsapp" />
-					<h2>Whatsapp</h2>
-					<label>+55 (11) 95710-0577</label>
-					<img src={cancelMediaIconImage} className="remove_midia remove_midia_icon" alr="Remove" />
-				</div>
-
-				<div className="add_midia_container website" id="signONG-website">
-					<div className="midia_bg_fade"></div>
-					<img src={websiteIconImage} className="add_midia_icon" alt="Website" />
-					<h2>Website</h2>
-					<label>cachorroscarentes.com</label>
-					<img src={cancelMediaIconImage} className="remove_midia remove_midia_icon" alr="Remove" />
-				</div>
+				{instagramONG !== null && (<InstagramPreview />)}
+				{whatsappONG !== null && (<WhatsappPreview />)}
+				{websiteONG !== null && (<WebsitePreview />)}
 			</div>
 		</div>
 	)
@@ -285,9 +302,51 @@ function SocialMediaOptions({ setMediaModal, setAddMedia }) {
 	)
 }
 
-function SocialMediaInputModal({ setMediaModal, currentAddMedia }) {
+function UpdateAddMediaButtonEnabled() {
+	const addMediaButton = document.getElementById("signONG_addMidiaButton");
+	const addMediaInput = document.getElementById("signONG_addMidiaInput");
+
+	const CAN_ADD = addMediaInput.value !== "";
+
+	if (!CAN_ADD) {
+		addMediaButton.classList.add(signMediaStyle.add_media_button_disabled);
+		return;
+	}
+
+	addMediaButton.classList.remove(signMediaStyle.add_media_button_disabled);
+}
+
+function SocialMediaInputModal({ setMediaModal, currentAddMedia, setInstagramONG, setWhatsappONG, setWebsiteONG }) {
+	const mediaIcon = currentAddMedia === "instagram" && instagramIconImage
+		|| currentAddMedia === "whatsapp" && whatsappIconImage
+		|| currentAddMedia === "website" && websiteIconImage
+	const titleText = currentAddMedia === "instagram" && "NOME DE USUÁRIO"
+		|| currentAddMedia === "whatsapp" && "NÚMERO DE TELEFONE"
+		|| currentAddMedia === "website" && "URL DO WEBSITE"
+
 	function onCloseSignMedia() {
 		setMediaModal(null)
+	}
+
+	function onAddMedia() {
+		const addMediaInput = document.getElementById("signONG_addMidiaInput");
+		const mediaValue = addMediaInput.value;
+
+		const IS_EMPTY = mediaValue === ""
+
+		if (IS_EMPTY) {
+			return
+		}
+
+		if (currentAddMedia === "instagram") {
+			setInstagramONG(mediaValue);
+		} else if (currentAddMedia === "whatsapp") {
+			setWhatsappONG(mediaValue);
+		} else if (currentAddMedia === "website") {
+			setWebsiteONG(mediaValue);
+		}
+
+		setMediaModal(null);
 	}
 
 	return (
@@ -305,22 +364,23 @@ function SocialMediaInputModal({ setMediaModal, currentAddMedia }) {
 				</div>
 
 				<div className={signMediaStyle.sign_media_container}>
-					<div className={[signMediaStyle.media_icon_view, "instagram"].join(" ")}>
-						<img src={instagramIconImage} />
+					<div className={[signMediaStyle.media_icon_view, currentAddMedia].join(" ")}>
+						<img src={mediaIcon} />
 					</div>
 
 					<div className={signMediaStyle.media_input_container}>
-						<h1>NOME DE USUÁRIO</h1>
+						<h1>{titleText}</h1>
 						<div className={signMediaStyle.media_input}>
-							<input type="text" />
+							<input id="signONG_addMidiaInput" type="text" onChange={UpdateAddMediaButtonEnabled} />
 						</div>
 					</div>
 				</div>
 
-				<div className={[signMediaStyle.add_media_button, signMediaStyle.add_media_button_disabled].join(" ")}>
+				<div id="signONG_addMidiaButton" onClick={onAddMedia}
+					className={[signMediaStyle.add_media_button, signMediaStyle.add_media_button_disabled].join(" ")}>
 					<label>Adicionar</label>
 				</div>
-			</div>
+			</div >
 		</>
 	)
 }
@@ -399,6 +459,10 @@ function SignONGComponent({ currentModal, setCurrentModal }) {
 	const [currentMediaModal, setMediaModal] = useState(null);
 	const [currentAddMedia, setAddMedia] = useState(null);
 
+	const [instagramONG, setInstagramONG] = useState(null);
+	const [whatsappONG, setWhatsappONG] = useState(null);
+	const [websiteONG, setWebsiteONG] = useState(null);
+
 	return (
 		currentModal === "signONG" && (
 			<>
@@ -407,7 +471,9 @@ function SignONGComponent({ currentModal, setCurrentModal }) {
 				<div className={signStyle.signONG_modal}>
 					<div className={signStyle.left_box}>
 						<AddNameContainer />
-						<AddSocialMediaContainer setMediaModal={setMediaModal} />
+						<AddSocialMediaContainer setMediaModal={setMediaModal}
+							instagramONG={instagramONG} whatsappONG={whatsappONG} websiteONG={websiteONG}
+							setInstagramONG={setInstagramONG} setWhatsappONG={setWhatsappONG} setWebsiteONG={setWebsiteONG} />
 						<AddTagContainer />
 					</div>
 
@@ -429,7 +495,8 @@ function SignONGComponent({ currentModal, setCurrentModal }) {
 				)}
 
 				{currentMediaModal === "add_media" && (
-					<SocialMediaInputModal setMediaModal={setMediaModal} currentAddMedia={currentAddMedia} />
+					<SocialMediaInputModal setMediaModal={setMediaModal} currentAddMedia={currentAddMedia}
+						setInstagramONG={setInstagramONG} setWhatsappONG={setWhatsappONG} setWebsiteONG={setWebsiteONG} />
 				)}
 			</>
 		)

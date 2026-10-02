@@ -6,7 +6,7 @@
 /* Modal */
 .options_modal {
 	position: fixed;
-	transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%) scale(.825);
 	top: 50%;
 	left: 50%;
 
@@ -17,12 +17,12 @@
 	border-radius: 25px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.235);
 
-	animation: modalOpen 0.175s cubic-bezier(.3, 1.5, .925, 1);
+	animation: optionsModalOpen 0.175s cubic-bezier(.3, 1.5, .925, 1);
 }
 
 .sign_media_modal {
 	position: fixed;
-	transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%) scale(.8);
 	top: 50%;
 	left: 50%;
 
@@ -33,16 +33,26 @@
 	border-radius: 25px;
 	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.235);
 
-	animation: modalOpen 0.175s cubic-bezier(.3, 1.5, .925, 1);
+	animation: mediaModalOpen 0.175s cubic-bezier(.3, 1.5, .925, 1);
 }
 
-@keyframes modalOpen {
+@keyframes optionsModalOpen {
 	from {
-		transform: translate(-50%, -50%) scale(.8);
+		transform: translate(-50%, -50%) scale(.65);
 	}
 
 	to {
-		transform: translate(-50%, -50%) scale(1);
+		transform: translate(-50%, -50%) scale(.825);
+	}
+}
+
+@keyframes mediaModalOpen {
+	from {
+		transform: translate(-50%, -50%) scale(.625);
+	}
+
+	to {
+		transform: translate(-50%, -50%) scale(.8);
 	}
 }
 
@@ -86,6 +96,8 @@
 	font-style: italic;
 	text-align: center;
 	font-size: 34px;
+
+	color: rgba(0, 0, 0, .9);
 
 	margin-top: 5px;
 	padding-left: 50px;
@@ -306,6 +318,8 @@
 	transform: translate(-50%, -50%);
 	top: 50%;
 	left: 50%;
+
+	pointer-events: none;
 }
 
 .add_media_button_disabled {

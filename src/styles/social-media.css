@@ -41,15 +41,6 @@
 	position: absolute;
 	right: 9px;
 	top: 11px;
-}
-
-.remove_midia_icon {
-	pointer-events: none;
-}
-
-.remove_midia_button {
-	background: rgba(255, 255, 255, 0);
-	border: rgba(255, 255, 255, 0);
 
 	cursor: pointer;
 }
