@@ -243,9 +243,13 @@
 }
 
 .location_container h1 {
-	font-size: 13px;
-	font-weight: 300px;
+	font-size: 17px;
+	font-weight: 300;
 	color: rgba(0, 0, 0, .75)
+}
+
+.invalid_location h1 {
+	color: rgba(152, 34, 34, .75);
 }
 
 .left_middle_container {

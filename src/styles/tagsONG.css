@@ -60,5 +60,10 @@
 .selected_tag_divider_bar {
 	transition:
 		background 0.2s cubic-bezier(.22, 1, 0.35, 1),
-		border-color 0.2s cubic-bezier(.22, 1, 0.35, 1);
+		border-color 0.2s cubic-bezier(.22, 1, 0.35, 1),
+		transform 0.2s ease;
+}
+
+.tag_container:hover {
+	transform: scale(1.05);
 }
