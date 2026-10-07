@@ -44,10 +44,21 @@
 
 /* Selected tag */
 .selected_tag_container {
-	background: CCE4FF;
+	background: #CCE4FF;
 	border-color: #3B8CE9;
 }
 
 .selected_tag_divider_bar {
 	background: #3B8CE980;
+}
+
+
+/* Animation */
+.tag_container,
+.tag_divider_bar,
+.selected_tag_container,
+.selected_tag_divider_bar {
+	transition:
+		background 0.2s cubic-bezier(.22, 1, 0.35, 1),
+		border-color 0.2s cubic-bezier(.22, 1, 0.35, 1);
 }

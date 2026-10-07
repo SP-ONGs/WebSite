@@ -191,10 +191,6 @@ function AddSocialMediaContainer({ setMediaModal, socialMediaList, setSocialMedi
 		)
 	}
 
-	console.log(socialMediaList["instagram"])
-	console.log(socialMediaList["whatsapp"])
-	console.log(socialMediaList["website"])
-
 	return (
 		<div className={signStyle.left_middle_container}>
 			<div className={signStyle.midia_title_container}>
@@ -217,27 +213,53 @@ function AddSocialMediaContainer({ setMediaModal, socialMediaList, setSocialMedi
 	)
 }
 
-function AddTagContainer() {
+function AddTagContainer({ tagList, setTagList }) {
 	const tagContainerStyle = ["tag_container", signStyle.tag_container_size].join(" ");
+
+	function setTagValue(tagName, value) {
+		setTagList(previous => ({
+			...previous,
+			[tagName]: value
+		}));
+	}
+
+	function toggleTagSelected(tagName) {
+		const tagElement = document.getElementById("signONG_tag_" + tagName);
+		const tagDividerLement = tagElement.querySelector(":scope > div");
+
+		const SELECT_TAG = !tagList[tagName];
+
+		if (SELECT_TAG) {
+			tagElement.classList.add("selected_tag_container");
+			tagDividerLement.classList.add("selected_tag_divider_bar")
+
+			setTagValue(tagName, true);
+		} else {
+			tagElement.classList.remove("selected_tag_container");
+			tagDividerLement.classList.remove("selected_tag_divider_bar")
+
+			setTagValue(tagName, false);
+		}
+	}
 
 	return (
 		<div className={signStyle.left_bottom_container}>
 			<h2 className={signStyle.social_midia_title}>TAGS DA ONG</h2>
 
 			<div className={signStyle.select_tags_container}>
-				<button className={tagContainerStyle}>
+				<button className={tagContainerStyle} id="signONG_tag_pet" onClick={() => toggleTagSelected("pet")}>
 					<img src={petTagIconImage} alt="Pet" />
 					<div className="tag_divider_bar"></div>
 					<label>Animais</label>
 				</button>
 
-				<button className={tagContainerStyle}>
+				<button className={tagContainerStyle} id="signONG_tag_voluntario" onClick={() => toggleTagSelected("voluntario")}>
 					<img src={voluntarioTagIconImage} alt="Voluntário" />
 					<div className="tag_divider_bar"></div>
 					<label>Voluntário</label>
 				</button>
 
-				<button className={tagContainerStyle}>
+				<button className={tagContainerStyle} id="signONG_tag_doacao" onClick={() => toggleTagSelected("doacao")}>
 					<img src={donationTagIconImage} alt="Doação" />
 					<div className="tag_divider_bar"></div>
 					<label>Doação</label>
@@ -355,15 +377,10 @@ function SocialMediaInputModal({ setMediaModal, currentAddMedia, socialMediaList
 			return
 		}
 
-		console.log("Input 1")
-		console.log(socialMediaList)
-		console.log(mediaValue)
 		setSocialMediaList(previous => ({
 			...previous,
 			[currentAddMedia]: mediaValue
 		}))
-		console.log("Input 2")
-		console.log(socialMediaList)
 		setMediaModal(null);
 	}
 
@@ -478,6 +495,7 @@ function SignONGComponent({ currentModal, setCurrentModal }) {
 	const [currentAddMedia, setAddMedia] = useState(null);
 
 	const [socialMediaList, setSocialMediaList] = useState({});
+	const [tagList, setTagList] = useState({});
 
 	return (
 		currentModal === "signONG" && (
@@ -488,7 +506,7 @@ function SignONGComponent({ currentModal, setCurrentModal }) {
 					<div className={signStyle.left_box}>
 						<AddNameContainer />
 						<AddSocialMediaContainer setMediaModal={setMediaModal} socialMediaList={socialMediaList} setSocialMediaList={setSocialMediaList} />
-						<AddTagContainer />
+						<AddTagContainer tagList={tagList} setTagList={setTagList} />
 					</div>
 
 					<div className={signStyle.divide_bar}></div>
