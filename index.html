@@ -17,7 +17,59 @@
             <img src="images/SPONGs_icon-fb.png" class="icone-logo" alt="SP ONGS Logo">
             <h1>SP ONGS</h1>
         </div>
+
+        <div class="barra-pesquisa">
+
+					<i class="bi bi-search" style="font-size: 1.5rem" icone-busca></i>
+
+					<input type="text" placeholder="Pesquise o nome da ONG" id="ong-pesquisa-nome" />
+
+        </div>
+
+
+
+              
     </header>
+
+            <div class="barra-cinza"> </div>
+
+        <!-- MENU LATERAL   -->
+
+        <aside class="menu-lateral">
+
+      <!-- SERA UTILIZADO PARA O MOBILE
+        -->
+       <!-- <div class="menu-logo">
+        <i class="bi bi-list"></i>
+        <span>Menu</span>
+        </div>  -->
+
+    <nav class="menu-links">
+
+        <a href="#" class="menu-link">
+            <i class="bi bi-house-fill"></i>
+            <span>HomePage</span>
+        </a>
+
+        <a href="#" class="menu-link">
+            <i class="bi bi-map-fill"></i>
+            <span>Ver mapa</span>
+        </a>
+
+        <a href="#" class="menu-link">
+            <i class="bi bi-exclamation-circle"></i>
+            <span>Sobre nós</span>
+        </a>
+
+        <a href="#" class="menu-link">
+            <i class="bi bi-plus"></i>
+            <span>Adicionar ONG</span>
+        </a>
+
+    </nav>
+
+</aside>
+
 
     <!-- MODAL BOAS VINDAS  -->
 
@@ -80,253 +132,463 @@
 
     <main>
 
+        <!-- MAIN AQUI PABLO  -->
 
-		<div class="barra-cinza"> </div>
 
-		<div class="layout-principal">
+		<div class="layout-principal">	
 
-			<div class="coluna-esquerda">
-				<div class="barra-pesquisa">
+            	<div class="filtro-container">
 
-					<i class="bi bi-search" style="font-size: 1.5rem" icone-busca></i>
+                <button class="botao-filtrar" id="tag-menu">
+                <i class="bi bi-funnel-fill"></i>
+                Filtrar
+                </button>
 
-					<input type="text" placeholder="Pesquise o nome da ONG" id="ong-pesquisa-nome" />
+                <div class="menu-filtro" id="menu-filtro">
 
-					<!-- FILTRO CATEGORIA -->
-					<div class="filtro-container">
+                    <div class="tag-button" data-tag="todas">
+                    <i class="bi bi-grid-fill"></i>
+                    Todas
 
-						<button class="botao-filtrar" id="tag-menu">
+                    </div>
 
-							<i class="bi bi-funnel-fill" style="font-size: 1.5rem"></i>
+                    <div class="tag-button" data-tag="acolhimento">
+                    <i class="bi bi-house-heart-fill"></i>
+                    Acolhimento
+                    </div>
 
-							Filtrar
+                    <div class="tag-button" data-tag="animais">
+                    <i class="bi bi-heart-pulse-fill"></i>
+                    Animais
+                    </div>
 
-						</button>
+                    <div class="tag-button" data-tag="comunidade">
+                    <i class="bi bi-people-fill"></i>
+                    Comunidade
+                    </div>
 
-						<div class="menu-filtro" id="menu-filtro">
+                    <div class="tag-button" data-tag="criancas">
+                    <i class="bi bi-emoji-smile-fill"></i>
+                    Crianças
+                    </div>
 
-							<div class="tag-button" data-tag="todas">
-								Todas
-							</div>
+                    <div class="tag-button" data-tag="desenvolvimento">
+                    <i class="bi bi-tree-fill"></i>
+                    Desenvolvimento
+                    </div>
 
-							<div class="tag-button" data-tag="acolhimento">
-								🤝 Acolhimento
-							</div>
+                    <div class="tag-button" data-tag="desenvolvimentoSocial">
+                    <i class="bi bi-globe-americas"></i>
+                    Desenvolvimento Social
+                    </div>
 
-							<div class="tag-button" data-tag="animais">
-								🐾 Animais
-							</div>
+                    <div class="tag-button" data-tag="deficientes">
+                     <i class="bi bi-universal-access"></i>
+                    Pessoas com Deficiência
+                     </div>
 
-							<div class="tag-button" data-tag="comunidade">
-								🏘️ Comunidade
-							</div>
+                    <div class="tag-button" data-tag="mulheres">
+                      <i class="bi bi-gender-female"></i>
+                      Mulheres
+                     </div>
 
-							<div class="tag-button" data-tag="criancas">
-								🧒 Crianças
-							</div>
+                </div>
 
-							<div class="tag-button" data-tag="desenvolvimento">
-								🚀 Desenvolvimento Pessoal
-							</div>
+                <button class="botao-seta" id="seta-filtro">
+                <i class="bi bi-chevron-right"></i>
+                </button>
 
-							<div class="tag-button" data-tag="desenvolvimentoSocial">
-								🌍 Desenvolvimento Social
-							</div>
+            </div>
 
-							<div class="tag-button" data-tag="deficientes">
-								♿ Pessoas com Deficiência
-							</div>
+          <!-- LISTAGEM AQUI PABLOOOO - -->
 
-							<div class="tag-button" data-tag="mulheres">
-								👩 Mulheres
-							</div>
+          <div class="listagem-ongs">
 
-						</div>
 
-					</div>
+            <!-- CARD 1 -->
+                <div class="cartao-ong" id="ong-cartao1" onclick="abrirModalOng(1)">
 
+                    <img
+                    class="imagem-ong"
+                
+                    >
 
-					<button class="botao-localizacao" onclick="ativarLocalizacao()">
+                    <div class="info-ong">
 
-						<i class="bi bi-geo-alt-fill" style="font-size: 1.5rem;"></i>
+                    <div class="desc-center">
+                        <div class="nome-ong">Cachorros carentes</div>
 
-						<a href="#">Ative a sua localização</a>
-					</button>
-				</div>
+                        <div class="avaliacao-ong">
+                        <i class="bi bi-star-fill"></i>
+                    </div>
 
-				<!-- LISTAGEM AQUI PABLOOOO -->
+                <!-- Necessário para o modal -->
+                    <div class="endereco-ong"></div>
+                    
+                    </div>
 
-        <div class="coluna-esquerda">
+                    <div class="desc-media">
+                    <div class="media-ong">
+                    <a href="#" class="etiqueta">
+                        <i class="bi bi-instagram"></i> Instagram
+                    </a>
 
-					<div class="cartao-ong" id="ong-cartao1">
+                    <a href="#" class="etiqueta">
+                        <i class="bi bi-whatsapp"></i> WhatsApp
+                    </a>
 
-						<div class="imagem-ong" style="background:#e8eef5;"></div>
-						<div class="info-ong">
+                    <a href="#" class="etiqueta">
+                        <i class="bi bi-globe"></i> Website
+                    </a>
+                    </div>
+                    </div>
 
-							<div class="desc-left">
-								<div class="nome-ong">Cachorros carentes</div>
+                    <div class="desc-etiqueta">
+                    <div class="etiquetas-ong">
+                    <span class="etiqueta">
+                        <i class="bi bi-paw-fill"></i> Animais
+                    </span>
 
-								<div class="endereco-ong">
+                    <span class="etiqueta">
+                        <i class="bi bi-hand-thumbs-up-fill"></i> Voluntário
+                    </span>
 
-									<i class="bi bi-geo-alt-fill" style="font-size:13px; color:#4a90e2;"></i>
+                    <span class="etiqueta">
+                        <i class="bi bi-cash-coin"></i> Doação
+                    </span>
+                    </div>
+                    </div>
 
-									São Paulo, SP, Rua Doutor Joviano Pacheco de Aguirre, 255
-								</div>
+             </div>
 
-							</div>
+        <button class="botao-acessar" id="ong-button1">
+        
+        </button>
 
-							<div class="desc-right">
-								<div class="etiquetas-ong">
-									<span class="etiqueta bi bi-heart-pulse-fill"> Animais</span>
-								</div>
-							</div>
+    </div>
+
 
+       <!-- CARD 2 -->
+    <div class="cartao-ong" id="ong-cartao2">
+
+        <img
+            class="imagem-ong"
+        >
+
+        <div class="info-ong">
+
+            <div class="desc-center">
+                <div class="nome-ong">Cachorros carentes</div>
+
+                <div class="avaliacao-ong">
+                    <i class="bi bi-star-fill"></i>
+                    <span>4,7</span>
+                </div>
+
+                <!-- Necessário para o modal -->
+                <div class="endereco-ong"></div>
+            </div>
+
+            <div class="desc-media">
+                <div class="media-ong">
+                    <a href="#" class="etiqueta">
+                        <i class="bi bi-instagram"></i> Instagram
+                    </a>
 
-						</div>
+                    <a href="#" class="etiqueta">
+                        <i class="bi bi-whatsapp"></i> WhatsApp
+                    </a>
+
+                    <a href="#" class="etiqueta">
+                        <i class="bi bi-globe"></i> Website
+                    </a>
+                </div>
+            </div>
 
-						<button class="botao-acessar" type="button" id="ong-button1">
+            <div class="desc-etiqueta">
+                <div class="etiquetas-ong">
+                    <span class="etiqueta">
+                        <i class="bi bi-gender-female"></i> Mulheres
+                    </span>
 
-							<i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
+                    <span class="etiqueta">
+                        <i class="bi bi-hand-thumbs-up-fill"></i> Voluntário
+                    </span>
 
-							Acessar
-						</button>
-					</div>
+                    <span class="etiqueta">
+                        <i class="bi bi-cash-coin"></i> Doação
+                    </span>
+                </div>
+            </div>
 
-					<div class="cartao-ong" id="ong-cartao2">
-						<div class="imagem-ong" style="background:#e8eef5;"></div>
+        </div>
+
+        <button class="botao-acessar" type="button" id="ong-button2">
+            Acessar
+        </button>
+
+    </div>
+
+       <!-- CARD 2 -->
+    <div class="cartao-ong" id="ong-cartao3">
+
+        <img
+            class="imagem-ong"
+    
+        >
+
+        <div class="info-ong">
+
+            <div class="desc-center">
+                <div class="nome-ong">Cachorros carentes</div>
+
+                <div class="avaliacao-ong">
+                    <i class="bi bi-star-fill"></i>
+                    <span>4,7</span>
+                </div>
+
+                <!-- Necessário para o modal -->
+                <div class="endereco-ong"></div>
+            </div>
+
+            <div class="desc-media">
+                <div class="media-ong">
+                    <a href="#" class="etiqueta">
+                        <i class="bi bi-instagram"></i> Instagram
+                    </a>
 
-						<div class="info-ong">
+                    <a href="#" class="etiqueta">
+                        <i class="bi bi-whatsapp"></i> WhatsApp
+                    </a>
+
+                    <a href="#" class="etiqueta">
+                        <i class="bi bi-globe"></i> Website
+                    </a>
+                </div>
+            </div>
 
-							<div class="desc-left">
-								<div class="nome-ong">Cachorros carentes</div>
+            <div class="desc-etiqueta">
+                <div class="etiquetas-ong">
+                    <span class="etiqueta">
+                        <i class="bi bi-gender-female"></i> Mulheres
+                    </span>
 
-								<div class="endereco-ong">
+                    <span class="etiqueta">
+                        <i class="bi bi-hand-thumbs-up-fill"></i> Voluntário
+                    </span>
 
-									<i class="bi bi-geo-alt-fill" style="font-size:13px; color:#4a90e2;"></i>
+                    <span class="etiqueta">
+                        <i class="bi bi-cash-coin"></i> Doação
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="botao-acessar" type="button" id="ong-button3">
+            Acessar
+        </button>
+
+    </div>
+
+       <!-- CARD 4-->
+    <div class="cartao-ong" id="ong-cartao4">
+
+        <img
+            class="imagem-ong"
+         
+        >
+
+        <div class="info-ong">
+
+            <div class="desc-center">
+                <div class="nome-ong">Cachorros carentes</div>
+
+                <div class="avaliacao-ong">
+                    <i class="bi bi-star-fill"></i>
+                    <span>4,7</span>
+                </div>
+
+                <!-- Necessário para o modal -->
+                <div class="endereco-ong"></div>
+            </div>
+
+            <div class="desc-media">
+                <div class="media-ong">
+                    <a href="#" class="etiqueta">
+                        <i class="bi bi-instagram"></i> Instagram
+                    </a>
+
+                    <a href="#" class="etiqueta">
+                        <i class="bi bi-whatsapp"></i> WhatsApp
+                    </a>
 
-									São Paulo, SP, Rua Doutor Joviano Pacheco de Aguirre, 255
-								</div>
+                    <a href="#" class="etiqueta">
+                        <i class="bi bi-globe"></i> Website
+                    </a>
+                </div>
+            </div>
 
-							</div>
+            <div class="desc-etiqueta">
+                <div class="etiquetas-ong">
+                    <span class="etiqueta">
+                        <i class="bi bi-gender-female"></i> Mulheres
+                    </span>
 
-							<div class="desc-right">
-								<div class="etiquetas-ong">
-									<span class="etiqueta bi bi-gender-female"> Mulheres </span>
-								</div>
-							</div>
+                    <span class="etiqueta">
+                        <i class="bi bi-hand-thumbs-up-fill"></i> Voluntário
+                    </span>
 
+                    <span class="etiqueta">
+                        <i class="bi bi-cash-coin"></i> Doação
+                    </span>
+                </div>
+            </div>
 
-						</div>
+        </div>
 
-						<button class="botao-acessar" type="button" id="ong-button2">
+        <button class="botao-acessar" type="button" id="ong-button4">
+            Acessar
+        </button>
 
-							<i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
+    </div>
 
-							Acessar
-						</button>
-					</div>
+       <!-- CARD 5 -->
+    <div class="cartao-ong" id="ong-cartao5">
 
-					<div class="cartao-ong" id="ong-cartao3">
-						<div class="imagem-ong" style="background:#e8eef5;"></div>
+        <img
+            class="imagem-ong"
+        
+        >
 
-						<div class="info-ong">
+        <div class="info-ong">
 
-							<div class="desc-left">
-								<div class="nome-ong">Cachorros carentes</div>
+            <div class="desc-center">
+                <div class="nome-ong">Cachorros carentes</div>
 
-								<div class="endereco-ong">
+                <div class="avaliacao-ong">
+                    <i class="bi bi-star-fill"></i>
+                    <span>4,7</span>
+                </div>
 
-									<i class="bi bi-geo-alt-fill" style="font-size:13px; color:#4a90e2;"></i>
+                <!-- Necessário para o modal -->
+                <div class="endereco-ong"></div>
+            </div>
+
+            <div class="desc-media">
+                <div class="media-ong">
+                    <a href="#" class="etiqueta">
+                        <i class="bi bi-instagram"></i> Instagram
+                    </a>
 
-									São Paulo, SP, Rua Doutor Joviano Pacheco de Aguirre, 255
-								</div>
+                    <a href="#" class="etiqueta">
+                        <i class="bi bi-whatsapp"></i> WhatsApp
+                    </a>
 
-							</div>
+                    <a href="#" class="etiqueta">
+                        <i class="bi bi-globe"></i> Website
+                    </a>
+                </div>
+            </div>
 
-							<div class="desc-right">
-								<div class="etiquetas-ong">
-									<span class="etiqueta bi bi-people-fill"> Comunidade </span>
-								</div>
-							</div>
+            <div class="desc-etiqueta">
+                <div class="etiquetas-ong">
+                    <span class="etiqueta">
+                        <i class="bi bi-gender-female"></i> Mulheres
+                    </span>
 
+                    <span class="etiqueta">
+                        <i class="bi bi-hand-thumbs-up-fill"></i> Voluntário
+                    </span>
 
-						</div>
+                    <span class="etiqueta">
+                        <i class="bi bi-cash-coin"></i> Doação
+                    </span>
+                </div>
+            </div>
 
-						<button class="botao-acessar" type="button" id="ong-button3">
+        </div>
 
-							<i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
+        
 
-							Acessar
-						</button>
-					</div>
+        
 
-					<div class="cartao-ong" id="ong-cartao4">
-						<div class="imagem-ong" style="background:#e8eef5;"></div>
+        <button class="botao-acessar" type="button" id="ong-button5">
+            Acessar
+        </button>
 
-						<div class="info-ong">
+    </div>
 
-							<div class="desc-left">
-								<div class="nome-ong">Cachorros carentes</div>
 
-								<div class="endereco-ong">
+    <!-- CARD 6  -->
 
-									<i class="bi bi-geo-alt-fill" style="font-size:13px; color:#4a90e2;"></i>
+    <div class="cartao-ong" id="ong-cartao6">
 
-									São Paulo, SP, Rua Doutor Joviano Pacheco de Aguirre, 255
-								</div>
+        <img
+            class="imagem-ong"
+        
+        >
 
-							</div>
+        <div class="info-ong">
 
-							<div class="desc-right">
-								<div class="etiquetas-ong">
-									<span class="etiqueta bi bi-heart-fill">Animais</span>
-								</div>
-							</div>
+            <div class="desc-center">
+                <div class="nome-ong">Cachorros carentes</div>
 
+                <div class="avaliacao-ong">
+                    <i class="bi bi-star-fill"></i>
+                    <span>4,7</span>
+                </div>
 
-						</div>
+                <!-- Necessário para o modal -->
+                <div class="endereco-ong"></div>
+            </div>
 
-						<button class="botao-acessar" type="button" id="ong-button4">
+            <div class="desc-media">
+                <div class="media-ong">
+                    <a href="#" class="etiqueta">
+                        <i class="bi bi-instagram"></i> Instagram
+                    </a>
 
-							<i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
+                    <a href="#" class="etiqueta">
+                        <i class="bi bi-whatsapp"></i> WhatsApp
+                    </a>
 
-							Acessar
-						</button>
-					</div>
+                    <a href="#" class="etiqueta">
+                        <i class="bi bi-globe"></i> Website
+                    </a>
+                </div>
+            </div>
 
-					<div class="cartao-ong" id="ong-cartao5">
-						<div class="imagem-ong" style="background:#e8eef5;"></div>
+            <div class="desc-etiqueta">
+                <div class="etiquetas-ong">
+                    <span class="etiqueta">
+                        <i class="bi bi-gender-female"></i> Mulheres
+                    </span>
 
-						<div class="info-ong">
+                    <span class="etiqueta">
+                        <i class="bi bi-hand-thumbs-up-fill"></i> Voluntário
+                    </span>
 
-							<div class="desc-left">
-								<div class="nome-ong">Chachorros carente</div>
+                    <span class="etiqueta">
+                        <i class="bi bi-cash-coin"></i> Doação
+                    </span>
+                </div>
+            </div>
 
-								<div class="endereco-ong">
+        </div>
 
-									<i class="bi bi-geo-alt-fill" style="font-size:13px; color:#4a90e2;"></i>
+        
 
-									São Paulo, SP, Rua Doutor Joviano Pacheco de Aguirre, 255
-								</div>
+        
 
-							</div>
+        <button class="botao-acessar" type="button" id="ong-button6">
+            Acessar
+        </button>
 
-							<div class="desc-right">
-								<div class="etiquetas-ong">
-									<span class="etiqueta bi bi-heart-fill
-        ">Acolhimento</span>
-								</div>
-							</div>
+    </div>
 
 
-						</div>
-
-						<button class="botao-acessar" type="button" id="ong-button5">
-							<i class="bi bi-arrow-right-circle-fill" style="font-size:16px; color:white; display:block;"></i>
-							Acessar
-						</button>
-					</div>
-
+</div>
 					<div class="paginacao">
 						<a class="botao-nav" id="previusPageButton">&#8249;</a>
 						<a class="page-button" id="pageButton-1">1</a>
@@ -343,47 +605,26 @@
 
 			</div>
 
+            
 
-            <div class="coluna-direita">
+	    </div>
 
-                <div class="caixa-info">
-                    <div class="caixa-info-esquerda">
-                        <strong>QUEM SOMOS NÓS?</strong>
-                        <a href="#sobre">Clique aqui</a>
-                    </div>
+			
+				
+            
+        <!-- LISTAGEM AQUI PABLOOOO -
 
-                </div>
 
-                <div class="ativar-mapa">
-                    <span>Visualizar mapa</span>
-                    <label class="interruptor">
-                        <input type="checkbox" id="interruptor-mapa" onchange="toggleMap()" />
-                        <span class="deslizador"></span>
-                    </label>
-                </div>
 
-                <div class="area-mapa" id="area-mapa">
+        
+                        <!-- SENDO UTILIZADO PARA ABRIR MODAL, NAO IREI REMOVER. -->
+                        <input id="interruptor-mapa"/> -->
 
-                    <div id="mapa-leaflet"></div>
-
-                    <div class="placeholder-mapa" id="placeholder-mapa">
-
-                        <div class="icone-mapa-desativado">
-                            <svg width="56" height="56" fill="none" stroke="#999" stroke-width="2.5" viewBox="0 0 24 24">
-                                <circle cx="12" cy="10" r="3" />
-                                <path d="M12 2a8 8 0 0 1 8 8c0 5.25-8 14-8 14S4 15.25 4 10a8 8 0 0 1 8-8z" />
-                                <line x1="3" y1="3" x2="21" y2="21" stroke="#bbb" stroke-width="2.5" />
-                            </svg>
-                        </div>
-
-                        <div class="texto-mapa-desativado" id="texto-status-mapa">MAPA DESATIVADO</div>
-                    </div>
-
-                </div>
+                
 
             </div>
 
-        </div>
+        
 
     </main>
 
@@ -599,7 +840,7 @@
     </div>
 
     <!-- SEGUNDA PÁGINA - SOBRE -->
-    <article>
+    <!-- <article>
 
         <section class="container" id="sobre">
 
@@ -696,11 +937,11 @@
 
     </article>
 
-    <footer>
-
+    <footer> -->
+<!-- 
         <p> <i class="bi bi-c-circle"></i>
             2026 SP ONGs, direitos reservados FATEC da Zona Leste.</p>
-    </footer>
+    </footer> -->
 
 	<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 	<script type="module" src="src/main.js"></script>

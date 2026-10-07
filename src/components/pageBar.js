@@ -100,10 +100,12 @@ function changePage(pageNumber) {
 			inFilter[initialIndex + 1],
 			inFilter[initialIndex + 2],
 			inFilter[initialIndex + 3],
-			inFilter[initialIndex + 4]
+			inFilter[initialIndex + 4], 
+						inFilter[initialIndex + 5]
+
 		);
 	} else {
-		updateCurrentOngs(initialIndex, initialIndex + 1, initialIndex + 2, initialIndex + 3, initialIndex + 4);
+		updateCurrentOngs(initialIndex, initialIndex + 1, initialIndex + 2, initialIndex + 3, initialIndex + 4, initialIndex + 5);
 	}
 
 	currentPage = pageNumber;
@@ -189,3 +191,17 @@ export function Initialize() {
 	document.getElementById("previusPageButton").addEventListener("click", changePagePrevius)
 	document.getElementById("nextPageButton").addEventListener("click", changePageNext)
 }
+
+// PAGINAÇÃO DOS FILTROS
+
+const menuFiltro = document.getElementById("menu-filtro");
+const setaFiltro = document.getElementById("seta-filtro");
+
+setaFiltro.addEventListener("click", function() {
+
+    menuFiltro.scrollBy({
+        left: 200,
+        behavior: "smooth"
+    });
+
+});

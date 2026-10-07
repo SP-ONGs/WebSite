@@ -16,7 +16,10 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -24,7 +27,13 @@ body {
   background: var(--background1); 
   color: var(--cor-texto);
   min-height: 100vh;
-  padding-top: 145px; 
+  padding-top: 145px;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
 }
 
 /* MODAL BOAS VINDAS */
@@ -37,6 +46,7 @@ body {
     align-items: center;
     justify-content: center;
     z-index: 2000;
+    padding: 20px;
 }
 
 .modal-welcome.ativo { 
@@ -52,9 +62,9 @@ body {
     height: min(80vh, 600px);
     background: #fff;
     border-radius: 16px;
-    margin-top: 40px;
     text-align: center;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
 }
 
 .welcome-left {
@@ -64,8 +74,6 @@ body {
    width: 50%;
    height: 100%;
    padding: 10px; 
-   
-
 }
 
 .header-welcome {
@@ -103,7 +111,6 @@ body {
     line-height: 1.4;
     margin: 0 6rem 0;
     text-align: justify;
-
 }
 
 .orgs-cps{
@@ -131,8 +138,8 @@ body {
     background: none;
     font-size: 5rem;
     color: #fff;
-
     cursor: pointer;
+    z-index: 10;
 }
 
 .botao-fechar:hover {
@@ -149,90 +156,55 @@ body {
 }
 
 
-/* HEADER FIXA AQUI PABLO */
+/* HEADER FIXA */
+
 header {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 135px;
+  height: 100px;
   background-color: var(--background1);
-  padding: 25px 50px 10px 65px;
+  padding: 25px 20px 0 20px;
   z-index: 1000;
   border-bottom: 2px solid white;
+  display: flex; 
+  flex-direction: row; 
+  align-items: center;
 }
 
 .logo-area {
   display: flex;
   align-items: center;
+  width: 30%;
+  max-width: 40%; 
   gap: 20px;
 }
 
 .icone-logo {
-  width: 90px;
-  height: 90px;
+  width: 70px;
+  height: 70px;
 }
 
 header h1 {
-  font-size: 6rem;
-  font-weight: 800;
+  font-size: 4rem;
+  font-weight: 800; 
+  width: 100%; 
   color: var(--cor-primaria);
-  letter-spacing: -2px;
+  letter-spacing: -1px;
   line-height: 1;
-}
-
-/* main AQUI PSBLO */
-
-main{
- background-color: var(--background2);
- min-height: 100vh;
-
-}
-
-.layout-principal {
-  display: flex;
-  align-items: flex-start;
-  gap: 28px;
-  padding: 0 45px;
-  max-width: 100%;
-  margin: 0 auto;
-}
-
-.coluna-esquerda {
-  flex: 1;
-  min-width: 0;
-  
-}
-
-.coluna-direita {
-  width: 480px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.barra-cinza {
-  width: 67%;
-  height: 8px;
-  background-color: #d9d9d9;
-  margin: 0 0 24px 0;
-  margin-left: 45px;
-  border-radius: 0;
 }
 
 .barra-pesquisa {
   display: flex;
   align-items: center;
-  width: 70%;
-  max-width: 100%;
+  width: 30%;
   height: 44px;
-  gap: 40px;
+  gap: 20px;
   border: 1.5px solid var(--borda);
   border-radius: 8px;
   padding: 0 12px;
-  margin-bottom: 18px;
 }
-
 
 .barra-pesquisa input {
   flex: 0.6;
@@ -244,206 +216,316 @@ main{
   padding: 0 8px;
 }
 
-.botao-filtrar {
+.barra-cinza {
+  width: 100%;
+  height: 8px;
+  background-color: #d9d9d9;
+  margin:-20px 0 20px 0; 
+}
+
+/* MENU LATERAL aAQUI PABLOO */
+
+.menu-lateral {
+    width: 19%;
+    height: 100vh;
+    height: 100dvh;
+    background: #f9f9f9;
+    padding: 0 15px;
+    position: fixed;
+    left: 0;
+    top: 1;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 3px 0 10px rgba(0, 0, 0, 0.15);
+    z-index: 998;
+    overflow-y: auto;
+}
+
+.menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: transparent;
+    padding-top: 15px;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 13px 15px;
+    color: #000;
+    font-weight: 500; 
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.4s;
+    font-size: 1.5rem; 
+    letter-spacing: 0.5px;
+}
+
+.menu-link i {
+    font-size: 2.5rem;
+    color: #000; 
+}
+
+.menu-link:hover {
+    background: rgba(0, 123, 188, 0.1);
+}
+
+
+/* MAIN */
+
+main{
+  min-height: 100vh;
+  width: 100%;
+}
+
+.layout-principal {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--cor-icones);
-  margin-left: auto;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--cor-icones);
-  font-size: 1.2rem;
-  font-weight: 500;
-  
+  flex-wrap: wrap;
+  max-width: 100%;
+  height: 80vh; 
+  margin: 0 7% 0 20%; 
+  padding: 0 10px 0 10px; 
 }
 
 .filtro-container {
-  position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 45px;
+    background: white;
+    gap: 10px;
+}
+
+.filtro-container .botao-filtrar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #111;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 400;
+    font-style: italic;
+    flex-shrink: 0;
+}
+
+.filtro-container .botao-filtrar i {
+    font-size: 1.5rem !important;
 }
 
 .menu-filtro {
-  position: absolute;
-  top: 120%;
-  right: 0;
-  width: 180px;
-  background: white;
-  border: 1px solid #dde6f0;
-  border-radius: 10px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-  overflow: hidden;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-8px);
-  transition: all 0.2s ease;
-  z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex: 1;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    padding-bottom: 5px;
 }
 
-.menu-filtro.ativo {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+.menu-filtro .tag-button {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    padding: 3px 10px;
+    gap: 8px; 
+    background: #f5f5f5;
+    border: 1px solid #aaa;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    transition: 0.2s;
 }
 
-.menu-filtro div {
-  padding: 12px 14px; 
-  cursor: pointer;
-  font-size: 0.92rem;
-  transition: background 0.2s;
+.menu-filtro .tag-button:hover {
+    background: #e8e8e8;
 }
 
-.menu-filtro div:hover {
-  background: #f4f8fc;
+.botao-seta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 50%;
+    background: #000;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
 }
 
-.botao-localizacao {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: var(--cor-icones);
-  font-size: 1.47rem;
-  font-weight: 500;
+.botao-seta:hover {
+    background: #333;
 }
 
-.botao-localizacao a {
-  color: #1a8fd1;
-  font-size: 1.2rem;
 
-}
-
-.botao-localizacao a:hover { color: #1261a0; }
-
-/* LISTAGEM DE ONGS  */
-
-.listagem {
-    min-height: 60vh;
+/* GRADE DE ONGS */
+.listagem-ongs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-content: start;
+    align-items: start; 
+    column-gap: 8px;
+    row-gap: 30px;
+    height: 75vh;
+    overflow: hidden;
+    width: 100%;
 }
 
 .cartao-ong {
-  background: var(--background1);
-  border: 1.5px solid var(--borda);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 16px;
-  margin-bottom: 10px;
-  transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
-}
-.cartao-ong:hover {
-  box-shadow: 0 4px 18px rgba(26,143,209,0.10);
-  border-color: var(--cor-primaria);
-  transform: translateY(-2px);
+    min-width: 0;
+    border: 1.5px solid var(--borda);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 92%;
+    height: 34vh;
+    gap: 0px;
+    padding: 3px;
+    margin: 0 0 0 10px;
+    transition: all 0.2s;
 }
 
+.cartao-ong:hover {
+    box-shadow: 0 3px 10px rgba(26, 143, 209, 0.15);
+    border-color: var(--cor-primaria);
+    transform: translateY(-3px);}
+
 .imagem-ong {
-  width: 70px;
-  height: 70px;
-  border-radius: 6px;
-  object-fit: cover;
-  flex-shrink: 0;
+    width: 100%;
+    height: 26vh;
+    border: solid 4px #000;
+    border-radius: 10px;
+    object-fit: contain;
+    overflow: hidden;
+    flex-shrink: 0;
+    transition: color 1.2s;
+
 }
 
 .info-ong {
-  display: flex;
-  flex: 1;
-  gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
 }
 
-.desc-right {
-  display: flex;
-  align-items: end;
+/* teste hover */
+
+.info-ong:hover{
+
+     background-color: rgba(214, 221, 226, 0.875); 
+     transition: color 1.2s;
+
 }
 
+.desc-center {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 0;
+}
 
 .nome-ong {
-  font-size: 1.80rem;
-  font-weight: 700;
-  color: var(--cor-texto);
-  margin-bottom: 3px;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--cor-texto);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
-.endereco-ong {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 1.1rem;
-  color: var(--cor-texto2);
-  margin-bottom: 7px;
+.desc-center .avaliacao-ong {
+    font-size: 1.0rem;
+    font-weight: 600;
+    margin: 0 5px 0 0;
+    white-space: nowrap;
+}
+
+.desc-media,
+.media-ong {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    flex-wrap: wrap;
+}
+
+.media-ong .etiqueta {
+    background: #168dcc;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 2px 5px;
+    font-size: 1rem;
+    text-decoration: none;
 }
 
 .etiquetas-ong {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3px;
 }
 
-.etiqueta {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  background: #e8eef5;
-  border: 1px solid #c8d6e5;
-  border-radius: 20px;
-  padding: 3px 10px;
-  font-size: 0.78rem;
-  color: #444;
+.etiquetas-ong .etiqueta {
+    padding: 2px 5px;
+    font-size: 1rem;
+    border: solid 1px #000;
+    border-radius: 10px;
+}
+
+.endereco-ong {
+    display: none;
 }
 
 .botao-acessar {
-  background: #1a8fd1;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 20px;
-  font-size: 0.97rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center; 
-  gap: 6px;
-  white-space: nowrap;
-  transition: background 0.2s, transform 0.2s;
-  flex-shrink: 0;
+    display: none;
 }
-.botao-acessar:hover { background: #214f74; transform: translateY(-2px);}
 
 .paginacao {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 12px;
-  font-size: 0.97rem;
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    margin-top: 12px;
+    font-size: 0.97rem;
+    flex-wrap: wrap;
 }
 
-.paginacao a, .paginacao span {
+.paginacao a,
+.paginacao span {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 14px;
   min-width: 40px;
   height: 40px;
+  padding: 8px 14px;
   border-radius: 8px;
-  cursor: pointer;
-  text-decoration: none;
   color: var(--cor-primaria);
-  transition:all 0.2s;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .paginacao a:hover {
   transform: translateY(-4px);
 }
 
-.paginacao .ativo { 
-  font-weight: 700; 
-  color: white; 
-  background: linear-gradient(135deg, var(--cor-primaria), #4db8ff);
-  border-radius: 50%;
+.paginacao .ativo {
   padding: 6px 12px;
+  border-radius: 50%;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, var(--cor-primaria), #4db8ff);
 }
 
 .paginacao .botao-nav {
@@ -452,141 +534,8 @@ main{
   font-size: 2rem;
 }
 
-/* MAPA    */
 
-
-.caixa-info {
-  background: var(--cor-primaria);
-  border-radius: 8px 8px 0 0;
-  padding: 20px 12px 6px; 
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-}
-
-.caixa-info-esquerda {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center ;
-  gap: 10px;
-  width: 100%;
-}
-
-.caixa-info strong {
-  color: #f0eeee;
-  font-size: 1.6rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-
-.caixa-info a {
-  color: #fff;
-  font-size: 0.9rem;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.ativar-mapa {
-  background: #007dbc;
-  padding: 0px 16px 18px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.ativar-mapa span {
-  color: #fff;
-  font-size: 0.97rem;
-  font-weight: 300;
-}
-
-.interruptor {
-  position: relative;
-  display: inline-block;
-  width: 44px;
-  height: 24px;
-  cursor: pointer;
-}
-.interruptor input { display: none; }
-.deslizador {
-  position: absolute;
-  inset: 0;
-  background: #a0cde8;
-  border-radius: 24px;
-  transition: background 0.2s;
-}
-.deslizador::before {
-  content: '';
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  left: 3px;
-  top: 3px;
-  background: #fff;
-  border-radius: 50%;
-  transition: transform 0.2s;
-}
-
-.interruptor input:checked + .deslizador { background: #0a6ea8; }
-.interruptor input:checked + .deslizador::before { transform: translateX(20px); }
-
-.area-mapa {
-  background-color: #cddff1;
-  background-image: 
-  linear-gradient(rgba(205, 223, 241, 0.55), rgba(205, 223, 241, 0.55)),
-  url("imagens/84425e6cdccb6087df60120b640a61dbba4436a4.png");
-  background-repeat: repeat;
-  background-size: 200px 200px;;
-  border-radius: 0 0 8px 8px;
-  min-height: 40vh;
-  height: 50vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 14px;
-  color: #555;
-  margin-top: 20px;
-  position: relative;
-  overflow: hidden;
-}
-
-.texto-mapa-desativado {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: #666;
-  letter-spacing: 1px;
-  text-align: center;
-}
-
-.icone-mapa-desativado {
-  font-size: 2.8rem;
-  color: #999;
-  opacity: 0.7;
-}
-
-#mapa-leaflet {
-  width: 100%;
-  height: 100%;
-  display: none;
-  z-index: 1;
-}
-
-.placeholder-mapa {
-  position: absolute;
-  inset: 0;
-   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  gap: 14px;
-  z-index: 2;
-}
-
-
-/* QUEM SOMOS NÓS AQUI PABLO */
+/* QUEM SOMOS NÓS */
 
 article {
   min-height: 140vh;
@@ -621,7 +570,6 @@ article {
     margin-bottom: 20px;
     text-transform: uppercase;
 }
-
 
 .texto p {
     font-size: 22px;
@@ -733,7 +681,7 @@ article {
     font-weight: 500;
 }
 
-/* FOOTER  */
+/* FOOTER */
 
 footer {
   min-height: 5vh;
@@ -768,7 +716,7 @@ footer p {
   justify-content: center;
   padding: 20px;
   z-index: 3000;
-
+  overflow-y: auto;
 }
 
 .modal-ong.ativo {
@@ -778,18 +726,17 @@ footer p {
 .modal-conteudo {
   position: relative;
   width: min(95%, 1600px);
-  height: min(88vh, 750vh);
+  height: min(88vh, 750px);
   max-height: 90vh;
   border-radius: 20px;
   box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
   display: flex;
   background-color: transparent;
   padding: 10px 6px;
-  gap: 30px; 
-
+  gap: 30px;
 }
 
-/* LADO ESQUEROD MODAL =   */
+/* LADO ESQUERDO MODAL */
 
 .modalLeftSide{
   width: 55%;
@@ -799,7 +746,6 @@ footer p {
   flex-direction: column; 
   flex-shrink: 0; 
   overflow: hidden;
-
 }
 
 
@@ -820,7 +766,6 @@ footer p {
   transition: transform 0.2s, background 0.2s;
   z-index: 10;
   letter-spacing: 1.5px;
-
 }
 
 .fechar-modal:hover {
@@ -829,7 +774,7 @@ footer p {
   color: white;
 }
 
-/* TOPO MODAL  */
+/* TOPO MODAL */
 
 .modal-topo {
   display: flex;
@@ -842,7 +787,6 @@ footer p {
   border-radius: 8px; 
   box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
   flex-shrink: 0;
-
 }
 
 .modal-imagem {
@@ -951,6 +895,7 @@ footer p {
   margin: 0;
   border-bottom: 3px solid #1a1a2e;
   padding-bottom: 2px;
+  display: inline-block;
 }
 
 .redesSociais{
@@ -959,6 +904,7 @@ footer p {
   justify-content: space-around; 
   gap: 5px; 
   margin-bottom: 6px;
+  margin-top: 10px;
 }
 
 .modal-rede-card {
@@ -998,27 +944,7 @@ footer p {
   background: #2d9cdb;
 }
 
-@media (max-width: 700px) {
-  .modal-topo {
-    flex-direction: column;
-    padding-right: 46px;
-  }
-
-  .modal-info h2 {
-    font-size: 32px;
-  }
-
-  .modal-endereco {
-    align-items: flex-start;
-    font-size: 16px;
-  }
-
-  .redes-container {
-    justify-content: center;
-  }
-}
-
-		/* <!-- AVALIAÇÕES --> */
+/* AVALIAÇÕES */
 
 .avaliacoes-container{
   flex: 1 1 0;
@@ -1026,7 +952,7 @@ footer p {
   gap: 16px;
   min-height: 0;
   margin-top: 0;
-  padding: 16px ;
+  padding: 16px;
   background-color: hsl(0, 0%, 100%);
   border: solid 1px transparent;
   border-radius: 16px; 
@@ -1034,7 +960,7 @@ footer p {
   overflow: hidden;
 }
 
-/* LADO ESQUERDO DAS AVALIAÇÕES AQUI  */
+/* LADO ESQUERDO DAS AVALIAÇÕES */
 
 .ratingsLeft {
     width: 40%;
@@ -1048,8 +974,6 @@ footer p {
     margin-bottom: 20px;
     font-size: 18px;
 }
-
-
 
 .avaliacaoMedia span:first-child {
   font-size: 34px;
@@ -1103,7 +1027,7 @@ footer p {
   transition: width 0.6s ease;
 }
 
-/* LADO DIREITO AVALIAÇÕES AQUI PABLO  */
+/* LADO DIREITO AVALIAÇÕES */
 
 .ratingsRight{
   width: 50%;
@@ -1122,7 +1046,6 @@ footer p {
   font-weight: 600;
   color: #1a1a2e;
   margin: 0 0 4px 0;
-
 }
 
 .avaliacoesRealizadas .avaliacao {
@@ -1140,7 +1063,6 @@ footer p {
   font-weight: 700;
 }
 
-
 .caixa-avaliacoes {
    flex: 1;
     width: 100%;
@@ -1149,8 +1071,8 @@ footer p {
     flex-direction: column;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     border-left: 2px solid #e0e0e0;
+    padding-left: 10px;
 }
-
 
 .caixa-avaliacoes h3 {
     margin-top: 0;
@@ -1185,7 +1107,10 @@ footer p {
     margin: 0;
     font-size: 16px;
     color: #333;
+    border: none;
+    padding: 0;
 }
+
 .avaliacao p {
     margin: 8px 0 0;
     font-size: 14px;
@@ -1197,24 +1122,21 @@ footer p {
     width: 20px;
 }
 
-
 .scroll-avaliacoes::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 10px;
 }
-
 
 .scroll-avaliacoes::-webkit-scrollbar-thumb {
     background: #bbb;
     border-radius: 10px;
 }
 
-
 .scroll-avaliacoes::-webkit-scrollbar-thumb:hover {
     background: #888;
 }
 
-/* LADO DIREITO MODAL   */
+/* LADO DIREITO MODAL */
 
 .modalRightSide {
     width: 40%;
@@ -1292,11 +1214,10 @@ footer p {
     flex-direction: column;
     align-items: center;
     gap: 5px;
-    padding: 16px ;
+    padding: 16px;
     border: solid 1px transparent;
     border-radius: 26px; 
     box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
-    
 }
 
 .info-Mapa {
@@ -1305,7 +1226,6 @@ footer p {
     display: grid; 
     grid-template-columns: auto 1fr;
     align-items: center;
-  
 }
 
 .search-icon {
@@ -1315,7 +1235,6 @@ footer p {
     color: #666;
     grid-row: span 2;
 }
-
 
 .info-Mapa h3 {
     margin: 0;
@@ -1353,3 +1272,927 @@ footer p {
     display: block;
 }
 
+
+/* ============================================================
+   MEDIA QUERIES PRO MOBILE PABLOOOO
+   ============================================================ */
+
+   /* ESPECIAL MINHA AQUI  */
+
+   @media (max-width: 1460px) {
+    .desc-etiqueta{
+      display: none; 
+    }
+  }
+/* ============================================
+   TABLET GRANDE (até 1200px)
+   ============================================ */
+@media (max-width: 1367px) {
+  body {
+    padding-top: 130px;
+  }
+
+  header {
+    height: 90px;
+    padding: 18px 15px 0 15px;
+    gap: 15px;
+  }
+
+  header h1 {
+    font-size: 3rem;
+  }
+
+  .icone-logo {
+    width: 55px;
+    height: 55px;
+  }
+
+  .barra-pesquisa {
+    width: 35%;
+    height: 40px;
+  }
+
+  .barra-pesquisa input {
+    font-size: 1rem;
+  }
+
+  .menu-lateral {
+    width: 22%;
+    padding: 0 10px;
+  }
+
+  .menu-link {
+    font-size: 1.2rem;
+    padding: 11px 12px;
+  }
+
+  .menu-link i {
+    font-size: 2rem;
+  }
+
+  .layout-principal {
+    margin: 0 3% 0 24%;
+  }
+
+  .listagem-ongs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cartao-ong {
+    width: 95%;
+    height: 32vh;
+    margin-left: 5px;
+  }
+
+  .desc-etiqueta{
+    display: none; 
+   }
+
+  /* Modal ONG */
+  .modal-conteudo {
+    flex-direction: column;
+    height: auto;
+    max-height: 95vh;
+    overflow-y: auto;
+    gap: 15px;
+  }
+
+  .modalLeftSide,
+  .modalRightSide {
+    width: 100%;
+    height: auto;
+  }
+
+  .modalRightSide {
+    height: auto;
+    padding: 0;
+  }
+
+  .header-Modal {
+    height: auto;
+    padding: 10px 0;
+  }
+
+  .titulo-Modal h1 {
+    font-size: 42px;
+  }
+
+  .titulo-Modal h3 {
+    font-size: 20px;
+  }
+
+  .view-Mapa {
+    max-height: none;
+    min-height: 300px;
+  }
+
+  .fechar-modal {
+    right: 20px;
+    top: 10px;
+    width: 100px;
+    height: 36px;
+    font-size: 18px;
+  }
+}
+
+
+/* ============================================
+   TABLET (até 992px)
+   ============================================ */
+@media (max-width: 992px) {
+  body {
+    padding-top: 120px;
+  }
+
+  header {
+    height: 80px;
+    padding: 15px 12px 0 12px;
+  }
+
+  header h1 {
+    font-size: 2.3rem;
+  }
+
+  .icone-logo {
+    width: 45px;
+    height: 45px;
+  }
+
+  .logo-area {
+    width: 30%;
+    gap: 12px;
+  }
+
+  .barra-pesquisa {
+    width: 40%;
+    height: 38px;
+    gap: 10px;
+  }
+
+  .menu-lateral {
+    width: 25%;
+  }
+
+  .menu-link {
+    font-size: 1.05rem;
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .menu-link i {
+    font-size: 1.7rem;
+  }
+
+  .layout-principal {
+    margin: 0 2% 0 26%;
+    padding: 0 5px;
+  }
+
+  .filtro-container {
+    height: auto;
+    flex-wrap: wrap;
+    padding: 8px 0;
+  }
+
+  .filtro-container .botao-filtrar {
+    font-size: 1rem;
+  }
+
+  .menu-filtro .tag-button {
+    font-size: 0.85rem;
+    height: 28px;
+    padding: 3px 8px;
+  }
+
+  .listagem-ongs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 20px;
+  }
+
+  .cartao-ong {
+    height: 30vh;
+    width: 96%;
+    margin-left: 2%;
+  }
+
+  .nome-ong {
+    font-size: 1.05rem;
+  }
+
+  .desc-center .avaliacao-ong {
+    font-size: 0.9rem;
+  }
+
+  .media-ong .etiqueta,
+  .etiquetas-ong .etiqueta {
+    font-size: 0.85rem;
+  }
+
+  /* Sobre nós */
+  .container {
+    padding: 140px 20px 60px;
+  }
+
+  .sobre {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .texto h2,
+  .integrantes h2 {
+    font-size: 32px;
+  }
+
+  .texto p {
+    font-size: 18px;
+  }
+
+  .imagem-fatec {
+    max-width: 100%;
+  }
+
+  .imagem-fatec img {
+    height: 300px;
+  }
+
+  .cards {
+    gap: 25px;
+    justify-content: center;
+  }
+
+  /* Modal boas-vindas */
+  .welcome-conteudo {
+    flex-direction: column;
+    height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .welcome-left,
+  .welcome-right {
+    width: 100%;
+  }
+
+  .welcome-right {
+    height: 250px;
+  }
+
+  .header-welcome h1 {
+    font-size: 44px;
+  }
+
+  .subtitulo-welcome {
+    font-size: 24px;
+    margin: 15px 2rem;
+    text-align: center;
+  }
+
+  .welcome-left p {
+    margin: 0 2rem;
+    font-size: 16px;
+  }
+
+  .botao-fechar {
+    font-size: 3rem;
+    right: 20px;
+    color: #333;
+  }
+
+  /* Modal ONG avaliações */
+  .avaliacoes-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .ratingsLeft,
+  .ratingsRight {
+    width: 100%;
+    right: 0;
+    padding: 0;
+  }
+}
+
+
+   /* (até 768px) */
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 130px;
+  }
+
+  /* HEADER mais compacto */
+  header {
+    height: 70px;
+    padding: 10px 10px 0 10px;
+    gap: 8px;
+  }
+
+  .logo-area {
+    width: auto;
+    max-width: 50%;
+    gap: 8px;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+    letter-spacing: -0.5px;
+  }
+
+  .icone-logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .barra-pesquisa {
+    width: 100%;
+    height: 36px;
+    margin-top: 5px;
+  }
+
+  .barra-pesquisa input {
+    font-size: 0.9rem;
+    flex: 1;
+  }
+
+  /* pra barra lateral virar horizontal */
+  .menu-lateral {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    height: auto;
+    padding: 6px 10px;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+  }
+
+  .menu-links {
+    flex-direction: row;
+    gap: 4px;
+    width: 100%;
+    padding-top: 0;
+  }
+
+  .menu-link {
+    font-size: 0.85rem;
+    padding: 8px 12px;
+    gap: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .menu-link i {
+    font-size: 1.2rem;
+  }
+
+  .layout-principal {
+    margin: 0 10px;
+    padding: 0;
+    height: auto;
+    min-height: 80vh;
+  }
+
+  /* Filtros */
+  .filtro-container {
+    padding: 6px 0;
+    gap: 6px;
+  }
+
+  .filtro-container .botao-filtrar {
+    font-size: 0.9rem;
+  }
+
+  .filtro-container .botao-filtrar i {
+    font-size: 1.2rem !important;
+  }
+
+  .menu-filtro .tag-button {
+    font-size: 0.78rem;
+    height: 26px;
+    padding: 2px 8px;
+    gap: 4px;
+  }
+
+  .botao-seta {
+    width: 24px;
+    height: 24px;
+    font-size: 0.85rem;
+  }
+
+  .listagem-ongs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 6px;
+    row-gap: 15px;
+    height: auto;
+    padding-bottom: 30px;
+  }
+
+  .cartao-ong {
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 4px;
+  }
+
+  .imagem-ong {
+    height: 120px;
+    border-width: 2px;
+  }
+
+  .nome-ong {
+    font-size: 0.95rem;
+  }
+
+  .desc-center .avaliacao-ong {
+    font-size: 0.8rem;
+  }
+
+  .media-ong .etiqueta,
+  .etiquetas-ong .etiqueta {
+    font-size: 0.72rem;
+    padding: 1px 5px;
+  }
+
+  /* Paginação */
+  .paginacao {
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+
+  .paginacao a,
+  .paginacao span {
+    min-width: 34px;
+    height: 34px;
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+
+  .paginacao .botao-nav {
+    font-size: 1.5rem;
+  }
+
+  /* Sobre nós */
+  .container {
+    padding: 130px 15px 40px;
+  }
+
+  .texto h2,
+  .integrantes h2 {
+    font-size: 26px;
+  }
+
+  .texto p {
+    font-size: 16px;
+  }
+
+  .imagem-fatec img {
+    height: 220px;
+  }
+
+  .card {
+    width: 45%;
+    min-width: 140px;
+  }
+
+  .card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .card h3 {
+    font-size: 16px;
+  }
+
+  .card p {
+    font-size: 13px;
+  }
+
+  .links-redes i {
+    font-size: 1.5rem;
+  }
+
+  /* Welcome modal */
+  .welcome-conteudo {
+    width: 95%;
+    border-radius: 12px;
+  }
+
+  .header-welcome {
+    padding: 12px;
+    gap: 6px;
+  }
+
+  .header-welcome h1 {
+    font-size: 32px;
+  }
+
+  .header-welcome img {
+    width: 60px;
+    height: 60px;
+  }
+
+  .subtitulo-welcome {
+    font-size: 20px;
+    margin: 10px 1.2rem;
+    text-align: center;
+  }
+
+  .welcome-left p {
+    margin: 0 1.2rem;
+    font-size: 14px;
+  }
+
+  .orgs-cps {
+    height: auto;
+    padding: 10px 0;
+    gap: 8px;
+  }
+
+  .orgs-cps img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .welcome-right {
+    height: 180px;
+  }
+
+  .botao-fechar {
+    font-size: 2.5rem;
+    right: 10px;
+    top: 0;
+  }
+
+  /* Modal ONG */
+  .modal-ong {
+    padding: 8px;
+  }
+
+  .modal-conteudo {
+    padding: 8px 4px;
+    border-radius: 12px;
+    gap: 10px;
+  }
+
+  .fechar-modal {
+    position: static;
+    align-self: flex-end;
+    width: 80px;
+    height: 32px;
+    font-size: 14px;
+    border-radius: 14px;
+    margin-bottom: 8px;
+    margin-left: auto;
+    right: auto;
+    top: auto;
+  }
+
+  .modal-topo {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .modal-imagem {
+    width: 80px;
+    height: 80px;
+  }
+
+  .modal-info h2 {
+    font-size: 22px;
+  }
+
+  .modal-etiquetas,
+  .modal-etiqueta {
+    font-size: 0.7rem;
+  }
+
+  .modal-endereco {
+    font-size: 13px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  /* Redes sociais modal */
+  .redesSociais {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal-rede-card {
+    width: 100%;
+    max-width: 320px;
+    height: 70px;
+    flex-direction: row;
+    gap: 10px;
+    font-size: 15px;
+  }
+
+  .modal-rede-card i {
+    font-size: 28px;
+    margin-bottom: 0;
+  }
+
+  .acessarOng {
+    margin-bottom: 15px;
+    font-size: 13px;
+    flex-wrap: wrap;
+  }
+
+  .titulo-redes {
+    font-size: 14px;
+  }
+
+  /* Avaliações modal */
+  .avaliacoes-container {
+    padding: 12px;
+  }
+
+  .avaliacaoMedia span:first-child {
+    font-size: 26px;
+  }
+
+  .avaliacaoMedia .totalAvaliado {
+    font-size: 16px;
+  }
+
+  .linhaAvaliacao {
+    height: 40px;
+  }
+
+  .linhaAvaliacao span {
+    font-size: 20px;
+    width: 14px;
+  }
+
+  .avaliacoesRealizadas h2 {
+    font-size: 17px;
+  }
+
+  .scroll-avaliacoes::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Mapa modal */
+  .header-Modal {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .header-Modal .logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .titulo-Modal h1 {
+    font-size: 28px;
+  }
+
+  .titulo-Modal h3 {
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+  .view-Mapa {
+    padding: 12px;
+    min-height: 250px;
+    border-radius: 16px;
+  }
+
+  .info-Mapa {
+    grid-template-columns: 1fr;
+    gap: 4px;
+    text-align: center;
+  }
+
+  .search-icon {
+    font-size: 40px;
+    justify-content: center;
+  }
+
+  .info-Mapa h3 {
+    font-size: 22px;
+  }
+
+  .info-Mapa span {
+    font-size: 14px;
+  }
+
+  .linhaDivisoriaMapa {
+    height: 2px;
+    width: 70%;
+  }
+
+  /* Footer */
+  footer p {
+    font-size: 0.95rem;
+    text-align: center;
+  }
+}
+
+
+   /* MOBILE PEQUENO (até 450px) */
+
+@media (max-width: 450px) {
+  body {
+    padding-top: 125px;
+  }
+
+  header {
+    height: 65px;
+    padding: 8px 8px 0 8px;
+  }
+
+  header h1 {
+    font-size: 1.5rem;
+  }
+
+  .icone-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .barra-pesquisa {
+    height: 32px;
+    padding: 0 8px;
+  }
+
+  .barra-pesquisa input {
+    font-size: 0.82rem;
+  }
+
+  .menu-lateral {
+    top: 65px;
+    padding: 5px 8px;
+  }
+
+  .menu-link {
+    font-size: 0.78rem;
+    padding: 6px 10px;
+  }
+
+  .menu-link i {
+    font-size: 1rem;
+  }
+
+  /* Grid de ONGs: 1 coluna */
+  .listagem-ongs {
+    grid-template-columns: 1fr;
+    row-gap: 12px;
+  }
+
+  .cartao-ong {
+    padding: 5px;
+  }
+
+  .imagem-ong {
+    height: 160px;
+  }
+
+  .nome-ong {
+    font-size: 1.05rem;
+  }
+
+  /* Filtros scroll */
+  .menu-filtro {
+    gap: 4px;
+  }
+
+  .menu-filtro .tag-button {
+    font-size: 0.72rem;
+    padding: 2px 6px;
+  }
+
+  /* Sobre nós */
+  .container {
+    padding: 120px 12px 30px;
+  }
+
+  .texto h2,
+  .integrantes h2 {
+    font-size: 22px;
+  }
+
+  .texto p {
+    font-size: 15px;
+  }
+
+  .imagem-fatec img {
+    height: 180px;
+  }
+
+  .cards {
+    gap: 15px;
+    justify-content: space-between;
+  }
+
+  .card {
+    width: calc(50% - 8px);
+    min-width: 0;
+  }
+
+  .card h3 {
+    font-size: 14px;
+  }
+
+  .card p {
+    font-size: 12px;
+  }
+
+  /* Welcome */
+  .header-welcome h1 {
+    font-size: 26px;
+  }
+
+  .header-welcome img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .subtitulo-welcome {
+    font-size: 17px;
+    margin: 8px 1rem;
+  }
+
+  .welcome-left p {
+    margin: 0 1rem;
+    font-size: 13px;
+  }
+
+  .orgs-cps img {
+    width: 55px;
+    height: 55px;
+  }
+
+  .welcome-right {
+    height: 140px;
+  }
+
+  /* Modal ONG AQUI PABLOO*/
+  .modal-info h2 {
+    font-size: 19px;
+  }
+
+  .modal-imagem {
+    width: 70px;
+    height: 70px;
+  }
+
+  .modal-rede-card {
+    height: 60px;
+    font-size: 13px;
+  }
+
+  .modal-rede-card i {
+    font-size: 24px;
+  }
+
+  .titulo-Modal h1 {
+    font-size: 24px;
+  }
+
+  .info-Mapa h3 {
+    font-size: 18px;
+  }
+
+  /* Paginação */
+  .paginacao a,
+  .paginacao span {
+    min-width: 30px;
+    height: 30px;
+    padding: 5px 8px;
+    font-size: 0.8rem;
+  }
+}
+
+
+   /* (até 360px) */
+
+@media (max-width: 360px) {
+  header h1 {
+    font-size: 1.3rem;
+  }
+
+  .menu-link {
+    font-size: 0.72rem;
+    padding: 5px 8px;
+  }
+
+  .menu-link i {
+    display: none;
+  }
+
+  .imagem-ong {
+    height: 130px;
+  }
+
+  .card {
+    width: 100%;
+  }
+}

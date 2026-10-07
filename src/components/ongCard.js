@@ -5,7 +5,7 @@ const dadosOngsResponse = await fetch("src/data/ongsData.json");
 const dadosOngs = await dadosOngsResponse.json();
 
 // Public
-export let currentOngs = [0, 1, 2, 3, 4];
+export let currentOngs = [0, 1, 2, 3, 4, 5];
 
 // Text
 const tagsTexto = {
@@ -94,10 +94,11 @@ function updateAllCards() {
 	updateOngCartao(3, currentOngs[2]);
 	updateOngCartao(4, currentOngs[3]);
 	updateOngCartao(5, currentOngs[4]);
+	updateOngCartao(6, currentOngs[5]);	
 }
 
-export function updateCurrentOngs(first, second, third, fourth, fifth) {
-	currentOngs = [first, second, third, fourth, fifth]
+export function updateCurrentOngs(first, second, third, fourth, fifth, sixth) {
+	currentOngs = [first, second, third, fourth, fifth, sixth];	
 	updateAllCards()
 }
 
