@@ -1,8 +1,19 @@
 // --> Functions <-- //
 export async function getCepData(cep) {
-	const viaCep = await fetch(
-		`https://viacep.com.br/ws/${cep}/json/`
-	).then(res => res.json());
+	let viaCep;
+
+	try {
+		const URL = `https://viacep.com.br/ws/${cep}/json/`
+		const response = await fetch(URL)
+
+		if (!response.ok) {
+			throw new Error(`HTTP error! status: ${response.status}`)
+		}
+
+		viaCep = response.json()
+	} catch (error) {
+		viaCep = {}
+	}
 
 	return viaCep;
 }

@@ -16,6 +16,7 @@ import "../styles/tagsONG.css";
 // Images
 import addPhotoIconImage from "../../images/elements_vectors/AddPhotoIcon.png";
 import locationIconImage from "../../images/elements_vectors/LocationIcon.png";
+import invalidLocationIconImage from "../../images/elements_vectors/InvalidLocationIcon.png";
 
 import addGreyIconImage from "../../images/elements_vectors/AddGreyIcon.png";
 import cancelMediaIconImage from "../../images/elements_vectors/CancelMediaIcon.png";
@@ -32,6 +33,9 @@ import nonHideIconImage from "../../images/elements_vectors/NonHideIcon.png";
 
 import logoImage from "../../images/SPONGs_icon-nobg.png";
 import closeIconImage from "../../images/elements_vectors/CloseIcon.png";
+
+// Values
+let lastUpdatedCEP;
 
 
 
@@ -126,18 +130,42 @@ function AddNameContainer({ setOngName, setOngCEP }) {
 		setOngName(nameInputElement.value);
 	}
 
+	const [cepIsInvalid, setCepIsInvalid] = useState(false);
+
 	let lastUpdateCEP;
 	let cepIsLoading = false;
+
+	function setCepInvalid(isInvalid) {
+		const locationContainerElement = document.getElementsByClassName(signStyle.location_container)[0];
+
+		if (isInvalid) {
+			setCepIsInvalid(true);
+			locationContainerElement.classList.add("invalid_location");
+		} else {
+			setCepIsInvalid(false);
+			locationContainerElement.classList.remove("invalid_location");
+		}
+	}
 
 	async function updateCEP() {
 		const cepInputElement = document.getElementById("signONG_cep");
 		const locationTextElement = document.getElementById("signONG_location_text");
 
 		/* Update text */
-		const cep = cepInputElement.value.replace(/\D/g, "")
+		const cep = cepInputElement.value.replace(/\D/g, "").substring(0, 8)
 		cepInputElement.value = cep;
 
-		if (cep === "") {
+		const IS_SAME_CEP = lastUpdatedCEP == cep
+		const CEP_ENOUGH_DIGITS = cep.length >= 8;
+
+		if (IS_SAME_CEP) {
+			return;
+		}
+		lastUpdatedCEP = cep;
+
+		setCepInvalid(false);
+
+		if (!CEP_ENOUGH_DIGITS) {
 			locationTextElement.textContent = "(Informe o CEP)";
 			return;
 		}
@@ -173,6 +201,7 @@ function AddNameContainer({ setOngName, setOngCEP }) {
 			cepLoadingAnimation();
 		}
 
+		//locationTextElement.textContent = "---";
 		const cepData = await getCepData(cep);
 
 		/* Finish CEP loading */
@@ -185,14 +214,14 @@ function AddNameContainer({ setOngName, setOngCEP }) {
 		cepIsLoading = false;
 
 		const CEP_IS_VALID = cepData.localidade !== undefined;
-		console.log(cepData.localidade);
 
 		if (!CEP_IS_VALID) {
 			locationTextElement.textContent = "(CEP inválido)";
+			setCepInvalid(true);
 			return;
 		}
 
-		locationTextElement.textContent = `${cepData.logradouro}, ${cepData.localidade}, ${cepData.uf}`;
+		locationTextElement.textContent = `${cepData.logradouro}, ${cepData.localidade}` //, ${cepData.uf}`;
 	}
 
 	return (
@@ -212,8 +241,8 @@ function AddNameContainer({ setOngName, setOngCEP }) {
 					<label>CEP</label>
 					<input id="signONG_cep" type="text" onSelect={ResetErrors} onChange={updateCEP} />
 				</div>
-				<div className={signStyle.location_container}>
-					<img src={locationIconImage} alt="Localização" />
+				<div className={signStyle.location_container} id="signONG_location_container">
+					<img src={cepIsInvalid ? invalidLocationIconImage : locationIconImage} alt="Localização" />
 					<h1 id="signONG_location_text">(Informe o CEP)</h1>
 				</div>
 			</div>
