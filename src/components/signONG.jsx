@@ -34,9 +34,6 @@ import nonHideIconImage from "../../images/elements_vectors/NonHideIcon.png";
 import logoImage from "../../images/SPONGs_icon-nobg.png";
 import closeIconImage from "../../images/elements_vectors/CloseIcon.png";
 
-// Values
-let lastUpdatedCEP;
-
 
 
 // --> Functions <-- //
@@ -54,17 +51,21 @@ function setError(element, isError) {
 function ResetErrors() {
 	const nameInput = document.getElementById("signONG_name");
 	const cepInput = document.getElementById("signONG_cep");
+	const midiaContainer = document.getElementsByClassName(signStyle.midia_container)[0];
 
 	const confirmPasswordInput = document.getElementById("signONG_confirm_password");
 
 	setError(nameInput.parentElement, false)
 	setError(cepInput.parentElement, false)
+	setError(midiaContainer, false)
 	setError(confirmPasswordInput.parentElement, false)
 }
 
-function OnSign() {
+function OnSign(ongCEP, socialMediaList, tagList) {
 	const nameInput = document.getElementById("signONG_name");
 	const cepInput = document.getElementById("signONG_cep");
+
+	const midiaContainer = document.getElementsByClassName(signStyle.midia_container)[0];
 
 	const emailInput = document.getElementById("signONG_email");
 	const passwordInput = document.getElementById("signONG_password");
@@ -79,15 +80,28 @@ function OnSign() {
 	}
 
 	// Update error outlines
-	setError(nameInput.parentElement, nameInput.value === "")
-	setError(cepInput.parentElement, cepInput.value === "")
+	const ongName = nameInput.value;
+	const NAME_IS_VALID = ongName !== "";
+	const CEP_IS_VALID = ongCEP !== undefined;
 
-	const IS_SAME_PASSWORD = passwordInput.value === confirmPasswordInput.value
-	setError(confirmPasswordInput.parentElement, !IS_SAME_PASSWORD)
+	setError(nameInput.parentElement, !NAME_IS_VALID);
+	setError(cepInput.parentElement, !CEP_IS_VALID);
 
-	if (!IS_SAME_PASSWORD) {
+	const socialKeys = Object.entries(socialMediaList).filter(([_, value]) => value !== undefined)
+	const HAS_SOCIAL_MEDIA = socialKeys.length > 0;
+	setError(midiaContainer, !HAS_SOCIAL_MEDIA);
+
+	const IS_SAME_PASSWORD = passwordInput.value === confirmPasswordInput.value;
+	setError(confirmPasswordInput.parentElement, !IS_SAME_PASSWORD);
+
+	// Check if can sign ONG
+	const CAN_SIGN_ONG = NAME_IS_VALID && CEP_IS_VALID && HAS_SOCIAL_MEDIA && IS_SAME_PASSWORD;
+
+	if (!CAN_SIGN_ONG) {
 		return
 	}
+
+	// Send sign request to backend
 }
 
 function UpdateSignButtonEnabled() {
@@ -111,11 +125,11 @@ function UpdateSignButtonEnabled() {
 	signButton.classList.remove(signStyle.signin_button_disabled);
 }
 
-function SignButtonComponent() {
+function SignButtonComponent({ ongCEP, socialMediaList, tagList }) {
 	return (
 		<button
 			className={[signStyle.signin_button, signStyle.signin_button_disabled].join(" ")}
-			onClick={OnSign}
+			onClick={() => OnSign(ongCEP, socialMediaList, tagList)}
 			id="signONG_sign_button"
 		>Cadastrar</button>
 	)
@@ -124,15 +138,10 @@ function SignButtonComponent() {
 
 
 // Functions 2: Left-side (ONG information) //
-function AddNameContainer({ setOngName, setOngCEP }) {
-	function updateONGName() {
-		const nameInputElement = document.getElementById("signONG_name");
-		setOngName(nameInputElement.value);
-	}
-
+function AddNameContainer({ setOngCEP }) {
 	const [cepIsInvalid, setCepIsInvalid] = useState(false);
 
-	let lastUpdateCEP;
+	let lastUpdatedCEP;
 	let cepIsLoading = false;
 
 	function setCepInvalid(isInvalid) {
@@ -164,6 +173,7 @@ function AddNameContainer({ setOngName, setOngCEP }) {
 		lastUpdatedCEP = cep;
 
 		setCepInvalid(false);
+		setOngCEP(undefined);
 
 		if (!CEP_ENOUGH_DIGITS) {
 			locationTextElement.textContent = "(Informe o CEP)";
@@ -172,7 +182,7 @@ function AddNameContainer({ setOngName, setOngCEP }) {
 
 		/* Load CEP */
 		const startTime = Date.now();
-		lastUpdateCEP = startTime
+		lastUpdatedCEP = startTime
 
 		async function cepLoadingAnimation() {
 			const locationTextElement = document.getElementById("signONG_location_text");
@@ -205,7 +215,7 @@ function AddNameContainer({ setOngName, setOngCEP }) {
 		const cepData = await getCepData(cep);
 
 		/* Finish CEP loading */
-		const UPDATE_CEP = lastUpdateCEP === startTime
+		const UPDATE_CEP = lastUpdatedCEP === startTime
 
 		if (!UPDATE_CEP) {
 			return;
@@ -222,6 +232,7 @@ function AddNameContainer({ setOngName, setOngCEP }) {
 		}
 
 		locationTextElement.textContent = `${cepData.logradouro}, ${cepData.localidade}` //, ${cepData.uf}`;
+		setOngCEP(cep);
 	}
 
 	return (
@@ -235,7 +246,7 @@ function AddNameContainer({ setOngName, setOngCEP }) {
 			<div className={signStyle.name_container}>
 				<h2>NOME DA ONG</h2>
 				<div className={signStyle.name_input}>
-					<input id="signONG_name" type="text" onSelect={ResetErrors} onChange={updateONGName} />
+					<input id="signONG_name" type="text" onSelect={ResetErrors} />
 				</div>
 				<div className={signStyle.cep_input}>
 					<label>CEP</label>
@@ -252,7 +263,8 @@ function AddNameContainer({ setOngName, setOngCEP }) {
 
 function AddSocialMediaContainer({ setMediaModal, socialMediaList, setSocialMediaList }) {
 	function onAddMedia() {
-		setMediaModal("options")
+		ResetErrors();
+		setMediaModal("options");
 	}
 
 	function removeMedia(mediaName) {
@@ -600,8 +612,7 @@ function SignONGComponent({ currentModal, setCurrentModal }) {
 	const [currentMediaModal, setMediaModal] = useState(null);
 	const [currentAddMedia, setAddMedia] = useState(null);
 
-	const [ongName, setOngName] = useState("");
-	const [ongCEP, setOngCEP] = useState();
+	const [ongCEP, setOngCEP] = useState(undefined);
 	const [socialMediaList, setSocialMediaList] = useState({});
 	const [tagList, setTagList] = useState({});
 
@@ -612,7 +623,7 @@ function SignONGComponent({ currentModal, setCurrentModal }) {
 
 				<div className={signStyle.signONG_modal}>
 					<div className={signStyle.left_box}>
-						<AddNameContainer setOngName={setOngName} setOngCEP={setOngCEP} />
+						<AddNameContainer setOngCEP={setOngCEP} />
 						<AddSocialMediaContainer setMediaModal={setMediaModal} socialMediaList={socialMediaList} setSocialMediaList={setSocialMediaList} />
 						<AddTagContainer tagList={tagList} setTagList={setTagList} />
 					</div>
@@ -626,7 +637,7 @@ function SignONGComponent({ currentModal, setCurrentModal }) {
 
 						<h2 className={signStyle.sign_text}>Adicione as informações para cadastrar a sua ONG</h2>
 						<SignInputsContainer />
-						<SignButtonComponent />
+						<SignButtonComponent ongCEP={ongCEP} socialMediaList={socialMediaList} tagList={tagList} />
 					</div>
 				</div>
 

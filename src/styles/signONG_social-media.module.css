@@ -176,6 +176,12 @@
 	border-radius: 10px;
 
 	cursor: pointer;
+
+	transition: transform 0.2s ease;
+}
+
+.media_option:hover {
+	transform: scale(1.02);
 }
 
 .media_icon {
@@ -307,6 +313,12 @@
 	margin-right: 25px;
 
 	cursor: pointer;
+
+	transition: transform 0.2s ease;
+}
+
+.add_media_button:hover {
+	transform: scale(1.0125);
 }
 
 .add_media_button label {
@@ -329,4 +341,8 @@
 
 .add_media_button_disabled label {
 	color: rgba(255, 255, 255, .6);
+}
+
+.add_media_button_disabled:hover {
+	transform: scale(1);
 }

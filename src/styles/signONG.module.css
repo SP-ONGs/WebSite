@@ -33,6 +33,14 @@
 
 
 /* Aviso de erro (Error warning) */
+.name_input,
+.cep_input,
+.midia_container,
+.input_group {
+	outline: 0 solid #E32424;
+	transition: outline 0.0675s ease;
+}
+
 .error_outline {
 	outline: 2px solid #E32424;
 }
@@ -316,6 +324,12 @@
 	box-sizing: border-box;
 
 	position: relative;
+
+	transition: transform 0.2s ease;
+}
+
+.add_social_midia:hover {
+	transform: scale(1.0425);
 }
 
 .add_social_midia img {
@@ -498,6 +512,12 @@
 	font-weight: 500;
 
 	cursor: pointer;
+
+	transition: transform 0.2s ease;
+}
+
+.signin_button:hover {
+	transform: scale(1.0125);
 }
 
 .signin_button_disabled {
@@ -505,4 +525,8 @@
 	color: rgba(255, 255, 255, .6);
 
 	cursor: default;
+}
+
+.signin_button_disabled:hover {
+	transform: scale(1);
 }
