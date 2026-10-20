@@ -1,0 +1,13 @@
+.ongCard_container {
+	width: 300px;
+	height: 171px;
+
+	background: rgb(0, 0, 0);
+	border-radius: 5px;
+
+	position: relative;
+}
+
+.ongCard_container img {
+	position: absolute
+}
