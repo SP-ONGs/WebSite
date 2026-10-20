@@ -5,8 +5,8 @@ const dadosOngsResponse = await fetch("src/data/ongsData.json");
 const dadosOngs = await dadosOngsResponse.json();
 
 // Import
-import { updateCurrentOngs } from "./components/ongCard.js";
-import { updateMaxPage } from "./components/pageBar.js";
+import { updateCurrentOngs } from "../components/ongCard.js";
+import { updateMaxPage } from "../components/pageBar.js";
 
 // Public
 export let inFilter;

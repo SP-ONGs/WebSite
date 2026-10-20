@@ -2,7 +2,7 @@
 
 // Import
 import { updateCurrentOngs } from "./ongCard.js";
-import { inFilter } from "../filterController.js"
+import { inFilter } from "../controllers/filterController.js"
 
 
 // Private

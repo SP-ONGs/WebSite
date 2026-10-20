@@ -1,8 +1,9 @@
 // --> Variables <-- //
 
 // Component
-import NavbarComponent from './navbar.jsx'
-import OngCardComponent from './ongCard.jsx'
+import NavbarComponent from './navbar.jsx';
+import TabsMenuComponent from './tabsMenu.jsx';
+import OngCardComponent from './ongCard.jsx';
 
 
 
@@ -14,6 +15,7 @@ function HomepageComponent() {
 	return (
 		<>
 			<NavbarComponent />
+			<TabsMenuComponent />
 		</>
 	);
 }
