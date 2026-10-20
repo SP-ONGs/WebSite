@@ -332,7 +332,7 @@ function AddSocialMediaContainer({ setMediaModal, socialMediaList, setSocialMedi
 }
 
 function AddTagContainer({ tagList, setTagList }) {
-	const tagContainerStyle = ["tag_container", signStyle.tag_container_size].join(" ");
+	const tagContainerStyle = ["tag_container", "selectable_tag", signStyle.tag_container_size].join(" ");
 
 	function setTagValue(tagName, value) {
 		setTagList(previous => ({

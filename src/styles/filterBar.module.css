@@ -1,0 +1,44 @@
+* {
+	margin: 0px;
+	font-family: Arial, sans-serif;
+}
+
+.filter_bar_container {
+	height: 30px;
+	max-width: 947px;
+
+	position: relative;
+	left: 291px;
+	margin-top: 35px;
+
+	display: flex;
+	gap: 8px;
+}
+
+.filter_title {
+	display: flex;
+	gap: 8px;
+}
+
+.filter_title img {
+	height: 100%;
+	width: 34px;
+
+	object-fit: contain;
+}
+
+.filter_title h1 {
+	font-size: 22px;
+	font-weight: 400;
+	font-style: italic;
+
+	margin-right: 6px;
+}
+
+.tag_container_size {
+	height: 30px;
+}
+
+.tag_container_size label {
+	font-size: 18px;
+}

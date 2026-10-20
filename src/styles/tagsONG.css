@@ -64,6 +64,6 @@
 		transform 0.2s ease;
 }
 
-.tag_container:hover {
+.selectable_tag:hover {
 	transform: scale(1.0425);
 }

@@ -14,8 +14,12 @@ import addOngIconImage from '../../images/elements_vectors/AddONGIcon.png';
 // --> Functions <-- //
 
 // Functions 1: Tabs menu //
-function TabsMenuComponent() {
+function TabsMenuComponent({ setCurrentModal }) {
 	const selectedOptionStyle = [tabsMenuStyle.menu_option_container, tabsMenuStyle.selected_option].join(" ")
+
+	function onAddONGClick() {
+		setCurrentModal("loginONG");
+	}
 
 	return (
 		<div className={tabsMenuStyle.menu_container}>
@@ -34,7 +38,7 @@ function TabsMenuComponent() {
 				<h1>Sobre nós</h1>
 			</div>
 
-			<div className={tabsMenuStyle.menu_option_container}>
+			<div className={tabsMenuStyle.menu_option_container} onClick={onAddONGClick}>
 				<img src={addOngIconImage} />
 				<h1>Adicionar ONG</h1>
 			</div>
