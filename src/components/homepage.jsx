@@ -4,7 +4,7 @@
 import NavbarComponent from './navbar.jsx';
 import TabsMenuComponent from './tabsMenu.jsx';
 import FilterBarComponent from './filterBar.jsx';
-import OngCardComponent from './ongCard.jsx';
+import OngBoardComponent from './ongBoard.jsx';
 
 
 
@@ -18,6 +18,7 @@ function HomepageComponent({ setCurrentModal }) {
 			<NavbarComponent />
 			<TabsMenuComponent setCurrentModal={setCurrentModal} />
 			<FilterBarComponent />
+			<OngBoardComponent />
 		</>
 	);
 }

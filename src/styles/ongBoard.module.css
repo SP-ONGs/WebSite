@@ -1,0 +1,14 @@
+.ongBoard_container {
+	width: 950px;
+	height: 500px;
+	display: flex;
+	flex-wrap: wrap;
+
+	border: none;
+
+	position: absolute;
+	top: 160px;
+	left: 291px;
+
+	gap: 10px 10px;
+}
