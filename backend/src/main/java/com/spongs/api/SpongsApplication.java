@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpongsApiApplication {
+public class SpongsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpongsApiApplication.class, args);
+		SpringApplication.run(SpongsApplication.class, args);
 	}
 
 }

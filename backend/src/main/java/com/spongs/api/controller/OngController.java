@@ -3,6 +3,9 @@ package com.spongs.api.controller;
 import com.spongs.api.service.OngService;
 import com.spongs.api.model.Ong;
 
+import com.spongs.api.dto.OngRegistrationRequest;
+import com.spongs.api.dto.OngRegistrationResponse;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,14 +26,7 @@ public class OngController {
 
 	@PostMapping
 	public ResponseEntity<OngRegistrationResponse> registerOng(@Valid @RequestBody OngRegistrationRequest request) {
-		Ong ong = ongService.registerOng(
-				request.email(),
-				request.password(),
-				request.name(),
-				request.cep(),
-				request.houseNumber(),
-				request.cnpj(),
-				request.imageUrl());
+		Ong ong = ongService.registerOng(request);
 
 		OngRegistrationResponse response = OngRegistrationResponse.from(ong);
 

@@ -1,47 +1,82 @@
 package com.spongs.api.service;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
-
-import com.spongs.api.repository.OngRepository;
-import com.spongs.api.model.Ong;
-import com.spongs.api.model.OngStatus;
-
+// Framework
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+// Repositorys
+import com.spongs.api.repository.OngRepository;
+import com.spongs.api.repository.SocialMediaRepository;
+import com.spongs.api.repository.TagRepository;
+import com.spongs.api.repository.OngSocialMediaRepository;
+import com.spongs.api.repository.OngTagRepository;
+
+// Models
+import com.spongs.api.model.Ong;
+import com.spongs.api.model.OngStatus;
+import com.spongs.api.model.SocialMedia;
+import com.spongs.api.model.OngSocialMedia;
+import com.spongs.api.model.Tag;
+import com.spongs.api.model.OngTag;
+
+// DTOs
+import com.spongs.api.dto.OngRegistrationRequest;
+
+// Utils
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
 @Service
 public class OngService {
 	private final OngRepository ongRepository;
+	private final SocialMediaRepository socialMediaRepository;
+	private final TagRepository tagRepository;
+	private final OngSocialMediaRepository ongSocialMediaRepository;
+	private final OngTagRepository ongTagRepository;
+
 	private final PasswordEncoder passwordEncoder;
 
-	public OngService(OngRepository ongRepository, PasswordEncoder passwordEncoder) {
+	public OngService(
+			OngRepository ongRepository,
+			SocialMediaRepository socialMediaRepository,
+			TagRepository tagRepository,
+			OngSocialMediaRepository ongSocialMediaRepository,
+			OngTagRepository ongTagRepository,
+			PasswordEncoder passwordEncoder) {
 		this.ongRepository = ongRepository;
+		this.socialMediaRepository = socialMediaRepository;
+		this.tagRepository = tagRepository;
+		this.ongSocialMediaRepository = ongSocialMediaRepository;
+		this.ongTagRepository = ongTagRepository;
 		this.passwordEncoder = passwordEncoder;
 	}
 
 	@Transactional
-	public Ong registerOng(String email, String password, String name, String cep, String houseNumber, String cnpj,
-			String imageUrl) {
+	public Ong registerOng(OngRegistrationRequest request) {
 
 		// Normalize and validate basic fields
-		String normalizedEmail = normalizeEmail(email);
+		String normalizedEmail = normalizeEmail(request.email());
 
-		if (password == null || password.isBlank()) {
+		if (request.password() == null || request.password().isBlank()) {
 			throw new IllegalArgumentException("Password is required.");
 		}
 
-		if (name == null || name.isBlank()) {
+		if (request.name() == null || request.name().isBlank()) {
 			throw new IllegalArgumentException("ONG name is required.");
 		}
 
-		if (cep == null || !cep.matches("\\d{8}")) {
+		if (request.cep() == null || !request.cep().matches("\\d{8}")) {
 			throw new IllegalArgumentException("Invalid CEP format.");
 		}
 
-		if (houseNumber == null || houseNumber.isBlank()) {
+		if (request.houseNumber() == null || request.houseNumber().isBlank()) {
 			throw new IllegalArgumentException("House number is required.");
 		}
 
@@ -53,21 +88,69 @@ public class OngService {
 		}
 
 		// Normal and validate optional CNPJ
-		String normalizedCnpj = normalizeCnpj(cnpj);
+		String normalizedCnpj = normalizeCnpj(request.cnpj());
 
 		if (normalizedCnpj != null && ongRepository.existsByCnpj(normalizedCnpj)) {
 			throw new IllegalArgumentException("An ONG with this CNPJ is already registered");
 		}
 
-		// Get password hash
-		String passwordHash = passwordEncoder.encode(password);
+		// Validate catalogue IDs before creating the ONG.
+		List<Long> socialMediaIds = request.socialMedia().stream()
+				.map(OngRegistrationRequest.SocialMediaEntry::socialMediaId).toList();
+		List<Long> tagIds = request.tagIds();
 
-		// Register ONG
-		Ong ong = new Ong(normalizedEmail, passwordHash, name.trim(), cep, houseNumber.trim(), normalizedCnpj, imageUrl);
+		ensureNoDuplicates(socialMediaIds, "social media");
+		ensureNoDuplicates(tagIds, "tag");
+
+		Map<Long, SocialMedia> socialMediaById = socialMediaRepository.findAllById(socialMediaIds).stream()
+				.collect(Collectors.toMap(SocialMedia::getId, Function.identity()));
+
+		boolean SOCIAL_MEDIA_ARE_VALID = socialMediaById.size() == socialMediaIds.size();
+
+		if (!SOCIAL_MEDIA_ARE_VALID) {
+			throw new IllegalArgumentException("One or more social media types do not exist.");
+		}
+
+		Map<Long, Tag> tagsById = tagRepository.findAllById(tagIds).stream()
+				.collect(Collectors.toMap(Tag::getId, Function.identity()));
+
+		boolean TAGS_ARE_VALID = tagsById.size() == tagIds.size();
+
+		if (!TAGS_ARE_VALID) {
+			throw new IllegalArgumentException("One or more tags do not exist.");
+		}
+
+		// Get password hash
+		String passwordHash = passwordEncoder.encode(request.password());
+
+		// Save ONG
+		Ong ong = new Ong(
+				normalizedEmail,
+				passwordHash,
+				request.name().trim(),
+				request.cep(),
+				request.houseNumber().trim(),
+				normalizedCnpj,
+				request.imageUrl());
 
 		ong.setStatus(OngStatus.IN_REVIEW);
 
-		return ongRepository.save(ong);
+		Ong savedOng = ongRepository.save(ong);
+
+		// Save social media connections
+		List<OngSocialMedia> socialMediaEntries = request.socialMedia().stream()
+				.map(entry -> new OngSocialMedia(savedOng, socialMediaById.get(entry.socialMediaId()),
+						entry.description().trim()))
+				.toList();
+
+		ongSocialMediaRepository.saveAll(socialMediaEntries);
+
+		// Save tags connections
+		List<OngTag> tagEntries = tagIds.stream().map(tagId -> new OngTag(savedOng, tagsById.get(tagId))).toList();
+
+		ongTagRepository.saveAll(tagEntries);
+
+		return savedOng;
 	}
 
 	@Transactional(readOnly = true)
@@ -101,5 +184,13 @@ public class OngService {
 		}
 
 		return digits;
+	}
+
+	private void ensureNoDuplicates(List<Long> ids, String fieldName) {
+		Set<Long> uniqueIds = new HashSet<>(ids);
+
+		if (uniqueIds.size() != ids.size()) {
+			throw new IllegalArgumentException("Duplicate " + fieldName + " IDs are not allowed.");
+		}
 	}
 }
