@@ -13,5 +13,7 @@ public interface OngRepository extends JpaRepository<Ong, Long> {
 
 	List<Ong> findAllByStatus(OngStatus status);
 
+	List<Ong> findAllByStatusOrderByNameAsc(OngStatus status);
+
 	boolean existsByCnpj(String cnpj);
 }

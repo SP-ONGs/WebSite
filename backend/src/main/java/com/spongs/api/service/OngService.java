@@ -21,6 +21,11 @@ import com.spongs.api.model.Tag;
 import com.spongs.api.model.OngTag;
 
 // DTOs
+import com.spongs.api.dto.OngPublicSummary;
+import com.spongs.api.dto.OngPublicResponse;
+import com.spongs.api.dto.OngSocialMediaResponse;
+import com.spongs.api.dto.SocialMediaTypeResponse;
+import com.spongs.api.dto.TagResponse;
 import com.spongs.api.dto.OngRegistrationRequest;
 
 // Utils
@@ -56,6 +61,61 @@ public class OngService {
 		this.ongSocialMediaRepository = ongSocialMediaRepository;
 		this.ongTagRepository = ongTagRepository;
 		this.passwordEncoder = passwordEncoder;
+	}
+
+	@Transactional(readOnly = true)
+	public List<OngPublicSummary> getPublicOngs() {
+		return ongRepository.findAllByStatusOrderByNameAsc(OngStatus.APPROVED).stream()
+				.map(ong -> new OngPublicSummary(
+						ong.getId(),
+						ong.getName(),
+						ong.getCep(),
+						ong.getImageUrl()))
+				.toList();
+	}
+
+	@Transactional(readOnly = true)
+	public OngPublicResponse getPublicOngById(Long id) {
+		Ong ong = ongRepository.findById(id).filter(item -> item.getStatus() == OngStatus.APPROVED)
+				.orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(
+						org.springframework.http.HttpStatus.NOT_FOUND, "ONG not found"));
+
+		List<OngSocialMediaResponse> socialMedia = ongSocialMediaRepository.findAllByOng_Id(id).stream()
+				.map(entry -> new OngSocialMediaResponse(
+						entry.getSocialMedia().getId(),
+						entry.getSocialMedia().getName(),
+						entry.getDescription()))
+				.toList();
+
+		List<TagResponse> tags = ongTagRepository.findAllByOng_Id(id).stream().map(entry -> new TagResponse(
+				entry.getTag().getId(),
+				entry.getTag().getDescription(),
+				entry.getTag().getImageUrl())).toList();
+
+		return new OngPublicResponse(
+				ong.getId(),
+				ong.getName(),
+				ong.getCep(),
+				ong.getHouseNumber(),
+				ong.getCnpj(),
+				ong.getImageUrl(),
+				socialMedia,
+				tags);
+	}
+
+	@Transactional(readOnly = true)
+	public List<TagResponse> getAvailableTags() {
+		return tagRepository.findAllByOrderByDescriptionAsc().stream().map(tag -> new TagResponse(
+				tag.getId(),
+				tag.getDescription(),
+				tag.getImageUrl())).toList();
+	}
+
+	@Transactional(readOnly = true)
+	public List<SocialMediaTypeResponse> getAvailableSocialMedia() {
+		return socialMediaRepository.findAllByOrderByNameAsc().stream().map(type -> new SocialMediaTypeResponse(
+				type.getId(),
+				type.getName())).toList();
 	}
 
 	@Transactional

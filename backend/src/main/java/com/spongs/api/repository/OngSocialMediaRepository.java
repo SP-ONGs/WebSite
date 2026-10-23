@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.spongs.api.model.OngSocialMedia;
 
-public interface OngSocialMediaRepository extends JpaRepository<OngSocialMedia, Long> {
+import java.util.List;
 
+public interface OngSocialMediaRepository extends JpaRepository<OngSocialMedia, Long> {
+	List<OngSocialMedia> findAllByOng_Id(Long ongId);
 }
