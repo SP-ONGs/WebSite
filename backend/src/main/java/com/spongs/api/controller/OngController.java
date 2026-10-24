@@ -44,7 +44,9 @@ public class OngController {
 	public ResponseEntity<OngRegistrationResponse> registerOng(@Valid @RequestBody OngRegistrationRequest request) {
 		Ong ong = ongService.registerOng(request);
 
-		OngRegistrationResponse response = OngRegistrationResponse.from(ong);
+		String email = request.email().trim().toLowerCase(java.util.Locale.ROOT);
+
+		OngRegistrationResponse response = OngRegistrationResponse.from(ong, email);
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}

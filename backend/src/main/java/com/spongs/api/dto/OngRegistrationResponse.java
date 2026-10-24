@@ -15,10 +15,10 @@ public record OngRegistrationResponse(
 		String imageUrl,
 		OngStatus status,
 		Instant createdAt) {
-	public static OngRegistrationResponse from(Ong ong) {
+	public static OngRegistrationResponse from(Ong ong, String email) {
 		return new OngRegistrationResponse(
 				ong.getId(),
-				ong.getEmail(),
+				email,
 				ong.getName(),
 				ong.getCep(),
 				ong.getHouseNumber(),

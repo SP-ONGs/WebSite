@@ -21,12 +21,6 @@ public class Ong {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false, unique = true, length = 254)
-	private String email;
-
-	@Column(name = "password_hash", nullable = false, length = 255)
-	private String passwordHash;
-
 	@Column(nullable = false, length = 150)
 	private String name;
 
@@ -57,10 +51,7 @@ public class Ong {
 	protected Ong() {
 	}
 
-	public Ong(String email, String passwordHash, String name, String cep, String houseNumber, String cnpj,
-			String imageUrl) {
-		this.email = email;
-		this.passwordHash = passwordHash;
+	public Ong(String name, String cep, String houseNumber, String cnpj, String imageUrl) {
 		this.name = name;
 		this.cep = cep;
 		this.houseNumber = houseNumber;
@@ -71,22 +62,6 @@ public class Ong {
 
 	public Long getId() {
 		return id;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPasswordHash() {
-		return passwordHash;
-	}
-
-	public void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
 	}
 
 	public String getName() {

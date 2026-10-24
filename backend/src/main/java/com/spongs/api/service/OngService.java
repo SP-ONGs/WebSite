@@ -11,6 +11,7 @@ import com.spongs.api.repository.SocialMediaRepository;
 import com.spongs.api.repository.TagRepository;
 import com.spongs.api.repository.OngSocialMediaRepository;
 import com.spongs.api.repository.OngTagRepository;
+import com.spongs.api.repository.UserAccountRepository;
 
 // Models
 import com.spongs.api.model.Ong;
@@ -19,6 +20,7 @@ import com.spongs.api.model.SocialMedia;
 import com.spongs.api.model.OngSocialMedia;
 import com.spongs.api.model.Tag;
 import com.spongs.api.model.OngTag;
+import com.spongs.api.model.UserAccount;
 
 // DTOs
 import com.spongs.api.dto.OngPublicSummary;
@@ -45,6 +47,7 @@ public class OngService {
 	private final TagRepository tagRepository;
 	private final OngSocialMediaRepository ongSocialMediaRepository;
 	private final OngTagRepository ongTagRepository;
+	private final UserAccountRepository userAccountRepository;
 
 	private final PasswordEncoder passwordEncoder;
 
@@ -54,12 +57,14 @@ public class OngService {
 			TagRepository tagRepository,
 			OngSocialMediaRepository ongSocialMediaRepository,
 			OngTagRepository ongTagRepository,
+			UserAccountRepository userAccountRepository,
 			PasswordEncoder passwordEncoder) {
 		this.ongRepository = ongRepository;
 		this.socialMediaRepository = socialMediaRepository;
 		this.tagRepository = tagRepository;
 		this.ongSocialMediaRepository = ongSocialMediaRepository;
 		this.ongTagRepository = ongTagRepository;
+		this.userAccountRepository = userAccountRepository;
 		this.passwordEncoder = passwordEncoder;
 	}
 
@@ -180,13 +185,8 @@ public class OngService {
 			throw new IllegalArgumentException("One or more tags do not exist.");
 		}
 
-		// Get password hash
-		String passwordHash = passwordEncoder.encode(request.password());
-
 		// Save ONG
 		Ong ong = new Ong(
-				normalizedEmail,
-				passwordHash,
 				request.name().trim(),
 				request.cep(),
 				request.houseNumber().trim(),
@@ -209,6 +209,13 @@ public class OngService {
 		List<OngTag> tagEntries = tagIds.stream().map(tagId -> new OngTag(savedOng, tagsById.get(tagId))).toList();
 
 		ongTagRepository.saveAll(tagEntries);
+
+		// Create ONG owner account
+		String passwordHash = passwordEncoder.encode(request.password());
+
+		UserAccount owner = UserAccount.createOwner(normalizedEmail, passwordHash, savedOng);
+
+		userAccountRepository.save(owner);
 
 		return savedOng;
 	}
