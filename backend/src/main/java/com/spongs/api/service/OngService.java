@@ -3,7 +3,9 @@ package com.spongs.api.service;
 // Framework
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 // Repositorys
 import com.spongs.api.repository.OngRepository;
@@ -29,6 +31,8 @@ import com.spongs.api.dto.OngSocialMediaResponse;
 import com.spongs.api.dto.SocialMediaTypeResponse;
 import com.spongs.api.dto.TagResponse;
 import com.spongs.api.dto.OngRegistrationRequest;
+import com.spongs.api.dto.OngUpdateRequest;
+import com.spongs.api.dto.OngOwnerResponse;
 
 // Utils
 import java.util.HashSet;
@@ -82,8 +86,7 @@ public class OngService {
 	@Transactional(readOnly = true)
 	public OngPublicResponse getPublicOngById(Long id) {
 		Ong ong = ongRepository.findById(id).filter(item -> item.getStatus() == OngStatus.APPROVED)
-				.orElseThrow(() -> new org.springframework.web.server.ResponseStatusException(
-						org.springframework.http.HttpStatus.NOT_FOUND, "ONG not found"));
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ONG not found"));
 
 		List<OngSocialMediaResponse> socialMedia = ongSocialMediaRepository.findAllByOng_Id(id).stream()
 				.map(entry -> new OngSocialMediaResponse(
@@ -259,5 +262,118 @@ public class OngService {
 		if (uniqueIds.size() != ids.size()) {
 			throw new IllegalArgumentException("Duplicate " + fieldName + " IDs are not allowed.");
 		}
+	}
+
+	// ONG owner methods
+	@Transactional(readOnly = true)
+	public OngOwnerResponse getOwnerOng(Long ongId) {
+		Ong ong = ongRepository.findById(ongId)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ONG not found."));
+
+		return toOwnerResponse(ong);
+	}
+
+	public OngOwnerResponse updateOwnerOng(Long ongId, OngUpdateRequest request) {
+		Ong ong = ongRepository.findById(ongId)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ONG not found."));
+
+		// Validate unique social media and tags IDs
+		var socialMediaIds = request.socialMedia().stream().map(OngUpdateRequest.SocialMediaEntry::socialMediaId)
+				.toList();
+		var tagIds = request.tagIds();
+
+		if (new HashSet<>(socialMediaIds).size() != socialMediaIds.size()) {
+			throw new IllegalArgumentException("Duplicate social media types are not allowed.");
+		}
+
+		if (new HashSet<>(tagIds).size() != tagIds.size()) {
+			throw new IllegalArgumentException("Duplicate tags are not allowed.");
+		}
+
+		// Valid social media and tags exists
+		var socialMediaTypes = socialMediaRepository.findAllById(socialMediaIds);
+		var tags = tagRepository.findAllById(tagIds);
+
+		boolean SOCIAL_MEDIAS_EXISTS = socialMediaTypes.size() == socialMediaIds.size();
+		boolean TAGS_EXISTS = tags.size() == tagIds.size();
+
+		if (!SOCIAL_MEDIAS_EXISTS) {
+			throw new IllegalArgumentException("One or more social medias do not exist.");
+		}
+
+		if (!TAGS_EXISTS) {
+			throw new IllegalArgumentException("One or more tags do not exist.");
+		}
+
+		String newCnpj = normalizeCnpj(request.cnpj());
+		String oldCnpj = ong.getCnpj();
+
+		boolean CNPJ_CHANGED = !java.util.Objects.equals(oldCnpj, newCnpj);
+
+		if (CNPJ_CHANGED && newCnpj != null && ongRepository.existsByCnpj(newCnpj)) {
+			throw new IllegalArgumentException("This CNPJ is already registered.");
+		}
+
+		// Update the ONG's editable fields
+		ong.setName(request.name().trim());
+		ong.setCep(request.cep());
+		ong.setHouseNumber(request.houseNumber().trim());
+		ong.setCnpj(newCnpj);
+		ong.setImageUrl(request.imageUrl());
+
+		/*
+		 * Changing cnpj requires another review
+		 * if (CNPJ_CHANGED) {
+		 * ong.setStatus(OngStatus.IN_REVIEW);
+		 * }
+		 */
+
+		Ong savedOng = ongRepository.save(ong);
+
+		// Replace social media entries
+		ongSocialMediaRepository.deleteAllByOng_Id(ongId);
+
+		var newSocialMediaEntries = request.socialMedia().stream().map(entry -> {
+			var type = socialMediaTypes.stream().filter(item -> item.getId().equals(entry.socialMediaId())).findFirst()
+					.orElseThrow();
+
+			return new OngSocialMedia(savedOng, type, entry.description().trim());
+		}).toList();
+
+		ongSocialMediaRepository.saveAll(newSocialMediaEntries);
+
+		// Replace tags entries
+		ongTagRepository.deleteAllByOng_Id(ongId);
+
+		var newOngTags = tags.stream().map(tag -> new OngTag(savedOng, tag)).toList();
+
+		ongTagRepository.saveAll(newOngTags);
+
+		return toOwnerResponse(savedOng);
+	}
+
+	private OngOwnerResponse toOwnerResponse(Ong ong) {
+		var socialMedia = ongSocialMediaRepository.findAllByOng_Id(ong.getId()).stream()
+				.map(entry -> new OngSocialMediaResponse(
+						entry.getSocialMedia().getId(),
+						entry.getSocialMedia().getName(),
+						entry.getDescription()))
+				.toList();
+
+		var tags = ongTagRepository.findAllByOng_Id(ong.getId()).stream().map(entry -> new TagResponse(
+				entry.getTag().getId(),
+				entry.getTag().getDescription(),
+				entry.getTag().getImageUrl())).toList();
+
+		return new OngOwnerResponse(
+				ong.getId(),
+				ong.getName(),
+				ong.getCep(),
+				ong.getHouseNumber(),
+				ong.getCnpj(),
+				ong.getImageUrl(),
+				ong.getStatus(),
+				socialMedia,
+				tags);
 	}
 }
