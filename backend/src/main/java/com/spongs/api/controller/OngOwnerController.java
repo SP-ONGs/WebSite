@@ -39,4 +39,13 @@ public class OngOwnerController {
 
 		return ongService.updateOwnerOng(ongId, request);
 	}
+
+	@PostMapping("/removal-request")
+	public OngOwnerResponse requestRemoval(Authentication authentication) {
+		var account = accountAccessService.requireCurrentOwner(authentication);
+
+		Long ongId = account.getOng().getId();
+
+		return ongService.requestOngRemoval(ongId);
+	}
 }

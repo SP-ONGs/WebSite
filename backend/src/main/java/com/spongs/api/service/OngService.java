@@ -33,6 +33,8 @@ import com.spongs.api.dto.TagResponse;
 import com.spongs.api.dto.OngRegistrationRequest;
 import com.spongs.api.dto.OngUpdateRequest;
 import com.spongs.api.dto.OngOwnerResponse;
+import com.spongs.api.dto.OngAdminSummary;
+import com.spongs.api.dto.OngAdminResponse;
 
 // Utils
 import java.util.HashSet;
@@ -277,6 +279,13 @@ public class OngService {
 		Ong ong = ongRepository.findById(ongId)
 				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ONG not found."));
 
+		// Check if ONG is removed
+		boolean IS_REMOVED = ong.getStatus() == OngStatus.REMOVAL_REQUESTED || ong.getStatus() == OngStatus.ADMIN_REMOVED;
+
+		if (IS_REMOVED) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT, "This ONG has already been removed.");
+		}
+
 		// Validate unique social media and tags IDs
 		var socialMediaIds = request.socialMedia().stream().map(OngUpdateRequest.SocialMediaEntry::socialMediaId)
 				.toList();
@@ -352,6 +361,22 @@ public class OngService {
 		return toOwnerResponse(savedOng);
 	}
 
+	@Transactional
+	public OngOwnerResponse requestOngRemoval(Long ongId) {
+		Ong ong = ongRepository.findById(ongId)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ONG not found."));
+
+		if (ong.getStatus() == OngStatus.ADMIN_REMOVED || ong.getStatus() == OngStatus.REMOVAL_REQUESTED) {
+			throw new ResponseStatusException(HttpStatus.GONE, "This ONG has already been removed");
+		}
+
+		ong.setStatus(OngStatus.REMOVAL_REQUESTED);
+
+		Ong savedOng = ongRepository.save(ong);
+
+		return toOwnerResponse(savedOng);
+	}
+
 	private OngOwnerResponse toOwnerResponse(Ong ong) {
 		var socialMedia = ongSocialMediaRepository.findAllByOng_Id(ong.getId()).stream()
 				.map(entry -> new OngSocialMediaResponse(
@@ -375,5 +400,97 @@ public class OngService {
 				ong.getStatus(),
 				socialMedia,
 				tags);
+	}
+
+	// Administrator methods
+	@Transactional(readOnly = true)
+	public List<OngAdminSummary> getPedingOngs() {
+		return ongRepository.findAllByStatusOrderByCreatedAtAsc(OngStatus.IN_REVIEW).stream().map(ong -> {
+			UserAccount account = userAccountRepository.findByOng_Id(ong.getId())
+					.orElseThrow(() -> new IllegalStateException("ONG has no associated owner account"));
+
+			return new OngAdminSummary(
+					ong.getId(),
+					account.getEmail(),
+					ong.getName(),
+					ong.getCep(),
+					ong.getCnpj(),
+					ong.getStatus(),
+					ong.getCreatedAt());
+		}).toList();
+	}
+
+	@Transactional(readOnly = true)
+	public OngAdminResponse getAdminOng(Long ongId) {
+		Ong ong = ongRepository.findById(ongId)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ONG not found."));
+
+		UserAccount account = userAccountRepository.findByOng_Id(ongId)
+				.orElseThrow(() -> new IllegalStateException("ONG has no associated owner account"));
+
+		List<OngSocialMediaResponse> socialMedia = ongSocialMediaRepository.findAllByOng_Id(ongId).stream()
+				.map(entry -> new OngSocialMediaResponse(
+						entry.getSocialMedia().getId(),
+						entry.getSocialMedia().getName(),
+						entry.getDescription()))
+				.toList();
+
+		List<TagResponse> tags = ongTagRepository.findAllByOng_Id(ongId).stream().map(entry -> new TagResponse(
+				entry.getTag().getId(),
+				entry.getTag().getDescription(),
+				entry.getTag().getImageUrl())).toList();
+
+		return new OngAdminResponse(
+				ong.getId(),
+				account.getEmail(),
+				ong.getName(),
+				ong.getCep(),
+				ong.getHouseNumber(),
+				ong.getCnpj(),
+				ong.getImageUrl(),
+				ong.getStatus(),
+				ong.getCreatedAt(),
+				socialMedia,
+				tags);
+	}
+
+	@Transactional
+	public OngAdminResponse reviewOng(Long ongId, OngStatus newStatus) {
+		if (newStatus != OngStatus.APPROVED && newStatus != OngStatus.REJECTED && newStatus != OngStatus.IN_REVIEW) {
+			throw new IllegalArgumentException("Invalid review status");
+		}
+
+		Ong ong = ongRepository.findById(ongId)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ONG not found."));
+
+		// Check if ONG is removed
+		boolean IS_REMOVED = ong.getStatus() == OngStatus.REMOVAL_REQUESTED || ong.getStatus() == OngStatus.ADMIN_REMOVED;
+
+		if (IS_REMOVED) {
+			throw new ResponseStatusException(HttpStatus.CONFLICT, "A removed ONG cannot be reactivated.");
+		}
+
+		// Set new ONG status
+		ong.setStatus(newStatus);
+
+		Ong savedOng = ongRepository.save(ong);
+
+		return getAdminOng(savedOng.getId());
+	}
+
+	@Transactional
+	public OngAdminResponse adminRemoveOng(Long ongId) {
+		Ong ong = ongRepository.findById(ongId)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "ONG not found."));
+
+		if (ong.getStatus() == OngStatus.ADMIN_REMOVED || ong.getStatus() == OngStatus.REMOVAL_REQUESTED) {
+			throw new ResponseStatusException(HttpStatus.GONE, "This ONG has already been removed");
+		}
+
+		ong.setStatus(OngStatus.ADMIN_REMOVED);
+
+		Ong savedOng = ongRepository.save(ong);
+
+		return getAdminOng(savedOng.getId());
 	}
 }

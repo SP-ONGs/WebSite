@@ -35,3 +35,21 @@ export async function updateMyOng(ongData) {
 		body: JSON.stringify(ongData)
 	});
 }
+
+export async function requestMyOngRemoval() {
+	const csrfToken = await getCsrfToken();
+
+	const response = await requestOwnerOng("/removal-request", {
+		method: "POST",
+		headers: {
+			"X-CSRF-TOKEN": csrfToken
+		}
+	});
+
+	if (!response.ok) {
+		const error = await response.json().catch(() => ({}));
+		throw new Error(error.message || "Failed to request ONG removal.");
+	}
+
+	return response.json();
+}
