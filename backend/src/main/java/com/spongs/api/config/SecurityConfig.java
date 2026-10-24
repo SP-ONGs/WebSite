@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -28,6 +29,7 @@ import com.spongs.api.service.AccountUserDetailsService;
 import java.util.List;
 
 @Configuration
+@EnableMethodSecurity
 public class SecurityConfig {
 	@Bean
 	public SecurityContextRepository securityContextRepository() {
@@ -54,10 +56,25 @@ public class SecurityConfig {
 						.sessionFixation(fixation -> fixation.changeSessionId()))
 				.formLogin(form -> form.disable()).httpBasic(basic -> basic.disable())
 				.authorizeHttpRequests(auth -> auth
+						// Public authentication
 						.requestMatchers("/api/auth/csrf", "/api/auth/login").permitAll()
+
+						// Public ONG registration
 						.requestMatchers(HttpMethod.POST, "/api/ongs").permitAll()
+
+						// Public ONG catalogue
 						.requestMatchers(HttpMethod.GET, "/api/ongs", "/api/ongs/**", "/api/tags", "/api/social-media")
 						.permitAll()
+
+						// Only admin routes
+						.requestMatchers("/api/admin/**")
+						.hasRole("ADMIN")
+
+						// Only ONG owner routes
+						.requestMatchers("/api/owner/**")
+						.hasRole("ONG_OWNER")
+
+						// All other routes (Require authentication)
 						.anyRequest().authenticated());
 
 		return http.build();

@@ -146,7 +146,7 @@ public class OngService {
 		}
 
 		// Check if the email is already registered
-		boolean IS_ALREADY_REGISTERED = ongRepository.findByEmail(normalizedEmail).isPresent();
+		boolean IS_ALREADY_REGISTERED = userAccountRepository.findByEmail(normalizedEmail).isPresent();
 
 		if (IS_ALREADY_REGISTERED) {
 			throw new IllegalArgumentException("An account with this email already exists.");
